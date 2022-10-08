@@ -9,18 +9,25 @@
 	<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-	<header>
-		<div class="navbar">
-			<a href="/"><span class="title">Cool Forum</span></a>
-		</div>
-	</header>
+	<table class="c1 header">
+		<tr><td class="b n1 headertext" colspan="2">Cool Forum</td></tr>
+		<tr>
+			<td class="n2 nb headermenu">
+				<a href="./">Index</a>
+			</td>
+			<td class="n2 nb headermenu right">
+				<a href="./">Another Link</a>
+			</td>
+		</tr>
+	</table>
 
-	<div class="container">
-		{% block content %}{% endblock %}
-	</div>
+	{% block content %}{% endblock %}
 
-	<footer>
-		<p>{{ profiler_stats() }}</p>
-	</footer>
+	<table class="c1 footer">
+		<tr><td class="b n3">
+			Powered by Forum&trade;<br>
+			{{ profiler_stats() }}
+		</td></tr>
+	</table>
 </body>
 </html>
