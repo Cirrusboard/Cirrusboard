@@ -61,6 +61,9 @@ a:active, a:hover	{ color: #FFFFFF }
 }
 
 /// Example theme styling (voxelmanip_retro) \\\
+
+$primary: #38c016;
+
 body {
 	background: #011b01;
 	color: #f8f8f8;
@@ -68,7 +71,7 @@ body {
 }
 
 table.c1 {
-	border: 2px solid #38c016;
+	border: 2px solid $primary;
 
 	tr.h {
 		font-weight: bold;
@@ -80,7 +83,7 @@ table.c1 {
 	}
 
 	td.b {
-		border: 1px solid #38c016;
+		border: 1px solid $primary;
 		padding: 5px;
 	}
 
@@ -91,4 +94,24 @@ table.c1 {
 	tr.n1, td.n1 { background: rgba(0,0,0,0.6); }
 	tr.n2, td.n2 { background: rgba(16,49,1,0.65); }
 	tr.n3, td.n3 { background: rgba(0,0,0,0.6); }
+}
+
+input[type='text'], input[type='password'], input[type='email'], textarea, select, input[type='submit'], input[type='button'], button {
+	background: #000;
+	color: #efe;
+	padding: 4px;
+	border: 2px solid #106202;
+	font-family: 'Verdana', 'geneva', sans-serif;
+	font-size: 1em;
+}
+
+input[type='submit'], input[type='button'], button {
+	background: #021800;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+
+input[type='text']:hover, input[type='password']:hover, input[type='email']:hover, textarea:hover, select:hover, input[type='text']:focus, input[type='password']:focus, input[type='email']:focus, textarea:focus, select:focus,
+input[type='submit']:hover, input[type='button']:hover, button:hover, input[type='submit']:focus, input[type='button']:focus, button:focus {
+	border: 2px solid $primary;
 }
