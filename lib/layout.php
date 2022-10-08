@@ -6,7 +6,7 @@
  * @return \Twig\Environment Twig object.
  */
 function twigloader() {
-	global $tplCache, $tplNoCache;
+	global $tplCache, $tplNoCache, $config;
 
 	$doCache = ($tplNoCache ? false : $tplCache);
 
@@ -17,6 +17,8 @@ function twigloader() {
 	]);
 
 	$twig->addExtension(new ForumExtension());
+
+	$twig->addGlobal('config', $config);
 
 	return $twig;
 }

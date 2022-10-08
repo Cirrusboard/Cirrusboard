@@ -26,26 +26,27 @@ a:link, a:visited	{ color: #a0ff80 }
 a:active, a:hover	{ color: #FFFFFF }
 
 /// Header table styling \\\
-.headertext {
-	text-align: center;
-	font-size: 42pt; // beeeg
-	margin: 50px;
-}
-
-.headermenu {
-	a {
-		margin-left: 20px;
-		display: inline-block;
-		padding: 7px 0px;
+.header {
+	.text {
+		text-align: center;
+		font-size: 42pt; // beeeg
 	}
 
-	&.right  {
-		text-align:right;
-
+	.menu {
 		a {
-			margin-right: 20px;
+			margin-left: 20px;
 			display: inline-block;
 			padding: 7px 0px;
+		}
+
+		&.right  {
+			text-align:right;
+
+			a {
+				margin-right: 20px;
+				display: inline-block;
+				padding: 7px 0px;
+			}
 		}
 	}
 }

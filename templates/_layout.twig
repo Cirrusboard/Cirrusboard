@@ -4,18 +4,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-	<title>Cool Forum</title>
+	<title>{{ config.title }}</title>
 
 	<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 	<table class="c1 header">
-		<tr><td class="b n1 headertext" colspan="2">Cool Forum</td></tr>
+		<tr><td class="b n1 text" colspan="2">
+			<img src="{{ config.logo }}">
+		</td></tr>
 		<tr>
-			<td class="n2 nb headermenu">
+			<td class="n2 nb menu">
 				<a href="./">Index</a>
 			</td>
-			<td class="n2 nb headermenu right">
+			<td class="n2 nb menu right">
 				<a href="./">Another Link</a>
 			</td>
 		</tr>
