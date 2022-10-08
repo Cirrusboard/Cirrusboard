@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+	<title>Cool Forum</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+	<header>
+		<div class="navbar">
+			<a href="/"><span class="title">Cool Forum</span></a>
+		</div>
+	</header>
+
+	<div class="container">
+		{% block content %}{% endblock %}
+	</div>
+
+	<footer>
+		<p>{{ profiler_stats() }}</p>
+	</footer>
+</body>
+</html>

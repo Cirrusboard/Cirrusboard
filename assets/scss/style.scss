@@ -1,0 +1,43 @@
+/// General Styling \\\
+body {
+	background-color: #0c0c0c;
+	color: #eee;
+	font-family: "Fira Code", monospace;
+	margin: 0;
+}
+
+a {
+	color: #55cf55;
+	text-decoration: none;
+}
+
+/// Header & Footer \\\
+
+header, footer {
+	background-color: #080808;
+	padding: 15px 0;
+}
+
+header {
+	.navbar {
+		max-width: 1000px;
+		margin: auto;
+		padding: 0 50px;
+
+		.title {
+			font-size: 24pt;
+			font-weight: bold;
+		}
+	}
+}
+
+.container {
+	max-width: 1280px;
+	margin: 20px auto;
+	padding: 0 20px;
+}
+
+footer {
+	margin-top: 50px;
+	text-align: center;
+}

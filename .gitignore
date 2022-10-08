@@ -1,0 +1,5 @@
+vendor/
+composer.lock
+conf/config.php
+templates/cache/
+assets/css/
