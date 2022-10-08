@@ -39,10 +39,11 @@ a:active, a:hover	{ color: #FFFFFF }
 			padding: 7px 0px;
 		}
 
-		&.right  {
+		&.right {
 			text-align:right;
 
 			a {
+				margin-left: 0;
 				margin-right: 20px;
 				display: inline-block;
 				padding: 7px 0px;
@@ -58,6 +59,36 @@ a:active, a:hover	{ color: #FFFFFF }
 }
 .footer {
 	margin-top: 1.75em;
+}
+
+.center {
+	text-align: center;
+}
+
+.reglog {
+	text-align: center;
+
+	p {
+		margin-bottom: 30px;
+	}
+
+	div {
+		max-width: 500px;
+		padding-top: 15px;
+		padding-bottom: 5px;
+		padding-left: 10px;
+		padding-right: 10px;
+		margin: 10px auto;
+	}
+
+	span {
+		width: 200px;
+		display: inline-block;
+	}
+}
+
+.error {
+	color: #fa7f7f;
 }
 
 /// Example theme styling (voxelmanip_retro) \\\
@@ -114,4 +145,10 @@ input[type='submit'], input[type='button'], button {
 input[type='text']:hover, input[type='password']:hover, input[type='email']:hover, textarea:hover, select:hover, input[type='text']:focus, input[type='password']:focus, input[type='email']:focus, textarea:focus, select:focus,
 input[type='submit']:hover, input[type='button']:hover, button:hover, input[type='submit']:focus, input[type='button']:focus, button:focus {
 	border: 2px solid $primary;
+}
+
+.reglog div {
+	border-top: 1px solid $primary;
+
+	&:last-child {border-bottom:0}
 }

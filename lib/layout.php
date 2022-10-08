@@ -36,3 +36,9 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 		];
 	}
 }
+
+function redirect($url) {
+	header(sprintf('Location: %s', $url));
+	die();
+}
+
