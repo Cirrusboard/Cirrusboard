@@ -20,7 +20,11 @@
 				<a href="./">Index</a>
 			</td>
 			<td class="n2 nb menu right">
-				<a href="register.php">Register</a><a href="login.php">Login</a>
+				{% if log %}
+					{{ userlink(userdata) }}<a href="">Log out</a>
+				{% else %}
+					<a href="register.php">Register</a><a href="login.php">Login</a>
+				{% endif %}
 			</td>
 		</tr>
 	</table>

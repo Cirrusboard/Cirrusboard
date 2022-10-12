@@ -32,7 +32,9 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 		return [
 			new \Twig\TwigFunction('profiler_stats', function () use ($profiler) {
 				$profiler->getStats();
-			})
+			}),
+
+			new \Twig\TwigFunction('userlink', 'userlink', ['is_safe' => ['html']]),
 		];
 	}
 }
