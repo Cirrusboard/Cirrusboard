@@ -1,0 +1,15 @@
+Open Sans fonts generated from https://google-webfonts-helper.herokuapp.com/ using the following options:
+
+Charsets:
+- Latin
+- Latin-ext
+
+Styles:
+- 400 (normal)
+- 700 (bold)
+
+Copy CSS: Modern Browsers
+
+Folder prefix: ../fonts
+
+The font code in /assets/scss/fonts.scss has been changed slightly from the generated for optimal performance and rendering.
