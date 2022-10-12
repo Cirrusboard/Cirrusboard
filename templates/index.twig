@@ -3,6 +3,12 @@
 {% block title %}Index{% endblock %}
 
 	{% block content %}
+{% if just_registered %}
+	<table class="c1">
+		<tr><td class="b n1">You have successfully registered and are now logged in.</td></tr>
+	</table><br>
+{% endif %}
+
 <table class="c1">
 	<tr class="h"><td class="b">Index page</td></tr>
 	<tr><td class="b n1">

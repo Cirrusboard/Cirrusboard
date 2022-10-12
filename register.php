@@ -31,7 +31,7 @@ if (isset($_POST['action'])) {
 	// If no error found, it will register and redirect to index page.
 	// Otherwise register page will be shown again, with $error displayed to the user.
 
-	if ($error == '') {
+	if ($error == []) {
 		// Generate a random 64-length hexadecimal string for token.
 		$token = bin2hex(random_bytes(32));
 
