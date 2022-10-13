@@ -10,11 +10,24 @@
 {% endif %}
 
 <table class="c1">
-	<tr class="h"><td class="b">Index page</td></tr>
-	<tr><td class="b n1">
-		<p>This thing is very work in progress yeah</p>
-
-		{% if log %}<p>Logged in as: {{ userdata.name }}</p>{% endif %}
-	</td></tr>
+	<tr class="h">
+		<td class="b" style="width:30px">&nbsp;</td>
+		<td class="b">Forum</td>
+		<td class="b" style="width:60px">Threads</td>
+		<td class="b" style="width:60px">Posts</td>
+		<td class="b" style="width:150px">Last post</td>
+	</tr>
+	{% for forum in forums %}
+		<tr class="center">
+			<td class="b n1"></td>
+			<td class="b n2 left">
+				<a href="forum.php?id={{ forum.id }}">{{ forum.name }}</a>
+				<div style="margin-top:3px">{{ forum.description }}</div>
+			</td>
+			<td class="b n1">{{ forum.threads }}</td>
+			<td class="b n1">{{ forum.posts }}</td>
+			<td class="b n2">TODO</td>
+		</tr>
+	{% endfor %}
 </table>
 	{% endblock %}

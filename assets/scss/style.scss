@@ -61,9 +61,9 @@ a:active, a:hover	{ color: #FFFFFF }
 	margin-top: 1.75em;
 }
 
-.center {
-	text-align: center;
-}
+.left { text-align: left; }
+.center { text-align: center; }
+.right { text-align: right; }
 
 .reglog {
 	text-align: center;
@@ -98,7 +98,7 @@ $primary: #38c016;
 body {
 	background: #011b01;
 	color: #f8f8f8;
-	font-family: 'Open Sans'; // TODO: webfont
+	font-family: 'Open Sans';
 }
 
 table.c1 {
