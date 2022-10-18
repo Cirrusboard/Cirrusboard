@@ -1,0 +1,40 @@
+{% extends "_layout.twig" %}
+
+{% block title %}{{ forum.title }}{% endblock %}
+
+	{% block content %}
+<table class="c1">
+	<tr class="h">
+		<td class="b" style="width:30px">&nbsp;</td>
+		<td class="b">Title</td>
+		<td class="b" style="width:150px">Author</td>
+		<td class="b" style="width:60px">Replies</td>
+		<td class="b" style="width:60px">Views</td>
+		<td class="b" style="width:150px">Last post</td>
+	</tr>
+	{% set i = 1 %}
+	{% for thread in threads %}
+		{% if thread.sticky and not time %}
+			{% set tr = 1 %}
+		{% else %}
+			{% if i % 2 %}
+				{% set tr = 2 %}
+			{% else %}
+				{% set tr = 3 %}
+			{% endif %}
+		{% endif %}
+
+		<tr class="center">
+			<td class="b n1"></td>
+			<td class="b n2 left">
+				<a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a>
+			</td>
+			<td class="b n1">{{ userlink(thread, 'u_') }}</td>
+			<td class="b n1">{{ thread.posts-1 }}</td>
+			<td class="b n1">{{ thread.views }}</td>
+			<td class="b n2">TODO</td>
+		</tr>
+		{% set i = i + 1 %}
+	{% endfor %}
+</table>
+	{% endblock %}

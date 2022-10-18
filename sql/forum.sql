@@ -18,6 +18,17 @@ CREATE TABLE `forums` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+CREATE TABLE `threads` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `forum` int(10) unsigned NOT NULL,
+  `title` varchar(127) NOT NULL,
+  `author` int(10) unsigned NOT NULL,
+  `posts` int(10) unsigned NOT NULL DEFAULT 1,
+  `views` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Incrementing ID for each user',
   `name` varchar(50) NOT NULL COMMENT 'Username',
