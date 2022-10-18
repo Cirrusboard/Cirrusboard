@@ -13,7 +13,7 @@ table.c1 {
 		text-align: center;
 	}
 	td.nb {
-		border: 0px none;
+		border: 0;
 	}
 }
 
@@ -113,13 +113,13 @@ table.c1 {
 		text-align: center;
 	}
 
-	td.b {
+	td {
 		border: 1px solid $primary;
 		padding: 5px;
 	}
 
 	tr.h, td.h {
-		background: rgba(32,98,2,0.7);
+		background: rgba(32,98,2,0.8);
 	}
 
 	tr.n1, td.n1 { background: rgba(0,0,0,0.6); }
