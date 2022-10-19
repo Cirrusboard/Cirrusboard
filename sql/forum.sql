@@ -18,6 +18,22 @@ CREATE TABLE `forums` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+CREATE TABLE `posts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Incrementing ID for every post',
+  `author` int(10) unsigned NOT NULL COMMENT 'The user ID of the author.',
+  `thread` int(10) unsigned NOT NULL COMMENT 'The thread that this post is attached to.',
+  `date` int(10) unsigned NOT NULL COMMENT 'Date timestamp of post.',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `poststext` (
+  `id` int(10) unsigned NOT NULL COMMENT 'ID of the post',
+  `text` text NOT NULL COMMENT 'Teh text lol',
+  `revision` int(10) unsigned NOT NULL DEFAULT 1 COMMENT 'The revision of this post text'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 CREATE TABLE `threads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `forum` int(10) unsigned NOT NULL,

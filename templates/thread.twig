@@ -1,0 +1,9 @@
+{% extends "_layout.twig" %}
+
+{% block title %}{{ thread.title }}{% endblock %}
+
+	{% block content %}
+{% for post in posts %}
+	{{ post.text }}
+{% endfor %}
+	{% endblock %}
