@@ -1,0 +1,13 @@
+<table class="c1 threadpost" id="{{ post.id }}">
+	<tr>
+		<td class="b n1 topbar_1">{{ userlink(post, 'u_') }}</td>
+		<td class="b n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }} | ID: {{ post.id }}</td>
+	</tr><tr valign="top">
+		<td class="b n1 sfont sidebar">
+			Member
+			<br>Posts: {{ post.u_posts }}<br>
+			<br>Joined: {{ post.u_joined | date('Y-m-d') }}<br>
+		</td>
+		<td class="b n2 mainbar">{{ post.text | postfilter }}</td>
+	</tr>
+</table>

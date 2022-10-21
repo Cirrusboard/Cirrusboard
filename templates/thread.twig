@@ -4,6 +4,6 @@
 
 	{% block content %}
 {% for post in posts %}
-	{{ post.text }}
+	{{ threadpost(post) }}
 {% endfor %}
 	{% endblock %}

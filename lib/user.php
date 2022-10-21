@@ -11,3 +11,12 @@ function userlabel($user, $pre = '') {
 		'<span style="color:#4f77ff;">%s</span>',
 	htmlspecialchars($user[$pre.'name'] ?? 'null'));
 }
+
+function postfields_user() {
+	$fields = ['joined', 'posts'];
+	$str = '';
+	foreach ($fields as $field)
+		$str .= "u.$field u_$field,";
+
+	return $str;
+}

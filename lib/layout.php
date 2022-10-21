@@ -5,12 +5,12 @@
  *
  * @return \Twig\Environment Twig object.
  */
-function twigloader() {
+function twigloader($subfolder = '') {
 	global $tplCache, $tplNoCache, $config, $log, $userdata;
 
 	$doCache = ($tplNoCache ? false : $tplCache);
 
-	$loader = new \Twig\Loader\FilesystemLoader('templates/');
+	$loader = new \Twig\Loader\FilesystemLoader('templates/'.$subfolder);
 
 	$twig = new \Twig\Environment($loader, [
 		'cache' => $doCache,
@@ -26,6 +26,14 @@ function twigloader() {
 	return $twig;
 }
 
+function threadpost($post) {
+	$twig = twigloader('components');
+
+	return $twig->render('threadpost.twig', [
+		'post' => $post
+	]);
+}
+
 class ForumExtension extends \Twig\Extension\AbstractExtension {
 	public function getFunctions() {
 		global $profiler;
@@ -35,6 +43,13 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 			}),
 
 			new \Twig\TwigFunction('userlink', 'userlink', ['is_safe' => ['html']]),
+			new \Twig\TwigFunction('threadpost', 'threadpost', ['is_safe' => ['html']]),
+		];
+	}
+
+	public function getFilters() {
+		return [
+			new \Twig\TwigFilter('postfilter', 'postfilter', ['is_safe' => ['html']]),
 		];
 	}
 }
