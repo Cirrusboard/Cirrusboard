@@ -1,6 +1,8 @@
 {% extends "_layout.twig" %}
 
-{% block title %}Index{% endblock %}
+{% set title = "Index" %}
+
+{% set nobreadcrumb = true %}
 
 	{% block content %}
 {% if just_registered %}

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-	<title>{{ config.title }}</title>
+	<title>{{ title }} - {{ config.title }}</title>
 
 	{# inline font styling - update from /assets/css/fonts.css #}
 	<style>@font-face{font-family:"Open Sans";font-style:normal;font-weight:400;font-display:swap;src:local(""),url("assets/fonts/open-sans-v34-400.woff2") format("woff2"),url("assets/fonts/open-sans-v34-400.woff") format("woff")}@font-face{font-family:"Open Sans";font-style:normal;font-weight:700;font-display:swap;src:local(""),url("assets/fonts/open-sans-v34-700.woff2") format("woff2"),url("assets/fonts/open-sans-v34-700.woff") format("woff")}</style>
@@ -29,7 +29,23 @@
 		</tr>
 	</table>
 
+	{% if not nobreadcrumb %}
+		<div class="breadcrumb">
+			<a href="./">Main</a> &raquo;
+			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo;{% endfor %}
+			{{ title }}
+		</div>
+	{% endif %}
+
 	{% block content %}{% endblock %}
+
+	{% if not nobreadcrumb %}
+		<div class="breadcrumb">
+			<a href="./">Main</a> &raquo;
+			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo;{% endfor %}
+			{{ title }}
+		</div>
+	{% endif %}
 
 	<table class="c1 footer">
 		<tr><td class="b n3">
