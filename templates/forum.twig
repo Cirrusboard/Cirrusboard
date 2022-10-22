@@ -5,8 +5,7 @@
 	{% block content %}
 <table class="c1">
 	<tr class="h">
-		<td class="b" style="width:30px">&nbsp;</td>
-		<td class="b">Title</td>
+		<td class="b" colspan="2">Title</td>
 		<td class="b" style="width:150px">Author</td>
 		<td class="b" style="width:60px">Replies</td>
 		<td class="b" style="width:60px">Views</td>
@@ -21,7 +20,7 @@
 		{% endif %}
 
 		<tr class="center n{{ zebra }}">
-			<td class="b"></td>
+			<td class="b" style="width:30px"></td>
 			<td class="b left">
 				<a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a>
 			</td>
