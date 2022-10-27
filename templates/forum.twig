@@ -5,11 +5,11 @@
 	{% block content %}
 <table class="c1">
 	<tr class="h">
-		<td class="b" colspan="2">Title</td>
-		<td class="b" style="width:150px">Author</td>
-		<td class="b" style="width:60px">Replies</td>
-		<td class="b" style="width:60px">Views</td>
-		<td class="b" style="width:150px">Last post</td>
+		<td colspan="2">Title</td>
+		<td style="width:150px">Author</td>
+		<td style="width:60px">Replies</td>
+		<td style="width:60px">Views</td>
+		<td style="width:150px">Last post</td>
 	</tr>
 	{% set i = 1 %}
 	{% for thread in threads %}
@@ -20,14 +20,14 @@
 		{% endif %}
 
 		<tr class="center n{{ zebra }}">
-			<td class="b" style="width:30px"></td>
-			<td class="b left">
+			<td style="width:30px"></td>
+			<td class="left">
 				<a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a>
 			</td>
-			<td class="b">{{ userlink(thread, 'u_') }}</td>
-			<td class="b">{{ thread.posts-1 }}</td>
-			<td class="b">{{ thread.views }}</td>
-			<td class="b">TODO</td>
+			<td>{{ userlink(thread, 'u_') }}</td>
+			<td>{{ thread.posts-1 }}</td>
+			<td>{{ thread.views }}</td>
+			<td>TODO</td>
 		</tr>
 		{% set i = i + 1 %}
 	{% endfor %}

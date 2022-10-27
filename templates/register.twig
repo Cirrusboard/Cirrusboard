@@ -4,8 +4,8 @@
 
 	{% block content %}
 <form class="reglog" method="POST"><table class="c1">
-	<tr class="h"><td class="b">Register</td></tr>
-	<tr><td class="b n1 center">
+	<tr class="h"><td>Register</td></tr>
+	<tr><td class="n1 center">
 		{% if error %}
 			<p class="error">The following errors occured when trying to register: <br>- {{ error | join('<br>-') | raw }}</p>
 		{% endif %}
