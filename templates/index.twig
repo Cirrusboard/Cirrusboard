@@ -38,7 +38,13 @@
 		</td>
 		<td class="n1">{{ forum.threads }}</td>
 		<td class="n1">{{ forum.posts }}</td>
-		<td class="n2">TODO</td>
+		<td class="n2">
+			{% if forum.posts > 0 and forum.lastdate > 0 %}
+				<span>{{ forum.lastdate | date('Y-m-d H:i') }}</span><br>
+				<span>by {{ userlink(forum, 'u_') }}
+					<a href="thread.php?pid={{ forum.lastid }}#{{ forum.lastid }}">&raquo;</a></span>
+			{% else %}None{% endif %}
+		</td>
 	</tr>
 {% endfor %}
 	{% endblock %}
