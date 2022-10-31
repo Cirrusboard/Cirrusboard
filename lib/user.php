@@ -8,8 +8,8 @@ function userlink($user, $pre = '') {
 
 function userlabel($user, $pre = '') {
 	return sprintf(
-		'<span style="color:#4f77ff;">%s</span>',
-	htmlspecialchars($user[$pre.'name'] ?? 'null'));
+		'<span style="color:#%s;">%s</span>',
+	powIdToColour($user[$pre.'powerlevel']), htmlspecialchars($user[$pre.'name'] ?? 'null'));
 }
 
 function postfields_user() {

@@ -9,7 +9,7 @@ $thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id FROM threads t
 	[$id]);
 
 $userpostfields = postfields_user();
-$posts = query("SELECT u.id u_id, u.name u_name, $userpostfields p.*, pt.text FROM posts p
+$posts = query("SELECT u.id u_id, u.name u_name, u.powerlevel u_powerlevel, $userpostfields p.*, pt.text FROM posts p
 		JOIN poststext pt ON p.id = pt.id AND pt.revision = 1
 		JOIN users u ON p.user = u.id
 		WHERE p.thread = ?
