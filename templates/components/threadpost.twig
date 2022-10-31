@@ -4,7 +4,8 @@
 		<td class="n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }} | ID: {{ post.id }}</td>
 	</tr><tr valign="top">
 		<td class="n1 sfont sidebar">
-			Member
+			{% if post.u_title %}{{ post.u_title | raw }}{% endif %}
+			{% if post.u_avatar %}<img src="userpic/{{ post.u_id }}">{% endif %}
 			<br>Posts: {{ post.u_posts }}<br>
 			<br>Joined: {{ post.u_joined | date('Y-m-d') }}<br>
 		</td>

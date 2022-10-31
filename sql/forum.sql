@@ -67,9 +67,12 @@ CREATE TABLE `users` (
   `ip` char(15) DEFAULT NULL COMMENT 'Latest IP address of user',
   `joined` int(10) unsigned NOT NULL COMMENT 'Timestamp when user joined',
   `lastview` int(10) unsigned DEFAULT NULL COMMENT 'Timestamp when user last viewed',
+  `lastpost` int(10) unsigned DEFAULT NULL COMMENT 'The ID of the user''s last post.',
   `powerlevel` tinyint(4) NOT NULL DEFAULT 1 COMMENT 'User''s power level, controlling access and permissions. (see perm.php)',
   `posts` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'User''s amount of posts.',
   `threads` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'User''s amount of threads.',
+  `title` varchar(255) DEFAULT NULL COMMENT 'Custom user title.',
+  `avatar` tinyint(1) unsigned DEFAULT NULL COMMENT 'Does user have an avatar?',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

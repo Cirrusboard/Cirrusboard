@@ -13,7 +13,7 @@ function userlabel($user, $pre = '') {
 }
 
 function postfields_user() {
-	$fields = ['joined', 'posts'];
+	$fields = ['joined', 'posts', 'title', 'avatar'];
 	$str = '';
 	foreach ($fields as $field)
 		$str .= "u.$field u_$field,";
