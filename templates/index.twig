@@ -11,24 +11,34 @@
 	</table><br>
 {% endif %}
 
-<table class="c1">
-	<tr class="h">
-		<td colspan="2">Forum</td>
-		<td style="width:60px">Threads</td>
-		<td style="width:60px">Posts</td>
-		<td style="width:150px">Last post</td>
+{% set last_category = -1 %}
+
+{% for forum in forums %}
+	{% if forum.cat != last_category %}
+		{% if last_category != -1 %}
+			</table><br>
+		{% endif %}
+
+		{% set last_category = forum.cat %}
+
+		<table class="c1">
+			<tr class="h">
+				<td colspan="2">{{ categories[forum.cat] }}</td>
+				<td style="width:60px">Threads</td>
+				<td style="width:60px">Posts</td>
+				<td style="width:150px">Last post</td>
+			</tr>
+	{% endif %}
+
+	<tr class="center">
+		<td class="n1" style="width:30px"></td>
+		<td class="n2 left">
+			<a href="forum.php?id={{ forum.id }}">{{ forum.title }}</a> {% if forum.minread > 0 %}<span class="sfont">(Private)</span>{% endif %}
+			<div style="margin-top:3px">{{ forum.descr | raw }}</div>
+		</td>
+		<td class="n1">{{ forum.threads }}</td>
+		<td class="n1">{{ forum.posts }}</td>
+		<td class="n2">TODO</td>
 	</tr>
-	{% for forum in forums %}
-		<tr class="center">
-			<td class="n1" style="width:30px"></td>
-			<td class="n2 left">
-				<a href="forum.php?id={{ forum.id }}">{{ forum.name }}</a>
-				<div style="margin-top:3px">{{ forum.description }}</div>
-			</td>
-			<td class="n1">{{ forum.threads }}</td>
-			<td class="n1">{{ forum.posts }}</td>
-			<td class="n2">TODO</td>
-		</tr>
-	{% endfor %}
-</table>
+{% endfor %}
 	{% endblock %}

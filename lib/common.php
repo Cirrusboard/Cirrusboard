@@ -44,4 +44,8 @@ if ($log) {
 	query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
 } else {
 	// Fallback userdata for guests (NYI)
+	$userdata = [
+		'id' => -1,
+		'powerlevel' => 0
+	];
 }
