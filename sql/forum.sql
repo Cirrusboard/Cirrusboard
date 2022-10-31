@@ -9,9 +9,9 @@ SET NAMES utf8mb4;
 
 CREATE TABLE `forums` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Incrementing ID for every forum',
-  `sort` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Numeric value to sort forums in the wanted order, ascending',
-  `name` varchar(127) NOT NULL COMMENT 'Name of the forum',
-  `description` varchar(127) DEFAULT NULL COMMENT 'Description of the forum',
+  `ord` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Display order of forums, ascending',
+  `title` varchar(127) NOT NULL COMMENT 'Title of the forum',
+  `descr` varchar(127) DEFAULT NULL COMMENT 'Description of the forum',
   `threads` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Total amount of threads in the forum',
   `posts` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Total amount of posts in the forum',
   PRIMARY KEY (`id`)
@@ -20,7 +20,7 @@ CREATE TABLE `forums` (
 
 CREATE TABLE `posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Incrementing ID for every post',
-  `author` int(10) unsigned NOT NULL COMMENT 'The user ID of the author.',
+  `user` int(10) unsigned NOT NULL COMMENT 'The user ID of the author.',
   `thread` int(10) unsigned NOT NULL COMMENT 'The thread that this post is attached to.',
   `date` int(10) unsigned NOT NULL COMMENT 'Date timestamp of post.',
   PRIMARY KEY (`id`)
@@ -38,7 +38,7 @@ CREATE TABLE `threads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `forum` int(10) unsigned NOT NULL,
   `title` varchar(127) NOT NULL,
-  `author` int(10) unsigned NOT NULL,
+  `user` int(10) unsigned NOT NULL,
   `posts` int(10) unsigned NOT NULL DEFAULT 1,
   `views` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
