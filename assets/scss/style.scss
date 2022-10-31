@@ -93,6 +93,10 @@ a:active, a:hover	{ color: #FFFFFF }
 
 .breadcrumb {
 	margin: 1.75em 10px;
+
+	.actions {
+		float: right;
+	}
 }
 
 .threadpost {
@@ -117,6 +121,27 @@ a:active, a:hover	{ color: #FFFFFF }
 	}
 }
 
+ul.pipemenu {
+	display: inline;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		display: inline-block;
+		border-left: 1.1px solid white;
+		padding: 0px 8px;
+
+		&:first-child {
+			border-left-width: 0;
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+}
 
 /// Example theme styling (voxelmanip_retro) \\\
 

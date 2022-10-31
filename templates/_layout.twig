@@ -34,6 +34,10 @@
 			<a href="./">Main</a> &raquo;
 			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo;{% endfor %}
 			{{ title }}
+
+			<div class="actions">
+				<ul class="pipemenu">{% for url, title in actions %}<li><a href="{{ url }}">{{ title }}</a></li>{% endfor %}</ul>
+			</div>
 		</div>
 	{% endif %}
 
