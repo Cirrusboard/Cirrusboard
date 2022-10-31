@@ -143,6 +143,36 @@ ul.pipemenu {
 	}
 }
 
+// Spoilers
+
+.spoiler {
+	border: 2px dotted #bebebe;
+	display: inline-block;
+
+	.container { opacity: 0; }
+	.container:hover { opacity: 1; }
+}
+
+// Quotes
+
+.quote {
+	margin: 10px 30px;
+
+	.author {
+		font-style: italic;
+		font-size: 0.95em;
+		margin-bottom: 10px;
+		padding-left: 15px;
+	}
+
+	.quotetext {
+		/*border: 2px solid #38c016;
+		border-left: 0;
+		border-right: 0;*/
+		padding: 5px;
+	}
+}
+
 /// Example theme styling (voxelmanip_retro) \\\
 
 $primary: #38c016;
@@ -203,4 +233,10 @@ input[type='submit']:hover, input[type='button']:hover, button:hover, input[type
 	border-top: 1px solid $primary;
 
 	&:last-child {border-bottom:0}
+}
+
+.quote .quotetext {
+	border: 2px solid $primary;
+	border-left: 0;
+	border-right: 0;
 }
