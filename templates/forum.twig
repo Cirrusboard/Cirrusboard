@@ -31,7 +31,11 @@
 			<td>{{ userlink(thread, 'u_') }}</td>
 			<td>{{ thread.posts-1 }}</td>
 			<td>{{ thread.views }}</td>
-			<td>TODO</td>
+			<td>
+				<span>{{ thread.lastdate | date('Y-m-d H:i') }}</span><br>
+				<span>by {{ userlink(thread, 'ul_' ) }}
+					<a href="thread.php?pid={{ thread.lastid }}#{{ thread.lastid }}">&raquo;</a></span>
+			</td>
 		</tr>
 		{% set i = i + 1 %}
 	{% endfor %}
