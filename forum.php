@@ -15,6 +15,7 @@ $threads = query("SELECT t.*, u.id u_id, u.name u_name, u.powerlevel u_powerleve
 $twig = twigloader();
 
 echo $twig->render('forum.twig', [
+	'id' => $id,
 	'forum' => $forum,
 	'threads' => $threads
 ]);

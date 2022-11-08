@@ -3,7 +3,7 @@
 {% set title = forum.title %}
 
 {% if log %}
-	{% set actions = {"newthread.php": "New thread"} %}
+	{% set actions = {("newthread.php?id="~id) : "New thread"} %}
 {% endif %}
 
 	{% block content %}
@@ -13,7 +13,7 @@
 		<td style="width:150px">Author</td>
 		<td style="width:60px">Replies</td>
 		<td style="width:60px">Views</td>
-		<td style="width:150px">Last post</td>
+		<td style="width:175px">Last post</td>
 	</tr>
 	{% set i = 1 %}
 	{% for thread in threads %}
