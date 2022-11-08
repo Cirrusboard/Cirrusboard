@@ -1,7 +1,7 @@
 /// General Styling \\\
 body {
 	line-height: 1.3;
-	margin: 10px auto;
+	margin: 5px auto 25px;
 	max-width: 1440px;
 }
 table.c1 {
@@ -178,9 +178,9 @@ ul.pipemenu {
 $primary: #38c016;
 
 body {
-	background: #011b01;
+	background: url('../coolgreen2.png') #011b01;
 	color: #f8f8f8;
-	font-family: 'Open Sans';
+	font-family: 'Open Sans', sans-serif;
 }
 
 table.c1 {
@@ -204,8 +204,8 @@ table.c1 {
 		background: rgba(32,98,2,0.8);
 	}
 
-	tr.n1, td.n1 { background: rgba(0,0,0,0.6); }
-	tr.n2, td.n2 { background: rgba(16,49,1,0.65); }
+	tr.n1, td.n1 { background: rgba(5, 9, 3, 0.6); }
+	tr.n2, td.n2 { background: rgba(16, 48, 2, 0.65); }
 	tr.n3, td.n3 { background: rgba(0,0,0,0.6); }
 }
 
