@@ -162,6 +162,21 @@ ul.pipemenu {
 	}
 }
 
+table.postformatting {
+	border-spacing: 0px;
+	border-collapse: collapse;
+
+	td {
+		border: 0 !important;
+	}
+
+	input[type=button] {
+		text-align: center;
+		width: auto;
+		height: 35px;
+		font-size: 11pt;
+	}
+}
 
 // Spoilers
 
