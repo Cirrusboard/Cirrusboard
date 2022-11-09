@@ -8,6 +8,8 @@ $thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id FROM threads t
 		WHERE t.id = ?",
 	[$id]);
 
+if (!$thread) error('404', "This forum doesn't exist.");
+
 $userpostfields = postfields_user();
 $posts = query("SELECT u.id u_id, u.name u_name, u.powerlevel u_powerlevel, $userpostfields p.*, pt.text FROM posts p
 		JOIN poststext pt ON p.id = pt.id AND pt.revision = 1

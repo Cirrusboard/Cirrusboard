@@ -26,6 +26,11 @@ function twigloader($subfolder = '') {
 	return $twig;
 }
 
+function error($title, $message) {
+	echo twigloader()->render('_error.twig', ['err_title' => $title, 'err_message' => $message]);
+	die();
+}
+
 function threadpost($post) {
 	$twig = twigloader('components');
 
