@@ -1,0 +1,17 @@
+{% extends "_layout.twig" %}
+
+{% set title = "FAQ" %}
+
+	{% block content %}
+<table class="c1 faq">
+	<tr class="h"><td>FAQ</td></tr>
+	<tr><td class="n1"><ol class="toc">
+		{% for item in faq %}<li><a href="#{{ item.id }}">{{ item.title }}</a></li>{% endfor %}
+	</ol></td></tr>
+
+	{% for item in faq %}
+		<tr class="h"><td id="{{ item.id }}">{{ item.title }}</td></tr>
+		<tr><td class="n1">{{ item.content | raw }}</td></tr>
+	{% endfor %}
+</table>
+	{% endblock %}

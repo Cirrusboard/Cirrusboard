@@ -208,6 +208,31 @@ table.postformatting {
 	}
 }
 
+// FAQ styling
+
+.faq {
+	p {
+		margin-bottom: 1em;
+		margin-top: 1em;
+	}
+
+	li {
+		margin-bottom: 1em;
+	}
+	.toc li {
+		margin-bottom: 0.6em;
+	}
+
+	pre {
+		display: inline-block;
+	}
+}
+.faq > tbody > tr > .n1 {
+	padding: 5px 15px;
+}
+
+.autowidth { width: auto !important }
+
 /// Example theme styling (voxelmanip_retro) \\\
 
 $primary: #38c016;
