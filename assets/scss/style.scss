@@ -143,6 +143,26 @@ ul.pipemenu {
 	}
 }
 
+.postform {
+	input[type=text] {
+		margin: 10px 0;
+	}
+
+	textarea, .actionbar {
+		width: 90%;
+		max-width: 900px;
+	}
+
+	.actionbar {
+		text-align: center;
+
+		input[type=submit] {
+			margin: 10px 10px;
+		}
+	}
+}
+
+
 // Spoilers
 
 .spoiler {

@@ -1,0 +1,28 @@
+{% extends "_layout.twig" %}
+
+{% set title = "New thread" %}
+
+	{% block content %}
+{% if error %}
+	<p class="error">The following errors occured when trying to register: <br>- {{ error | join('<br>- ') | raw }}</p>
+{% endif %}
+
+<form method="POST"><table class="c1 postform">
+	<tr class="h"><td colspan="2">New Thread</td></tr>
+	<tr class="n1">
+		<td class="nb center" style="width:120px"><strong>Title:</strong></td>
+		<td class="nb"><input type="text" name="title" style="width:60%" value="{{ threadtitle }}"></td>
+	</tr>
+	<tr class="n1">
+		<td class="nb"></td>
+		<td class="nb">
+			<textarea name="message" id="message" rows="12" cols="80">{{ message }}</textarea>
+
+			<div class="actionbar">
+				{#<input type="submit" name="action" value="Preview">#}
+				<input type="submit" name="action" value="Submit">
+			</div>
+		</td>
+	</tr>
+</table></form>
+	{% endblock %}

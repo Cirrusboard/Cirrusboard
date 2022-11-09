@@ -55,6 +55,9 @@ CREATE TABLE `threads` (
   `user` int(10) unsigned NOT NULL COMMENT 'User ID of the forum author',
   `posts` int(10) unsigned NOT NULL DEFAULT 1 COMMENT 'Amount of posts in the thread',
   `views` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Thread views',
+  `lastdate` int(10) unsigned DEFAULT NULL COMMENT 'Date of last post in thread',
+  `lastuser` int(10) unsigned DEFAULT NULL COMMENT 'Author of last post in thread',
+  `lastid` int(10) unsigned DEFAULT NULL COMMENT 'ID of last post in thread',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -77,4 +80,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2022-10-31 14:24:56
+-- 2022-10-31 16:22:41
