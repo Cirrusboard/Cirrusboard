@@ -33,7 +33,7 @@
 	{% if not nobreadcrumb %}
 		<div class="breadcrumb">
 			<a href="./">Main</a> &raquo;
-			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo;{% endfor %}
+			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo; {% endfor %}
 			{{ title }}
 
 			<div class="actions">
@@ -47,7 +47,7 @@
 	{% if not nobreadcrumb %}
 		<div class="breadcrumb">
 			<a href="./">Main</a> &raquo;
-			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo;{% endfor %}
+			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo; {% endfor %}
 			{{ title }}
 		</div>
 	{% endif %}
