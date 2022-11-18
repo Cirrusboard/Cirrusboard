@@ -45,8 +45,7 @@ if (isset($_POST['action'])) {
 	}
 }
 
-$twig = twigloader();
-echo $twig->render('register.twig', [
+echo twigloader()->render('register.twig', [
 	'error' => $error,
 	'name' => $name ?? null
 ]);

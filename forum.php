@@ -14,9 +14,7 @@ $threads = query("SELECT t.*, u.id u_id, u.name u_name, u.powerlevel u_powerleve
 		WHERE t.forum = ? ORDER BY t.id DESC",
 	[$id]);
 
-$twig = twigloader();
-
-echo $twig->render('forum.twig', [
+echo twigloader()->render('forum.twig', [
 	'id' => $id,
 	'forum' => $forum,
 	'threads' => $threads

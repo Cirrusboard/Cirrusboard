@@ -22,8 +22,7 @@ if (isset($_POST['action'])) {
 	}
 }
 
-$twig = twigloader();
-echo $twig->render('login.twig', [
+echo twigloader()->render('login.twig', [
 	'error' => $error,
 	'name' => $name ?? null
 ]);

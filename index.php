@@ -12,9 +12,7 @@ $forums = query("SELECT f.*, u.id u_id, u.name u_name, u.powerlevel u_powerlevel
 		ORDER BY c.ord, c.id, f.ord, f.id",
 	[$userdata['powerlevel']]);
 
-$twig = twigloader();
-
-echo $twig->render('index.twig', [
+echo twigloader()->render('index.twig', [
 	'categories' => $categories,
 	'forums' => $forums,
 	'just_registered' => isset($_GET['rd'])

@@ -32,9 +32,7 @@ function error($title, $message) {
 }
 
 function threadpost($post) {
-	$twig = twigloader('components');
-
-	return $twig->render('threadpost.twig', [
+	return twigloader('components')->render('threadpost.twig', [
 		'post' => $post
 	]);
 }

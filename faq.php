@@ -11,8 +11,6 @@ if (file_exists('conf/faq.php'))
 else
 	require('conf/faq.sample.php');
 
-$twig = twigloader();
-
-echo $twig->render('faq.twig', [
+echo twigloader()->render('faq.twig', [
 	'faq' => $faq
 ]);

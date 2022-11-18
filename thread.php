@@ -21,9 +21,7 @@ $posts = query("SELECT u.id u_id, u.name u_name, u.powerlevel u_powerlevel, $use
 $breadcrumb = [
 	'forum.php?id='.$thread['forum_id'] => $thread['forum_title']];
 
-$twig = twigloader();
-
-echo $twig->render('thread.twig', [
+echo twigloader()->render('thread.twig', [
 	'thread' => $thread,
 	'posts' => $posts,
 	'breadcrumb' => $breadcrumb
