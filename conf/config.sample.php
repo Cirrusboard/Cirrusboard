@@ -11,3 +11,8 @@ $tplNoCache = false; // **DO NOT SET AS TRUE IN PROD - DEV ONLY**
 $config['title'] = "Cool Forum";
 $config['description'] = "A very cool forum.";
 $config['logo'] = 'voxelmanip_forums.png';
+
+// List of smilies, if you want them.
+$smilies = [
+	//'-_-' => 'assets/smilies/annoyed.png',
+];

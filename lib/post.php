@@ -1,6 +1,8 @@
 <?php
 
 function postfilter($text) {
+	global $smilies;
+
 	if (empty($text)) return;
 
 	$text = trim($text);
@@ -23,6 +25,10 @@ function postfilter($text) {
 	$text = preg_replace("'\[quote=\"(.*?)\" id=\"(.*?)\"\]'si", '<div class="quote"><div class="author"><a href=thread.php?pid=\\2#\\2>Posted by \\1</a></div><div class="quotetext">', $text);
 	$text = preg_replace("'\[quote=(.*?)\]'si", '<div class="quote"><div class="author">Posted by ', $text);
 	$text = preg_replace("'\[/quote\][\n\r\x0C]*'", '</div></div>', $text);
+
+	// Smil(ies|eys)
+	foreach ($smilies as $code => $image)
+		$text = str_replace($code, sprintf('<img class="smiley" src="%s" alt="%s" title="%s">', $image, $code, $code), $text);
 
 	$text = str_replace("\n", '<br>', $text);
 
