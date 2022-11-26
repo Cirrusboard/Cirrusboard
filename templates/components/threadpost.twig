@@ -1,7 +1,12 @@
+
+
 <table class="c1 threadpost" id="{{ post.id }}">
 	<tr>
 		<td class="n1 topbar_1">{{ userlink(post, 'u_') }}</td>
-		<td class="n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }} | ID: {{ post.id }}</td>
+		<td class="n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }}
+			<span style="float:right">
+				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a> | ID: {{ post.id }}</span>
+		</td>
 	</tr><tr valign="top">
 		<td class="n1 sfont sidebar">
 			{% if post.u_title %}{{ post.u_title | raw }}{% endif %}

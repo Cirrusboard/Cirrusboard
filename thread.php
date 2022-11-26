@@ -3,6 +3,12 @@ require('lib/common.php');
 
 $id = $_GET['id'] ?? null;
 
+// Thing to ease permalinks, thread.php?pid=%d to point to a particular post
+if (isset($_GET['pid'])) {
+	// TODO: When I implement pagination this needs to be expanded
+	$id = result("SELECT thread FROM posts WHERE id = ?", [$_GET['pid']]);
+}
+
 $thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id FROM threads t
 		JOIN forums f ON f.id = t.forum
 		WHERE t.id = ?",
@@ -22,6 +28,7 @@ $breadcrumb = [
 	'forum.php?id='.$thread['forum_id'] => $thread['forum_title']];
 
 echo twigloader()->render('thread.twig', [
+	'id' => $id,
 	'thread' => $thread,
 	'posts' => $posts,
 	'breadcrumb' => $breadcrumb

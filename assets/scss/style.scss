@@ -119,6 +119,11 @@ a:active, a:hover	{ color: #FFFFFF }
 	.topbar_1, .sidebar {
 		text-align: center;
 	}
+
+	.mainbar {
+		padding: 10px;
+		line-height: 1.5;
+	}
 }
 
 ul.pipemenu {
@@ -214,6 +219,7 @@ table.postformatting {
 	p {
 		margin-bottom: 1em;
 		margin-top: 1em;
+		line-height: 1.5;
 	}
 
 	li {
