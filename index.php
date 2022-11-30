@@ -12,8 +12,14 @@ $forums = query("SELECT f.*, u.id u_id, u.name u_name, u.powerlevel u_powerlevel
 		ORDER BY c.ord, c.id, f.ord, f.id",
 	[$userdata['powerlevel']]);
 
+$stats = fetch("SELECT (SELECT COUNT(*) FROM users) u, (SELECT COUNT(*) FROM threads) t, (SELECT COUNT(*) FROM posts) p");
+
+$newestUser = fetch("SELECT id, name, powerlevel FROM users ORDER BY id DESC LIMIT 1");
+
 echo twigloader()->render('index.twig', [
 	'categories' => $categories,
 	'forums' => $forums,
-	'just_registered' => isset($_GET['rd'])
+	'just_registered' => isset($_GET['rd']),
+	'stats' => $stats,
+	'newestuser' => $newestUser
 ]);

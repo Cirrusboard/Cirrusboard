@@ -47,4 +47,17 @@
 		</td>
 	</tr>
 {% endfor %}
+</table>
+
+<br><table class="c1 faq">
+
+	<tr class="h"><td class="left">Statistics</td></tr>
+
+	<tr><td class="n1">
+		<p>Total posts: <strong>{{ stats.p }}</strong>
+			&mdash; Total threads: <strong>{{ stats.t }}</strong>
+			&mdash; Total members: <strong>{{ stats.u }}</strong>
+			&mdash; Newest: {{ userlink(newestuser) }}</p>
+	</td></tr>
+</table>
 	{% endblock %}
