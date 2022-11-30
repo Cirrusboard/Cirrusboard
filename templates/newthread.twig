@@ -4,11 +4,11 @@
 
 	{% block content %}
 {% if error %}
-	<p class="error">The following errors occured when trying to register: <br>- {{ error | join('<br>- ') | raw }}</p>
+	<p class="error">The following errors occured when trying to make a new thread: <br>- {{ error | join('<br>- ') | raw }}</p>
 {% endif %}
 
 <form method="POST"><table class="c1 postform">
-	<tr class="h"><td colspan="2">New Thread</td></tr>
+	<tr class="h"><td colspan="2">New thread</td></tr>
 	<tr class="n1">
 		<td class="nb center" style="width:120px"><strong>Title:</strong></td>
 		<td class="nb"><input type="text" name="title" style="width:60%" value="{{ threadtitle }}"></td>
