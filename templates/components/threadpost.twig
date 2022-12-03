@@ -4,6 +4,7 @@
 	<tr>
 		<td class="n1 topbar_1">{{ userlink(post, 'u_') }}</td>
 		<td class="n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }}
+			{%- if post.tid %}, in <a href="thread.php?id={{ post.tid }}">{{ post.ttitle }}</a>{% endif %}
 			<span style="float:right">
 				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a> | ID: {{ post.id }}</span>
 		</td>

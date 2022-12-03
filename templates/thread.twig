@@ -1,9 +1,15 @@
 {% extends "_layout.twig" %}
 
-{% set title = thread.title %}
+{% if viewmode == "thread" %}
+	{% set title = thread.title %}
 
-{% if log %}
-	{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+	{% if log %}
+		{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+	{% endif %}
+{% elseif viewmode == "user" %}
+	{% set title = "Posts" %}
+{% elseif viewmode == "time" %}
+	{% set title = "Latest posts" %}
 {% endif %}
 
 	{% block content %}

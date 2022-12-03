@@ -18,7 +18,7 @@
 		</td></tr>
 		<tr>
 			<td class="n2 nb menu">
-				<a href="./">Index</a><a href="faq.php">FAQ</a>
+				<a href="./">Index</a><a href="faq.php">FAQ</a><a href="memberlist.php">Member list</a><a href="thread.php?time=86400">Latest posts</a>
 			</td>
 			<td class="n2 nb menu right">
 				{% if log %}
@@ -49,6 +49,10 @@
 			<a href="./">Main</a> &raquo;
 			{% for url, title in breadcrumb %}<a href="{{ url }}">{{ title }}</a> &raquo; {% endfor %}
 			{{ title }}
+
+			<div class="actions">
+				<ul class="pipemenu">{% for url, title in actions %}<li><a href="{{ url }}">{{ title }}</a></li>{% endfor %}</ul>
+			</div>
 		</div>
 	{% endif %}
 
