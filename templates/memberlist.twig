@@ -1,0 +1,24 @@
+{% extends "_layout.twig" %}
+
+{% set title = "Member list" %}
+
+	{% block content %}
+<table class="c1">
+	<tr class="h">
+		<td class="b h" width="32">#</td>
+		<td class="b h" width="62">Picture</td>
+		<td class="b h">Name</td>
+		<td class="b h" width="145">Registered on</td>
+		<td class="b h" width="75">Posts</td>
+	</tr>
+{% for user in users %}
+	<tr class="n1" style="height:69px">
+		<td class="b center">{{ user.id }}.</td>
+		<td class="b center">{% if user.avatar %}<img src="userpic/{{ user.id }}" width=60 height=60>{% endif %}</td>
+		<td class="b">{{ userlink(user) }}</td>
+		<td class="b center">{{ user.joined | date("Y-m-d H:i") }}</td>
+		<td class="b center">{{ user.posts }}</td>
+	</tr>
+{% endfor %}
+</table>
+	{% endblock %}
