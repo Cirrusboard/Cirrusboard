@@ -38,7 +38,7 @@ if ($viewmode == 'thread') {
 
 	$breadcrumb = ['forum.php?id='.$thread['forum_id'] => $thread['forum_title']];
 } elseif ($viewmode == 'user') {
-	$user = fetch("SELECT * FROM users WHERE id = ?", [$uid]);
+	$user = fetch("SELECT name FROM users WHERE id = ?", [$uid]);
 
 	if (!$user) error('404', "This user doesn't exist.");
 

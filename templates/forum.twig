@@ -1,9 +1,15 @@
 {% extends "_layout.twig" %}
 
-{% set title = forum.title %}
+{% if viewmode == "forum" %}
+	{% set title = forum.title %}
 
-{% if log %}
-	{% set actions = {("newthread.php?id="~id) : "New thread"} %}
+	{% if log %}
+		{% set actions = {("newthread.php?id="~id) : "New thread"} %}
+	{% endif %}
+{% elseif viewmode == "user" %}
+	{% set title = "Threads" %}
+{% elseif viewmode == "time" %}
+	{% set title = "Latest threads" %}
 {% endif %}
 
 	{% block content %}
