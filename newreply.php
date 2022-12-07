@@ -11,7 +11,7 @@ $thread = fetch("SELECT t.*, f.title f_title
 
 $error = [];
 
-if ($action) {
+if ($action == "Submit") {
 	$lastpost = fetch("SELECT id, user, date FROM posts WHERE thread = ? ORDER BY id DESC LIMIT 1", [$thread['id']]);
 	if ($lastpost['user'] == $userdata['id'] && $lastpost['date'] >= (time() - 60*60*12))
 		$error[] = "You can't double post until it's been at least 12 hours!";
@@ -36,6 +36,12 @@ if ($action) {
 
 		redirect("thread.php?pid=$postid#$postid");
 	}
+} elseif ($action == 'Preview') {
+	$post['date'] = $post['ulastpost'] = time();
+	$post['text'] = $message;
+	foreach ($userdata as $field => $val)
+		$post['u_'.$field] = $val;
+	$post['headerbar'] = 'Post preview';
 }
 
 $breadcrumb = [
@@ -47,6 +53,8 @@ echo twigloader()->render('newreply.twig', [
 	'breadcrumb' => $breadcrumb,
 	'thread' => $thread,
 	'message' => $message,
-	'error' => $error
+	'error' => $error,
+	'post' => $post ?? null,
+	'action' => $action
 ]);
 

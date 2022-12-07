@@ -1,6 +1,7 @@
 
 
 <table class="c1 threadpost" id="{{ post.id }}">
+	{% if post.headerbar %}<tr class="h"><td colspan="2">{{ post.headerbar }}</td></tr>{% endif %}
 	<tr>
 		<td class="n1 topbar_1">{{ userlink(post, 'u_') }}</td>
 		<td class="n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }}

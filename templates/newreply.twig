@@ -7,6 +7,10 @@
 	<p class="error">The following errors occured when trying to make a reply: <br>- {{ error | join('<br>- ') | raw }}</p>
 {% endif %}
 
+{% if action == 'Preview' %}
+	{{ threadpost(post) }}
+{% endif %}
+
 <form method="POST"><table class="c1 postform">
 	<tr class="h"><td colspan="2">New reply</td></tr>
 	<tr class="n1">
@@ -21,7 +25,7 @@
 			<textarea name="message" id="message" rows="12" cols="80">{{ message }}</textarea>
 
 			<div class="actionbar">
-				{#<input type="submit" name="action" value="Preview">#}
+				<input type="submit" name="action" value="Preview">
 				<input type="submit" name="action" value="Submit">
 			</div>
 		</td>
