@@ -8,12 +8,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: php-actions/composer@v6
+      - name: Install Composer dependencies
+        uses: php-actions/composer@v6
 
       - name: Compile SCSS
         run: |
           sudo apt-get install -y sassc
-          bash tools/compile-scss-sassc.sh
+          bash tools/compile-sass-sassc.sh
+
+      - name: Prepare things
+        run: |
+          rm -rf .git .github DOCKER_ENV docker_tag output.log
 
       - name: Upload
         uses: actions/upload-artifact@v3
