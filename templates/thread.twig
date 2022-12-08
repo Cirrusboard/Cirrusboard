@@ -9,10 +9,20 @@
 {% elseif viewmode == "user" %}
 	{% set title = "Posts" %}
 {% elseif viewmode == "time" %}
-	{% set title = "Latest posts" %}
+	{% set title = "Latest posts (by post)" %}
 {% endif %}
 
 	{% block content %}
+{% if viewmode == "time" %}
+	<table class="c1 autowidth">
+		<tr class="h"><td>Latest posts</td></tr>
+		<tr><td class="n1 center">
+			<a href="forum.php?time={{ time }}">By thread</a> | By post
+			<br><br>{{ timelinks('forum', time) }}
+		</td></tr>
+	</table><br>
+{% endif %}
+
 {% for post in posts %}
 	{{ threadpost(post) }}
 {% endfor %}

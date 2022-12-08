@@ -64,7 +64,7 @@ if ($viewmode == 'thread') {
 			LEFT JOIN forums f ON f.id = t.forum
 			WHERE p.date > ? AND ? >= f.minread
 			ORDER BY p.date DESC",
-		[$time, $userdata['powerlevel']]);
+		[$mintime, $userdata['powerlevel']]);
 }
 
 
@@ -74,5 +74,6 @@ echo twigloader()->render('thread.twig', [
 	'thread' => $thread ?? null,
 	'posts' => $posts,
 	'breadcrumb' => $breadcrumb ?? null,
-	'viewmode' => $viewmode
+	'viewmode' => $viewmode,
+	'time' => $time
 ]);

@@ -56,5 +56,6 @@ echo twigloader()->render('forum.twig', [
 	'id' => $id,
 	'forum' => $forum ?? null,
 	'threads' => $threads,
-	'viewmode' => $viewmode
+	'viewmode' => $viewmode,
+	'time' => $time
 ]);
