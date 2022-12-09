@@ -55,6 +55,9 @@
 		</tr>
 		{% set i = i + 1 %}
 	{% endfor %}
+	{% if i == 1 %}
+		<tr><td class="n1 center" colspan="6"><p>No threads found.</p></td></tr>
+	{% endif %}
 </table>
 
 {{ pagelist | raw }}

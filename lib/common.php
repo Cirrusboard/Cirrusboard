@@ -36,7 +36,6 @@ if (isset($_COOKIE['token'])) {
 		$log = true;
 }
 
-
 if ($log) {
 	// Get data for the current user
 	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$id]);
@@ -49,3 +48,6 @@ if ($log) {
 		'powerlevel' => 0
 	];
 }
+
+$ppp = 20;
+$tpp = 50;

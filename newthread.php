@@ -44,6 +44,12 @@ if ($action == 'Submit') {
 
 		redirect("thread.php?id=$tid");
 	}
+} elseif ($action == 'Preview') {
+	$post['date'] = $post['ulastpost'] = time();
+	$post['text'] = $message;
+	foreach ($userdata as $field => $val)
+		$post['u_'.$field] = $val;
+	$post['headerbar'] = 'Post preview';
 }
 
 $breadcrumb = [
@@ -53,5 +59,7 @@ echo twigloader()->render('newthread.twig', [
 	'breadcrumb' => $breadcrumb,
 	'threadtitle' => $title,
 	'message' => $message,
-	'error' => $error
+	'error' => $error,
+	'post' => $post ?? null,
+	'action' => $action
 ]);

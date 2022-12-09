@@ -5,19 +5,19 @@
 	{% block content %}
 <table class="c1">
 	<tr class="h">
-		<td class="b h" width="32">#</td>
-		<td class="b h" width="62">Picture</td>
-		<td class="b h">Name</td>
-		<td class="b h" width="145">Registered on</td>
-		<td class="b h" width="75">Posts</td>
+		<td class="h" style="width:32px">#</td>
+		<td class="h" style="width:62px">Picture</td>
+		<td class="h">Name</td>
+		<td class="h" style="width:140px">Registered on</td>
+		<td class="h" style="width:50px">Posts</td>
 	</tr>
 {% for user in users %}
-	<tr class="n1" style="height:69px">
-		<td class="b center">{{ user.id }}.</td>
-		<td class="b center">{% if user.avatar %}<img src="userpic/{{ user.id }}" width=60 height=60>{% endif %}</td>
-		<td class="b">{{ userlink(user) }}</td>
-		<td class="b center">{{ user.joined | date("Y-m-d H:i") }}</td>
-		<td class="b center">{{ user.posts }}</td>
+	<tr class="n1 center" style="height:75px">
+		<td>{{ user.id }}.</td>
+		<td>{% if user.avatar %}<img src="userpic/{{ user.id }}" width=60 height=60>{% endif %}</td>
+		<td class="left">{{ userlink(user) }}</td>
+		<td>{{ user.joined | date("Y-m-d H:i") }}</td>
+		<td>{{ user.posts }}</td>
 	</tr>
 {% endfor %}
 </table>

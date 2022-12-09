@@ -4,15 +4,13 @@
 
 {% set actions = {("thread.php?user="~uid): "Show posts", ("forum.php?user="~uid): "Show threads"} %}
 
-
-
 	{% block content %}
 {% for cat, fields in profilefields %}
 	<table class="c1">
 		<tr class="h"><td colspan="2"><strong>{{ cat }}</strong></td></tr>
 		{% for title, value in fields %}
 			{% if value %}
-				<tr><td class="b n1" width="130"><b>{{ title }}</b></td><td class="b n2">{{ value | raw }}</td>
+				<tr><td class="n1" width="130"><b>{{ title }}</b></td><td class="n2">{{ value | raw }}</td>
 			{% endif %}
 		{% endfor %}
 	</table><br>
@@ -20,3 +18,5 @@
 
 
 	{% endblock %}
+
+\ No newline at end of file

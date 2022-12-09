@@ -18,14 +18,20 @@
 		<tr class="h"><td>Latest posts</td></tr>
 		<tr><td class="n1 center">
 			<a href="forum.php?time={{ time }}">By thread</a> | By post
-			<br><br>{{ timelinks('forum', time) }}
+			<br><br>{{ timelinks('thread', time) }}
 		</td></tr>
 	</table><br>
 {% endif %}
 
+{% set i = 1 %}
 {% for post in posts %}
 	{{ threadpost(post) }}
+	{% set i = i + 1 %}
 {% endfor %}
+
+{% if i == 1 %}
+	<table class="c1"><tr><td class="n1 center" colspan="6"><p>No posts found.</p></td></tr></table>
+{% endif %}
 
 {{ pagelist | raw }}
 	{% endblock %}
