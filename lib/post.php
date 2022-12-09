@@ -5,7 +5,8 @@ function postfilter($text) {
 
 	if (empty($text)) return;
 
-	$text = trim($text);
+	// Normalise the text (make it sane(r))
+	$text = str_replace("\r", "", trim($text));
 
 	// Basic formatting
 	$text = preg_replace("'\[b\](.*?)\[/b\]'si", '<b>\\1</b>', $text);
@@ -20,15 +21,31 @@ function postfilter($text) {
 	$text = preg_replace("'\[img\](.*?)\[/img\]'si", '<img src=\\1>', $text);
 	$text = preg_replace("'\[color=([a-f0-9]{6})\](.*?)\[/color\]'si", '<span style="color: #\\1">\\2</span>', $text);
 
+	// Userlinks and post links
+	$text = preg_replace("'>>([0-9]+)'si", '>><a href=thread.php?pid=\\1#\\1>\\1</a>', $text);
+
 	// Quotes (not from cave story LOL)
 	$text = preg_replace("'\[quote\](.*?)\[/quote\]'si", '<div class="quote"><div class="quotetext">\\1</div></div>', $text);
 	$text = preg_replace("'\[quote=\"(.*?)\" id=\"(.*?)\"\]'si", '<div class="quote"><div class="author"><a href=thread.php?pid=\\2#\\2>Posted by \\1</a></div><div class="quotetext">', $text);
-	$text = preg_replace("'\[quote=(.*?)\]'si", '<div class="quote"><div class="author">Posted by ', $text);
-	$text = preg_replace("'\[/quote\][\n\r\x0C]*'", '</div></div>', $text);
+	$text = preg_replace("'\[quote=(.*?)\][\n\r]*'si", '<div class="quote"><div class="author">Posted by \\1</div><div class="quotetext">', $text);
+	$text = preg_replace("'\[/quote\][\n\r]*'", '</div></div>', $text);
+
+	// Code block
+	$text = preg_replace_callback("'\[code\](.*?)\[/code\]'si", function ($match) {
+		return '<div class="codeblock">'.htmlspecialchars($match[1]).'</div>';
+	}, $text);
+	$text = preg_replace("'\[pre\](.*?)\[/pre\]'si", '<code>\\1</code>', $text);
+
+	// YooToob
+	$text = preg_replace(
+		"'\[youtube\]((https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/(watch\?v=)?)?([\-0-9_a-zA-Z]*?)\[\/youtube\]'si",
+		'<iframe width="427" height="240" src="https://www.youtube.com/embed/\\6" frameborder="0" allowfullscreen></iframe>',
+	$text);
+
 
 	// Smil(ies|eys)
 	foreach ($smilies as $code => $image)
-		$text = str_replace($code, sprintf('<img class="smiley" src="%s" alt="%s" title="%s">', $image, $code, $code), $text);
+		$text = str_replace(" $code ", sprintf(' <img class="smiley" src="%s" alt="%s" title="%s"> ', $image, $code, $code), $text);
 
 	$text = str_replace("\n", '<br>', $text);
 

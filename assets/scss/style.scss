@@ -135,6 +135,20 @@ a:active, a:hover	{ color: #FFFFFF }
 	}
 }
 
+.codeblock {
+	background-color: #151515;
+	color: #50fc5e;
+	border: 1px solid #6c6;
+	padding: 10px;
+	margin: 5px;
+	white-space: pre-wrap;
+	font-family: 'Fira Code', Monaco, Consolas, monospace;
+}
+
+.smiley {
+	vertical-align: middle;
+}
+
 ul.pipemenu {
 	display: inline;
 	list-style-type: none;
