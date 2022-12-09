@@ -4,6 +4,7 @@ require('lib/common.php');
 $id = $_GET['id'] ?? null;
 $uid = $_GET['user'] ?? null;
 $time = $_GET['time'] ?? null;
+$page = $_GET['page'] ?? 1;
 
 if ($id)
 	$viewmode = 'thread';
@@ -19,6 +20,7 @@ elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread.php?pid=%d to
 	error('400', "I'm confused as to what you want...");
 
 $userpostfields = 'u.id u_id, u.name u_name, u.powerlevel u_powerlevel, '.postfields_user();
+$offset = (($page - 1) * $ppp);
 
 if ($viewmode == 'thread') {
 	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id FROM threads t
@@ -30,17 +32,21 @@ if ($viewmode == 'thread') {
 
 	$posts = query("SELECT $userpostfields p.*, pt.text, pt.date ptdate, pt.revision cur_revision
 			FROM posts p
-			JOIN poststext pt ON p.id = pt.id AND pt.revision = 1
+			JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
 			JOIN users u ON p.user = u.id
 			WHERE p.thread = ?
-			ORDER BY p.id",
-		[$id]);
+			ORDER BY p.id LIMIT ?,?",
+		[$id, $offset, $ppp]);
 
 	$breadcrumb = ['forum.php?id='.$thread['forum_id'] => $thread['forum_title']];
+
+	$url = "thread.php?id=$id";
 } elseif ($viewmode == 'user') {
 	$user = fetch("SELECT name FROM users WHERE id = ?", [$uid]);
 
 	if (!$user) error('404', "This user doesn't exist.");
+
+	$thread['posts'] = result("SELECT COUNT(*) FROM posts WHERE user = ?", [$uid]);
 
 	$posts = query("SELECT $userpostfields p.*, pt.text, pt.date ptdate, pt.revision cur_revision, t.id tid, t.title ttitle
 			FROM posts p
@@ -49,12 +55,16 @@ if ($viewmode == 'thread') {
 			LEFT JOIN threads t ON p.thread = t.id
 			LEFT JOIN forums f ON f.id = t.forum
 			WHERE p.user = ? AND ? >= f.minread
-			ORDER BY p.id",
-		[$uid, $userdata['powerlevel']]);
+			ORDER BY p.id LIMIT ?,?",
+		[$uid, $userdata['powerlevel'], $offset, $ppp]);
 
 	$breadcrumb = ['profile.php?id='.$uid => $user['name']];
+
+	$url = "thread.php?user=$uid";
 } elseif ($viewmode == 'time') {
-	$mintime = ($time > 0 && $time <= 2592000 ? time() - $time : 86400);
+	$mintime = ($time > 0 && $time <= 2592000 ? time() - $time : 604800);
+
+	$thread['posts'] = result("SELECT COUNT(*) FROM posts WHERE date > ?", [$mintime]);
 
 	$posts = query("SELECT $userpostfields p.*, pt.text, pt.date ptdate, pt.revision cur_revision, t.id tid, t.title ttitle
 			FROM posts p
@@ -63,11 +73,14 @@ if ($viewmode == 'thread') {
 			LEFT JOIN threads t ON p.thread = t.id
 			LEFT JOIN forums f ON f.id = t.forum
 			WHERE p.date > ? AND ? >= f.minread
-			ORDER BY p.date DESC",
-		[$mintime, $userdata['powerlevel']]);
+			ORDER BY p.date DESC LIMIT ?,?",
+		[$mintime, $userdata['powerlevel'], $offset, $ppp]);
+
+	$url = "thread.php?time=$time";
 }
 
-
+if ($thread['posts'] > $ppp)
+	$pagelist = pagination($thread['posts'], $ppp, $url.'&page=%s', $page);
 
 echo twigloader()->render('thread.twig', [
 	'id' => $id,
@@ -75,5 +88,6 @@ echo twigloader()->render('thread.twig', [
 	'posts' => $posts,
 	'breadcrumb' => $breadcrumb ?? null,
 	'viewmode' => $viewmode,
-	'time' => $time
+	'time' => $time,
+	'pagelist' => $pagelist ?? null
 ]);

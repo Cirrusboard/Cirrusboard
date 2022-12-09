@@ -26,4 +26,6 @@
 {% for post in posts %}
 	{{ threadpost(post) }}
 {% endfor %}
+
+{{ pagelist | raw }}
 	{% endblock %}
