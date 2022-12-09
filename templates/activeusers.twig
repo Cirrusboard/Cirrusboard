@@ -1,0 +1,35 @@
+{% extends "_layout.twig" %}
+
+{% set title = "Active users" %}
+
+	{% block content %}
+<table class="c1 autowidth">
+	<tr class="h"><td>Active users</td></tr>
+	<tr><td class="n1 center">
+		{{ timelinks('activeusers', time) }}
+	</td></tr>
+</table><br>
+<table class="c1">
+	<tr class="h">
+		<td style="width:32px">#</td>
+		<td>Username</td>
+		<td style="width:140px">Registered on</td>
+		<td style="width:50px">Posts</td>
+		<td style="width:50px">Total</td>
+	</tr>
+	{% set i = 1 %}
+	{% for user in users %}
+		<tr class="n{% if i % 2 %}1{% else %}2{% endif %} center">
+			<td>{{ i }}.</td>
+			<td class="left">{{ userlink(user) }}</td>
+			<td>{{ user.joined | date('Y-m-d H:i') }}</td>
+			<td><b>{{ user.num }}</b></td>
+			<td><b>{{ user.posts }}</b></td>
+		</tr>
+		{% set i = i + 1 %}
+	{% endfor %}
+	{% if i == 1 %}
+		<tr><td class="n1 center" colspan="5"><p>There are no active users in the given timespan.</p></td></tr>
+	{% endif %}
+</table>
+	{% endblock %}
