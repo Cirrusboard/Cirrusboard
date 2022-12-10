@@ -18,3 +18,15 @@ $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people d
 $smilies = [
 	//'-_-' => 'assets/smilies/annoyed.png',
 ];
+
+// Sample post that is shown on profile pages.
+$samplepost = <<<HTML
+[b]This[/b] is a [i]sample message.[/i] It shows how [u]your posts[/u] will look on the board.
+[quote=Anonymous][spoiler]Hello![/spoiler][/quote]
+[code]if (true) {\r
+	print "The world isn't broken.";\r
+} else {\r
+	print "Something is very wrong.";\r
+}[/code]
+[url=]Test Link. Ooh![/url]
+HTML;

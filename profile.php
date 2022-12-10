@@ -5,7 +5,12 @@ $id = $_GET['id'] ?? null;
 
 $profile = fetch("SELECT * FROM users WHERE id = ?", [$id]);
 
+if (!$profile) error('404', 'This user does not exist.');
+
 $days = (time() - $profile['joined']) / 86400;
+
+if ($profile['email'] && $profile['showemail'] && $log)
+	$email = esc($profile['email']);
 
 $profilefields = [
 	"General information" => [
@@ -21,11 +26,18 @@ $profilefields = [
 	"User information" => [
 		'Bio'		=> ($profile['bio'] ? postfilter($profile['bio']) : ''),
 		'Location'	=> $profile['location'] ?: '',
+		'Email'		=> $email ?? ''
 	]
 ];
+
+$post = ['date' => time(), 'text' => $samplepost, 'headerbar' => 'Sample post'];
+
+foreach ($profile as $field => $val)
+	$post['u_'.$field] = $val;
 
 echo twigloader()->render('profile.twig', [
 	'uid' => $id,
 	'profile' => $profile,
-	'profilefields' => $profilefields
+	'profilefields' => $profilefields,
+	'sample_post' => $post
 ]);
