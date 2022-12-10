@@ -108,6 +108,23 @@ a:active, a:hover	{ color: #FFFFFF }
 	}
 }
 
+/* Footer */
+.footer {
+	font-size: 0.85em;
+
+	.stats {
+		float: right;
+		padding-top: 0.5em;
+	}
+
+	.poweredby {
+		float: left;
+		margin-right: 4px;
+		margin-top: 3px;
+		width: 88px;
+	}
+}
+
 .threadpost {
 	margin-bottom: 0.75em;
 
