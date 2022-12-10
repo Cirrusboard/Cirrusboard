@@ -47,7 +47,14 @@ if ($log) {
 		'id' => -1,
 		'powerlevel' => 0
 	];
+
+	query("REPLACE INTO guests (lastview, ip) VALUES (?,?)", [time(), $ipaddr]);
 }
 
-$ppp = 20;
-$tpp = 50;
+$ppp = $userdata['ppp'] ?? 20;
+$tpp = $userdata['tpp'] ?? 50;
+
+if (!$log || !$userdata['timezone'])
+	$userdata['timezone'] = $config['defaulttimezone'];
+
+date_default_timezone_set($userdata['timezone']);

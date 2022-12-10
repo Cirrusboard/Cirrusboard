@@ -47,3 +47,29 @@ function redirect($url) {
 	header(sprintf('Location: %s', $url));
 	die();
 }
+
+function esc($text) {
+	return htmlspecialchars($text);
+}
+
+function fieldinput($name, $value, $size, $max, $placeholder = '') {
+	return sprintf('<input type="text" name="%s" size="%s" maxlength="%s" value="%s"%s>',
+		$name, $size, $max, esc($value), ($placeholder ? ' placeholder="'.$placeholder.'"' : ''));
+}
+
+function fieldtextarea($name, $value, $rows, $cols) {
+	return sprintf('<textarea name="%s" rows=%s cols=%s>%s</textarea>',
+		$name, $rows, $cols, esc($value));
+}
+
+function fieldcheckbox($name, $checked, $label) {
+	return sprintf('<label><input type="checkbox" name="%s" value="1" %s> %s</label>', $name, ($checked ? ' checked' : ''), $label);
+}
+
+function fieldselect($name, $selected, $choices) {
+	$text = '';
+	foreach ($choices as $k => $v)
+		$text .= sprintf('<option value="%s"%s>%s</option>', $k, ($k == $selected ? ' selected' : ''), $v);
+
+	return sprintf('<select name="%s">%s</select>', $name, $text);
+}

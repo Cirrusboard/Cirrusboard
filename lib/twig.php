@@ -13,6 +13,12 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 			new \Twig\TwigFunction('posttoolbar', 'posttoolbar', ['is_safe' => ['html']]),
 
 			new \Twig\TwigFunction('timelinks', 'timelinks', ['is_safe' => ['html']]),
+
+			new \Twig\TwigFunction('field_input', 'fieldinput', ['is_safe' => ['html']]),
+			new \Twig\TwigFunction('field_textarea', 'fieldtextarea', ['is_safe' => ['html']]),
+			new \Twig\TwigFunction('field_checkbox', 'fieldcheckbox', ['is_safe' => ['html']]),
+			new \Twig\TwigFunction('field_select', 'fieldselect', ['is_safe' => ['html']]),
+
 		];
 	}
 
