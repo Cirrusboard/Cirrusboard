@@ -13,7 +13,7 @@
 	<tr class="h">
 		<td style="width:32px">#</td>
 		<td>Username</td>
-		<td style="width:140px">Registered on</td>
+		<td class="nom" style="width:140px">Registered on</td>
 		<td style="width:50px">Posts</td>
 		<td style="width:50px">Total</td>
 	</tr>
@@ -22,7 +22,7 @@
 		<tr class="n{% if i % 2 %}1{% else %}2{% endif %} center">
 			<td>{{ i }}.</td>
 			<td class="left">{{ userlink(user) }}</td>
-			<td>{{ user.joined | date('Y-m-d H:i') }}</td>
+			<td class="nom">{{ user.joined | date('Y-m-d H:i') }}</td>
 			<td><b>{{ user.num }}</b></td>
 			<td><b>{{ user.posts }}</b></td>
 		</tr>

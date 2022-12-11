@@ -130,19 +130,19 @@ a:active, a:hover	{ color: #FFFFFF }
 
 	&:last-child { margin-bottom: 0 }
 
-	.topbar_1, .topbar_2, .sidebar {
-		border: 0 !important;
-	}
-
 	.topbar_1 {
+		border-bottom: 0 !important;
+		border-right: 0 !important;
 		width: 180px;
 		height: 32px;
 	}
 	.topbar_2 {
+		border-left: 0 !important;
 		padding: 7px 10px;
 	}
 
 	.topbar_1, .sidebar {
+		border-top: 0 !important;
 		text-align: center;
 	}
 
@@ -278,6 +278,36 @@ table.postformatting {
 }
 
 .autowidth { width: auto !important }
+
+/* Mobile hacks haha :^) */
+@media (min-width: 640px) {
+	.nod { display: none; }
+}
+
+@media only screen and (max-width: 640px) {
+	/* 'no mobile' */
+	.nom { display: none; }
+
+	/* 'no desktop' */
+	.nod { display: unset; }
+
+	.nod img { max-height: 64px; }
+
+	/* display block on mobile */
+	.blkm { display: block !important; }
+
+	.threadpost .topbar_1 {
+		width: unset;
+		height: unset;
+		text-align: left;
+	}
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
 
 /// Example theme styling (voxelmanip_retro) \\\
 

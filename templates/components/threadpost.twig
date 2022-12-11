@@ -1,14 +1,20 @@
+
+
 <table class="c1 threadpost" id="{{ post.id }}">
 	{% if post.headerbar %}<tr class="h"><td colspan="2">{{ post.headerbar }}</td></tr>{% endif %}
 	<tr>
-		<td class="n1 topbar_1">{{ userlink(post, 'u_') }}</td>
-		<td class="n1 topbar_2 sfont">Posted on {{ post.date | date('Y-m-d') }}
+		<td class="n1 topbar_1 nom">{{ userlink(post, 'u_') }}</td>
+		<td class="b n1 topbar_1 topbar{$uid}_2 blkm nod clearfix">
+			<span style="float:left;margin-right:10px">{% if post.u_avatar %}<img src="userpic/{{ post.u_id }}">{% endif %}</span>
+			{{ userlink(post, 'u_') }} <div class="sfont" style="margin-top:0.5em">{% if post.u_title %}{{ post.u_title | raw }}{% endif %}</div>
+		</td>
+		<td class="n1 topbar_2 sfont blkm clearfix">Posted on {{ post.date | date('Y-m-d H:i') }}
 			{%- if post.tid %}, in <a href="thread.php?id={{ post.tid }}">{{ post.ttitle }}</a>{% endif %}
 			<span style="float:right">
-				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a> | ID: {{ post.id }}</span>
+				{% if post.id %}<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a> | ID: {{ post.id }}{% endif %}</span>
 		</td>
 	</tr><tr valign="top">
-		<td class="n1 sfont sidebar">
+		<td class="n1 sfont sidebar nom">
 			{% if post.u_title %}{{ post.u_title | raw }}{% endif %}
 			{% if post.u_avatar %}<img src="userpic/{{ post.u_id }}">{% endif %}
 			<br>Posts: {{ post.u_posts }}<br>

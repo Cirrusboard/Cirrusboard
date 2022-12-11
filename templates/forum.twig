@@ -26,9 +26,9 @@
 <table class="c1">
 	<tr class="h">
 		<td colspan="2">Title</td>
-		<td style="width:150px">Author</td>
-		<td style="width:60px">Replies</td>
-		<td style="width:60px">Views</td>
+		<td class="nom" style="width:150px">Author</td>
+		<td class="nom" style="width:60px">Replies</td>
+		<td class="nom" style="width:60px">Views</td>
 		<td style="width:175px">Last post</td>
 	</tr>
 	{% set i = 1 %}
@@ -44,9 +44,9 @@
 			<td class="left">
 				<a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a>
 			</td>
-			<td>{{ userlink(thread, 'u_') }}</td>
-			<td>{{ thread.posts-1 }}</td>
-			<td>{{ thread.views }}</td>
+			<td class="nom">{{ userlink(thread, 'u_') }}</td>
+			<td class="nom">{{ thread.posts-1 }}</td>
+			<td class="nom">{{ thread.views }}</td>
 			<td>
 				<span>{{ thread.lastdate | date('Y-m-d H:i') }}</span><br>
 				<span>by {{ userlink(thread, 'ul_' ) }}
