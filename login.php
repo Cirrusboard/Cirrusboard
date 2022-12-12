@@ -3,7 +3,9 @@ require('lib/common.php');
 
 $error = '';
 
-if (isset($_POST['action'])) {
+$action = $_POST['action'] ?? null;
+
+if ($action == 'Login') {
 	$name = $_POST['name'] ?? null;
 	$pass = $_POST['password'] ?? null;
 
@@ -20,6 +22,10 @@ if (isset($_POST['action'])) {
 		// Redirect to index... or should it redirect to the last page?
 		redirect('./');
 	}
+} elseif ($action == 'Logout') {
+	// Destroy the token cookie to log out the user.
+	setcookie('token', '');
+	redirect('./');
 }
 
 echo twigloader()->render('login.twig', [

@@ -22,13 +22,18 @@
 			</td>
 			<td class="n2 nb menu right">
 				{% if log %}
-					{{ userlink(userdata) }}<a href="editprofile.php">Edit profile</a><a href="">Log out</a>
+					{{ userlink(userdata) }}<a href="editprofile.php">Edit profile</a><a href="javascript:document.logout.submit()">Log out</a>
 				{% else %}
-					<a href="register.php">Register</a><a href="login.php">Login</a>
+					<a href="register.php">Register</a><a href="login.php">Log in</a>
 				{% endif %}
 			</td>
 		</tr>
 	</table>
+	{# Only allow logging out using a POST form, to not have an endpoint
+		where people could be tricked into logging themselves out #}
+	<form action="login.php" method="post" name="logout">
+		<input type="hidden" name="action" value="Logout">
+	</form>
 
 	{% if not nobreadcrumb %}
 		<div class="breadcrumb">
