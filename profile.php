@@ -12,6 +12,13 @@ $days = (time() - $profile['joined']) / 86400;
 if ($profile['email'] && $profile['showemail'] && $log)
 	$email = esc($profile['email']);
 
+if ($profile['birthday']) {
+	$birthdate = new DateTime($profile['birthday']);
+	$currdate = new DateTime(date("Y-m-d"));
+	$birthday = date("F j, Y", strtotime($profile['birthday']))
+		.' ('.intval($currdate->diff($birthdate)->format("%Y")).' years old)';
+}
+
 $profilefields = [
 	"General information" => [
 		'Name'			=> $profile['name'],
@@ -19,14 +26,15 @@ $profilefields = [
 		'Title'			=> $profile['title'],
 		'Total posts'	=> sprintf('%s (%1.02f per day)', $profile['posts'], $profile['posts'] / $days),
 		'Total threads'	=> sprintf('%s (%1.02f per day)', $profile['threads'], $profile['threads'] / $days),
-		'Registered on'	=> sprintf('%s (%s)', dateformat($profile['joined']), relTime($days * 86400)),
-		'Last post'		=> ($profile['lastpost'] ? sprintf('%s (%s)', dateformat($profile['lastpost']), relTime(time()-$profile['lastpost'])) : "None"),
-		'Last view'		=> sprintf('%s (%s)', dateformat($profile['lastview']), relTime(time() - $profile['lastview']))
+		'Registered on'	=> sprintf('%s (%s)', dateformat($profile['joined']), relTime($profile['joined'])),
+		'Last post'		=> ($profile['lastpost'] ? sprintf('%s (%s)', dateformat($profile['lastpost']), relTime($profile['lastpost'])) : "None"),
+		'Last view'		=> sprintf('%s (%s)', dateformat($profile['lastview']), relTime($profile['lastview']))
 	],
 	"User information" => [
 		'Bio'		=> ($profile['bio'] ? postfilter($profile['bio']) : ''),
 		'Location'	=> $profile['location'] ?: '',
-		'Email'		=> $email ?? ''
+		'Email'		=> $email ?? '',
+		'Birthday'	=> $birthday ?? ''
 	]
 ];
 

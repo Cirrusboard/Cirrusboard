@@ -5,6 +5,16 @@ require('lib/common.php');
 $user = fetch("SELECT * FROM users WHERE id = ?", [$userdata['id']]);
 
 if (isset($_POST['action'])) {
+
+	//Validate birthday values.
+	$bday = (int)($_POST['birthD'] ?? null);
+	$bmonth = (int)($_POST['birthM'] ?? null);
+	$byear = (int)($_POST['birthY'] ?? null);
+
+	if ($bday > 0 && $bmonth > 0 && $byear > 0 && $bmonth <= 12 && $bday <= 31 && $byear <= 3000) // Y-m-d
+		$birthday = $byear.'-'.str_pad($bmonth, 2, "0", STR_PAD_LEFT).'-'.str_pad($bday, 2, "0", STR_PAD_LEFT);
+
+
 	// Temp variables for dynamic query construction.
 	$fieldquery = '';
 	$placeholders = [];
@@ -19,6 +29,9 @@ if (isset($_POST['action'])) {
 		'ppp'		=> $_POST['ppp'],
 		'tpp'		=> $_POST['tpp'],
 	];
+
+	if (isset($birthday))
+		$fields['birthday'] = $birthday;
 
 	if ($userdata['powerlevel'] > 2)
 		$fields['title'] = $_POST['title'];
@@ -45,7 +58,8 @@ foreach (timezone_identifiers_list() as $tz)
 
 $user['timezone'] = $user['timezone'] ?: $config['defaulttimezone'];
 
-$birthday = ['y' => 2004, 'm' => 11, 'd' => 28];
+if ($user['birthday']) // Y-m-d format
+	$birthday = explode('-', $user['birthday']);
 
 echo twigloader()->render('editprofile.twig', [
 	'user' => $user,

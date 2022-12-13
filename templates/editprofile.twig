@@ -8,29 +8,35 @@
 
 	<tr class="h"><td colspan="2">Login information</td></tr>
 	<tr>
-		<td class="b n1 center">Username:</td>
-		<td class="b n2">ROllerozxa</td>
+		<td class="n1 center">Username:</td>
+		<td class="n2">ROllerozxa</td>
 	</tr><tr>
-		<td class="b n1 center">Password:</td>
-		<td class="b n2">{{ field_input('password', '', 13, 64, 'New password') }} {{ field_input('password', '', 13, 32, 'Repeat password') }}</td>
+		<td class="n1 center">Password:</td>
+		<td class="n2">{{ field_input('password', '', 13, 64, 'New password') }} {{ field_input('password', '', 13, 32, 'Repeat password') }}</td>
 	</tr>
 
 	<tr class="h"><td colspan="2">Appearance</td></tr>
 	<tr>
-		<td class="b n1 center">Title:</td>
-		<td class="b n2">{{ field_input('title', user.title, 40, 255) }}</td>
+		<td class="n1 center">Title:</td>
+		<td class="n2">{{ field_input('title', user.title, 40, 255) }}</td>
 	</tr>
 
 	<tr class="h"><td colspan="2">User information</td></tr>
 	<tr>
-		<td class="b n1 center">Location:</td>
-		<td class="b n2">{{ field_input('location', user.location, 40, 60) }}</td>
+		<td class="n1 center">Location:</td>
+		<td class="n2">{{ field_input('location', user.location, 40, 60) }}</td>
 	</tr><tr>
-		<td class="b n1 center">Bio:</td>
-		<td class="b n2">{{ field_textarea('bio', user.bio, 5, 80) }}</td>
+		<td class="n1 center">Birthday:</td>
+		<td class="n2">
+			{{ field_input('birthD', birthday[2], 5, 2, "Day") }}
+			{{ field_input('birthM', birthday[1], 5, 2, "Month") }}
+			{{ field_input('birthY', birthday[0], 5, 4, "Year") }}</td>
 	</tr><tr>
-		<td class="b n1 center">Email address:</td>
-		<td class="b n2">{{ field_input('email', user.email, 40, 60) }}
+		<td class="n1 center">Bio:</td>
+		<td class="n2">{{ field_textarea('bio', user.bio, 5, 80) }}</td>
+	</tr><tr>
+		<td class="n1 center">Email address:</td>
+		<td class="n2">{{ field_input('email', user.email, 40, 60) }}
 			<br>{{ field_checkbox('showemail', user.showemail, "Show email on profile page") }}</td>
 	</tr>
 
