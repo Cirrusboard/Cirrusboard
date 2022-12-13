@@ -38,7 +38,7 @@ $profilefields = [
 	]
 ];
 
-$post = ['date' => time(), 'text' => $samplepost, 'headerbar' => 'Sample post'];
+$post = ['date' => time(), 'text' => $samplepost ?? 'um hi', 'headerbar' => 'Sample post'];
 
 foreach ($profile as $field => $val)
 	$post['u_'.$field] = $val;

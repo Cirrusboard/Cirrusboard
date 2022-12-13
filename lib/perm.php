@@ -16,7 +16,8 @@ function powIdToName($id) {
 		1  => 'Member',
 		2  => 'Moderator',
 		3  => 'Administrator',
-		4  => 'Root'
+		4  => 'Root',
+		default => 'N/A'
 	};
 }
 
@@ -27,7 +28,8 @@ function powIdToColour($id) {
 		1  => '839ef9',
 		2  => '4fe840',
 		3  => 'aa3c3c',
-		4  => 'ffd21b'
+		4  => 'ffd21b',
+		default => ''
 	};
 }
 

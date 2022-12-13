@@ -48,7 +48,7 @@ if (isset($_POST['action'])) {
 	$placeholders[] = $user['id'];
 	query("UPDATE users SET $fieldquery WHERE id = ?", $placeholders);
 
-	redirect('profile.php?id=');
+	redirect('profile.php?id='.$user['id']);
 }
 
 
