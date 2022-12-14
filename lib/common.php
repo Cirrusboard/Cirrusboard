@@ -36,11 +36,12 @@ if (isset($_COOKIE['token'])) {
 		$log = true;
 }
 
+
 if ($log) {
 	// Get data for the current user
 	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$id]);
 
-	if (!$rss)
+	if (!isset($rss))
 		query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
 
 } else {
@@ -50,7 +51,7 @@ if ($log) {
 		'powerlevel' => 0
 	];
 
-	if (!$rss)
+	if (!isset($rss))
 		query("REPLACE INTO guests (lastview, ip) VALUES (?,?)", [time(), $ipaddr]);
 }
 
