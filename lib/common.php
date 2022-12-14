@@ -40,7 +40,9 @@ if ($log) {
 	// Get data for the current user
 	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$id]);
 
-	query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
+	if (!$rss)
+		query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
+
 } else {
 	// Fallback userdata for guests (NYI)
 	$userdata = [
@@ -48,7 +50,8 @@ if ($log) {
 		'powerlevel' => 0
 	];
 
-	query("REPLACE INTO guests (lastview, ip) VALUES (?,?)", [time(), $ipaddr]);
+	if (!$rss)
+		query("REPLACE INTO guests (lastview, ip) VALUES (?,?)", [time(), $ipaddr]);
 }
 
 $ppp = $userdata['ppp'] ?? 20;

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
+	<title>{{ config.title }}</title>
+	<description>The latest posts of {{ config.title }}</description>
+	<link>{{ fullurl }}</link>
+	<atom:link href="{{ fullurl }}/rss.php" rel="self" type="application/rss+xml"/>
+	{% for post in posts %}
+	<item>
+		<title>{{ post.title }}</title>
+		<description>
+			&lt;a href="{{ fullurl }}/thread.php?pid={{ post.id }}#{{ post.id }}"&gt;New post&lt;/a&gt; in thread "{{ post.title }}"
+			by &lt;a href="{{ fullurl }}/profile.php?id={{ post.u_id }}"&gt;{{ post.u_name }}&lt;/a&gt;
+			in forum &lt;a href="{{ fullurl }}/forum.php?id={{ post.forum }}"&gt;{{ post.ftitle }}&lt;/a&gt;
+		</description>
+		<pubDate>{{ post.date | date('r') }}</pubDate>
+		<category>{{ post.ftitle }}</category>
+		<guid>{{ fullurl }}/thread.php?pid={{ post.id }}#{{ post.id }}</guid>
+	</item>
+	{% endfor %}
+</channel></rss>
