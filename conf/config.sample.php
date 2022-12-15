@@ -10,7 +10,7 @@ $tplNoCache = false; // **DO NOT SET AS TRUE IN PROD - DEV ONLY**
 // Customise your forum
 $config['title'] = "Cool Forum";
 $config['description'] = "A very cool forum.";
-$config['logo'] = 'voxelmanip_forums.png';
+$config['logo'] = 'assets/logo_placeholder.png';
 
 $config['defaulttheme'] = "voxelmanip_retro";
 $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people do not select their own.
