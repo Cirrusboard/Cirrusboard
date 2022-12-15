@@ -24,7 +24,7 @@ if (isset($_POST['action'])) {
 		'bio'		=> $_POST['bio'] ?: null,
 		'email'		=> $_POST['email'] ?: null,
 		'showemail'	=> isset($_POST['showemail']) ? 1 : 0,
-		//'theme'		=> $_POST['theme'] != $defaulttheme ? $_POST['theme'] : null,
+		'theme'		=> $_POST['theme'] != $config['defaulttheme'] ? $_POST['theme'] : null,
 		'timezone'	=> $_POST['timezone'] != $config['defaulttimezone'] ? $_POST['timezone'] : null,
 		'ppp'		=> $_POST['ppp'],
 		'tpp'		=> $_POST['tpp'],

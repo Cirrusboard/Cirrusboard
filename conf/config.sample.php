@@ -12,6 +12,7 @@ $config['title'] = "Cool Forum";
 $config['description'] = "A very cool forum.";
 $config['logo'] = 'voxelmanip_forums.png';
 
+$config['defaulttheme'] = "voxelmanip_retro";
 $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people do not select their own.
 
 // List of smilies, if you want them.

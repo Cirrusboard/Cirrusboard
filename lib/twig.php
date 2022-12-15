@@ -19,6 +19,7 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 			new \Twig\TwigFunction('field_checkbox', 'fieldcheckbox', ['is_safe' => ['html']]),
 			new \Twig\TwigFunction('field_select', 'fieldselect', ['is_safe' => ['html']]),
 
+			new \Twig\TwigFunction('theme_list', 'themeList', ['is_safe' => ['html']]),
 		];
 	}
 

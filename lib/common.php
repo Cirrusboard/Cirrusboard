@@ -41,14 +41,18 @@ if ($log) {
 	// Get data for the current user
 	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$id]);
 
-	if (!isset($rss))
+	if (!isset($rss)) {
 		query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
 
+		if (!$userdata['theme'] || !isValidTheme($userdata['theme']))
+			$userdata['theme'] = $config['defaulttheme'];
+	}
 } else {
 	// Fallback userdata for guests (NYI)
 	$userdata = [
 		'id' => -1,
-		'powerlevel' => 0
+		'powerlevel' => 0,
+		'theme' => $config['defaulttheme']
 	];
 
 	if (!isset($rss))
