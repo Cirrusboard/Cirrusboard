@@ -43,10 +43,10 @@
 	<tr class="h"><td colspan="2">Options</td></tr>
 	<tr>
 		<td class="n1 center">Theme:</td>
-		<td class="n2">{{ field_select('theme', user.theme, theme_list()) }}</td>
+		<td class="n2">{{ field_select('theme', user.theme ?? config.defaulttheme, theme_list()) }}</td>
 	</tr><tr>
 		<td class="n1 center">Timezone:</td>
-		<td class="n2">{{ field_select('timezone', user.timezone, timezones) }}</td>
+		<td class="n2">{{ field_select('timezone', user.timezone ?? config.defaulttimezone, timezones) }}</td>
 	</tr><tr>
 		<td class="n1 center">Posts per page:</td>
 		<td class="n2">{{ field_input('ppp', user.ppp, 3, 3) }}</td>

@@ -13,14 +13,14 @@ if (isset($_POST['action'])) {
 	if (!$name)
 		$error[] = 'Blank username.';
 
-	if (!$pass || strlen($pass) < 6)
-		$error[] = 'Password is too short. ';
+	if (!$pass || strlen($pass) < 15)
+		$error[] = 'Password is too short (needs to be at least 15 characters).';
 
 	if (!$pass2 || $pass != $pass2)
-		$error[] = "The passwords don't match. ";
+		$error[] = "The passwords don't match.";
 
 	if (result("SELECT COUNT(*) FROM users WHERE LOWER(name) = ?", [strtolower($name)]))
-		$error[] = "Username has already been taken. ";
+		$error[] = "Username has already been taken.";
 
 	if (!preg_match('/^[a-zA-Z0-9\-_]+$/', $name))
 		$error[] = "Username contains invalid characters (Only alphanumeric and underscore allowed). ";

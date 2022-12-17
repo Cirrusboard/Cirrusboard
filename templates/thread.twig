@@ -4,7 +4,11 @@
 	{% set title = thread.title %}
 
 	{% if log %}
-		{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+		{% if not thread.locked %}
+			{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+		{% else %}
+			{% set actions = {"none" : "Thread locked"} %}
+		{% endif %}
 	{% endif %}
 {% elseif viewmode == "user" %}
 	{% set title = "Posts" %}

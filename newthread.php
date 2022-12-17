@@ -47,7 +47,7 @@ if ($action == 'Submit') {
 		redirect("thread.php?id=$tid");
 	}
 } elseif ($action == 'Preview') {
-	$post['date'] = $post['ulastpost'] = time();
+	$post['date'] = time();
 	$post['text'] = $message;
 	foreach ($userdata as $field => $val)
 		$post['u_'.$field] = $val;

@@ -25,8 +25,8 @@ function postfilter($text) {
 	$text = preg_replace("'>>([0-9]+)'si", '>><a href=thread.php?pid=\\1#\\1>\\1</a>', $text);
 
 	// Quotes (not from cave story LOL)
-	$text = preg_replace("'\[quote\](.*?)\[/quote\]'si", '<div class="quote"><div class="quotetext">\\1</div></div>', $text);
-	$text = preg_replace("'\[quote=\"(.*?)\" id=\"(.*?)\"\]'si", '<div class="quote"><div class="author"><a href=thread.php?pid=\\2#\\2>Posted by \\1</a></div><div class="quotetext">', $text);
+	$text = preg_replace("'\[quote\](.*?)\[/quote\][\n\r]*'si", '<div class="quote"><div class="quotetext">\\1</div></div>', $text);
+	$text = preg_replace("'\[quote=\"(.*?)\" id=\"(.*?)\"\][\n\r]*'si", '<div class="quote"><div class="author"><a href=thread.php?pid=\\2#\\2>Posted by \\1</a></div><div class="quotetext">', $text);
 	$text = preg_replace("'\[quote=(.*?)\][\n\r]*'si", '<div class="quote"><div class="author">Posted by \\1</div><div class="quotetext">', $text);
 	$text = preg_replace("'\[/quote\][\n\r]*'", '</div></div>', $text);
 
