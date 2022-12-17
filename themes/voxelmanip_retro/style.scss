@@ -5,7 +5,6 @@ $primary: #38c016;
 body {
 	background: url('coolgreen2.png') #011b01;
 	color: #f8f8f8;
-	font-family: 'Open Sans', sans-serif;
 }
 
 table.c1 {
@@ -39,7 +38,6 @@ input[type='text'], input[type='password'], input[type='email'], textarea, selec
 	color: #efe;
 	padding: 4px;
 	border: 2px solid #106202;
-	font-size: 1em;
 }
 
 input[type='submit'], input[type='button'], button {
@@ -61,4 +59,6 @@ input[type='submit']:hover, input[type='button']:hover, button:hover, input[type
 
 .quote .quotetext {
 	border: 2px solid $primary;
+	border-left: 0;
+	border-right: 0;
 }

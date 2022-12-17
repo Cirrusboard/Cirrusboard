@@ -62,11 +62,11 @@ function posttoolbar() {
 	// TODO: I'd really want some better icons for this... Font awesome?
 	return '<table class="postformatting"><tr>'
 			.posttoolbutton('B', 'Bold', 'b')
-			.posttoolbutton('I', 'Italics', 'i')
-			.posttoolbutton('U', 'Underline', 'u')
-			.posttoolbutton('S', 'Strikethrough', 's')
+			.posttoolbutton('<i>I</i>', 'Italics', 'i')
+			.posttoolbutton('<u>U</u>', 'Underline', 'u')
+			.posttoolbutton('<s>S</s>', 'Strikethrough', 's')
 			.'<td>&nbsp;</td>'
-			.posttoolbutton(':/', 'URL', 'url')
+			.posttoolbutton('://', 'URL', 'url')
 			.posttoolbutton('!', 'Spoiler', 'spoiler')
 			.posttoolbutton('&quot;', 'Quote', 'quote')
 			.posttoolbutton('>_', 'Code', 'code')

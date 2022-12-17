@@ -21,6 +21,10 @@ table.c1 {
 	}
 }
 
+img {
+	max-width: 100%;
+}
+
 /// Links \\\
 a {
 	text-decoration: none;
@@ -226,9 +230,9 @@ table.postformatting {
 		border: 0 !important;
 	}
 
-	input[type=button] {
+	input[type=button], button {
 		text-align: center;
-		width: auto;
+		width: 40px;
 		height: 35px;
 		font-size: 11pt;
 	}
@@ -237,6 +241,13 @@ table.postformatting {
 /// Default input styling \\\
 input[type='text'], input[type='password'], input[type='email'], textarea, select, input[type='submit'], input[type='button'], button {
 	font-size: 1em;
+	font-family: 'Open Sans';
+	padding: 5px;
+}
+
+input[type='submit'], input[type='button'], button {
+	font-weight: bold;
+	padding: 5px 10px;
 }
 
 /// Spoilers \\\
