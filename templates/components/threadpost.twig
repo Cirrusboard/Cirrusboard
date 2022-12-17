@@ -4,14 +4,25 @@
 	{% if post.headerbar %}<tr class="h"><td colspan="2">{{ post.headerbar }}</td></tr>{% endif %}
 	<tr>
 		<td class="n1 topbar_1 nom">{{ userlink(post, 'u_') }}</td>
-		<td class="b n1 topbar_1 topbar{$uid}_2 blkm nod clearfix">
+		<td class="b n1 topbar_1 blkm nod clearfix">
 			<span style="float:left;margin-right:10px">{% if post.u_avatar %}<img src="userpic/{{ post.u_id }}">{% endif %}</span>
 			{{ userlink(post, 'u_') }} <div class="sfont" style="margin-top:0.5em">{% if post.u_title %}{{ post.u_title | raw }}{% endif %}</div>
 		</td>
 		<td class="n1 topbar_2 sfont blkm clearfix">Posted on {{ post.date | date('Y-m-d H:i') }}
 			{%- if post.tid %}, in <a href="thread.php?id={{ post.tid }}">{{ post.ttitle }}</a>{% endif %}
-			<span style="float:right">
-				{% if post.id %}<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a> | ID: {{ post.id }}{% endif %}</span>
+			{% if post.revision >= 2 %}(edited {{ post.rev_date | date('Y-m-d H:i') }}){% endif %}
+			<span style="float:right">{% if post.id %}
+				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a>
+				{% if log %}
+					{% if post.minreply <= userdata.powerlevel %}
+						| <a href="newreply.php?id={{ post.thread }}&pid={{ post.id }}">Quote</a>
+					{% endif %}
+					{% if post.u_id or userdata.powerlevel > 3 %}
+						| <a href="editpost.php?pid={{ post.id }}">Edit</a>
+					{% endif %}
+				{% endif %}
+				| ID: {{ post.id }}
+			{% endif %}</span>
 		</td>
 	</tr><tr valign="top">
 		<td class="n1 sfont sidebar nom">

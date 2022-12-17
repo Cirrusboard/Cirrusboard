@@ -46,12 +46,34 @@ if ($action == "Submit") {
 	$post['headerbar'] = 'Post preview';
 }
 
+// Append quoted message to the newreply box, to reply to other messages.
+$pid = $_GET['pid'] ?? 0;
+if ($pid) {
+	$qpost = fetch("SELECT u.name name, p.user, pt.text, f.id fid, p.thread, f.minread
+				FROM posts p
+				LEFT JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
+				LEFT JOIN users u ON p.user = u.id
+				LEFT JOIN threads t ON t.id = p.thread
+				LEFT JOIN forums f ON f.id = t.forum
+				WHERE p.id = ?",
+			[$pid]);
+
+	//does the user have reading access to the quoted post?
+	if ($userdata['powerlevel'] < $qpost['minread'])
+		$qpost['name'] = $qpost['text'] = '[redacted]';
+
+	$message = sprintf(
+		'[quote="%s" id="%s"]%s[/quote]'.PHP_EOL.PHP_EOL,
+	$qpost['name'], $pid, $qpost['text']);
+}
+
 $breadcrumb = [
 	'forum.php?id='.$thread['forum'] => $thread['f_title'],
 	'thread.php?id='.$thread['id'] => $thread['title']
 ];
 
 echo twigloader()->render('newreply.twig', [
+	'id' => $id,
 	'breadcrumb' => $breadcrumb,
 	'thread' => $thread,
 	'message' => $message,

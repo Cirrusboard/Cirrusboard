@@ -21,7 +21,8 @@ elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread.php?pid=%d to
 
 // common fields to select
 $selectfields = 'u.id u_id, u.name u_name, u.powerlevel u_powerlevel, '.postfields_user().
-				'p.*, pt.text, pt.date, pt.revision cur_revision';
+				'p.*, pt.text, pt.date rev_date, pt.revision cur_revision,
+				f.minreply minreply';
 
 // common joins
 $join = "FROM posts p
@@ -37,7 +38,7 @@ if ($viewmode == 'thread') {
 
 	query("UPDATE threads SET views = views + 1 WHERE id = ?", [$id]);
 
-	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id FROM threads t
+	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread FROM threads t
 			JOIN forums f ON f.id = t.forum
 			WHERE t.id = ? AND ? >= f.minread",
 		[$id, $userdata['powerlevel']]);
