@@ -39,6 +39,13 @@
 			{% set zebra = 2 %}
 		{% endif %}
 
+		{% if viewmode == "forum" %}
+			{% if thread.sticky %}{% set zebra = 3 %}{% endif %}
+
+			{% if not thread.sticky and laststicky %}<tr class="c"><td colspan="6"></td>{% endif %}
+			{% set laststicky = thread.sticky %}
+		{% endif %}
+
 		<tr class="center n{{ zebra }}">
 			<td style="width:30px">
 				{% if thread.closed %}

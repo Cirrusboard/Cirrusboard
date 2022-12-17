@@ -27,7 +27,7 @@ if ($viewmode == 'forum') {
 			JOIN users u ON u.id = t.user
 			JOIN users ul ON ul.id = t.lastuser
 			WHERE t.forum = ?
-			ORDER BY t.id DESC LIMIT ?,?",
+			ORDER BY t.sticky DESC, t.id DESC LIMIT ?,?",
 		[$id, $offset, $tpp]);
 
 	$url = "forum.php?id=$id";
