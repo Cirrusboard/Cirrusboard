@@ -73,3 +73,17 @@ function fieldselect($name, $selected, $choices) {
 
 	return sprintf('<select name="%s">%s</select>', $name, $text);
 }
+
+function threadStatus($type) {
+	if (!$type) return '';
+
+	// TODO: add new status
+	$text = match ($type) {
+		'o'  => 'OFF'
+	};
+	$statusimg = match ($type) {
+		'o'  => 'off.png'
+	};
+
+	return "<img src=\"assets/status/$statusimg\" alt=\"$text\">";
+}

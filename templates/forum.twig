@@ -40,7 +40,11 @@
 		{% endif %}
 
 		<tr class="center n{{ zebra }}">
-			<td style="width:30px"></td>
+			<td style="width:30px">
+				{% if thread.closed %}
+					{{ thread_status("o") }}
+				{% endif %}
+			</td>
 			<td class="left">
 				<a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a>
 			</td>
