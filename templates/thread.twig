@@ -33,5 +33,19 @@
 	<table class="c1"><tr><td class="n1 center" colspan="6"><p>No posts found.</p></td></tr></table>
 {% endif %}
 
+{% if viewmode == "thread" and userdata.powerlevel >= thread.minreply and not thread.closed %}
+<form action="newreply.php?id={{ id }}" method="POST"><table class="c1 postform">
+	<tr class="h"><td>Quick Reply</a></td>
+	<tr class="n1"><td class="center">
+		<textarea class="postform" name="message" rows="8" cols="80"></textarea>
+
+		<div class="actionbar-quick">
+			<input type="submit" name="action" value="Preview">
+			<input type="submit" name="action" value="Submit">
+		</div>
+	</td></tr>
+</table></form><br>
+{% endif %}
+
 {{ pagelist | raw }}
 	{% endblock %}
