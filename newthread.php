@@ -8,7 +8,12 @@ $action = $_POST['action'] ?? null;
 $title = $_POST['title'] ?? '';
 $message = $_POST['message'] ?? '';
 
-$forum = fetch("SELECT * FROM forums WHERE id = ?", [$id]);
+$forum = fetch("SELECT id, title, minthread FROM forums WHERE id = ?", [$id]);
+
+if (!$forum)
+	error('404', "Forum does not exist.");
+if ($forum['minthread'] > $loguser['powerlevel'])
+	error('403', "You have no permissions to create threads in this forum.");
 
 $error = [];
 

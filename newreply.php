@@ -7,9 +7,16 @@ $id = $_GET['id'] ?? null;
 $action = $_POST['action'] ?? null;
 $message = trim($_POST['message'] ?? '');
 
-$thread = fetch("SELECT t.*, f.title f_title
+$thread = fetch("SELECT t.*, f.title f_title, f.minreply f_minreply
 	FROM threads t LEFT JOIN forums f ON f.id = t.forum
 	WHERE t.id = ?", [$id]);
+
+if (!$thread)
+	error('404', "Thread does not exist.");
+if ($thread['f_minreply'] > $userdata['powerlevel'])
+	error('403', "You have no permissions to create posts in this forum.");
+if ($thread['closed'] && $userdata['powerlevel'] < 2)
+	error('403', "You can't post in closed threads!");
 
 $error = [];
 
@@ -39,7 +46,7 @@ if ($action == "Submit") {
 		redirect("thread.php?pid=$postid#$postid");
 	}
 } elseif ($action == 'Preview') {
-	$post['date'] = $post['ulastpost'] = time();
+	$post['date'] = time();
 	$post['text'] = $message;
 	foreach ($userdata as $field => $val)
 		$post['u_'.$field] = $val;
@@ -81,3 +88,4 @@ echo twigloader()->render('newreply.twig', [
 	'post' => $post ?? null,
 	'action' => $action
 ]);
+
