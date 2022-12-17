@@ -18,14 +18,16 @@
 
 	{% block content %}
 {% if viewmode == "time" %}
-	<table class="c1 autowidth">
+	<table class="c1 autowidth br-after">
 		<tr class="h"><td>Latest posts</td></tr>
 		<tr><td class="n1 center">
 			<a href="forum.php?time={{ time }}">By thread</a> | By post (<a href="rss.php">RSS</a>)
 			<br><br>{{ timelinks('thread', time) }}
 		</td></tr>
-	</table><br>
+	</table>
 {% endif %}
+
+{{ pagelist | raw }}
 
 {% set i = 1 %}
 {% for post in posts %}
@@ -48,7 +50,7 @@
 			<input type="submit" name="action" value="Submit">
 		</div>
 	</td></tr>
-</table></form><br>
+</table></form>
 {% endif %}
 
 {{ pagelist | raw }}

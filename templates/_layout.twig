@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-	<title>{{ title }} - {{ config.title }}</title>
+	<title>{% if title != 'Index' %}{{ title }} - {% endif %}{{ config.title }}</title>
 
 	{# inline font styling - update from /assets/css/fonts.css #}
 	<style>@font-face{font-family:"Open Sans";font-style:normal;font-weight:400;font-display:swap;src:local(""),url("assets/fonts/open-sans-v34-400.woff2") format("woff2"),url("assets/fonts/open-sans-v34-400.woff") format("woff")}@font-face{font-family:"Open Sans";font-style:normal;font-weight:700;font-display:swap;src:local(""),url("assets/fonts/open-sans-v34-700.woff2") format("woff2"),url("assets/fonts/open-sans-v34-700.woff") format("woff")}</style>
