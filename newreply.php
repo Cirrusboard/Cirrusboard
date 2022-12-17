@@ -1,6 +1,8 @@
 <?php
 require('lib/common.php');
 
+needsLogin();
+
 $id = $_GET['id'] ?? null;
 $action = $_POST['action'] ?? null;
 $message = trim($_POST['message'] ?? '');
@@ -57,4 +59,3 @@ echo twigloader()->render('newreply.twig', [
 	'post' => $post ?? null,
 	'action' => $action
 ]);
-

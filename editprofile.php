@@ -1,6 +1,8 @@
 <?php
 require('lib/common.php');
 
+needsLogin();
+
 // TODO: only current user can be edited, make admins able to edit others
 $user = fetch("SELECT * FROM users WHERE id = ?", [$userdata['id']]);
 

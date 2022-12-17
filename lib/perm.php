@@ -43,3 +43,11 @@ function powNameToId($id) {
 		'Root'			=> 4
 	};
 }
+
+function needsLogin() {
+	global $log;
+	if (!$log) {
+		error('403', 'This page requires login. <p><a href="login.php">Login</a></p>');
+		die();
+	}
+}

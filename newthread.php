@@ -1,6 +1,8 @@
 <?php
 require('lib/common.php');
 
+needsLogin();
+
 $id = $_GET['id'] ?? null;
 $action = $_POST['action'] ?? null;
 $title = $_POST['title'] ?? '';
