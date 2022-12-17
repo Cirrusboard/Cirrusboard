@@ -52,9 +52,10 @@ function esc($text) {
 	return htmlspecialchars($text);
 }
 
-function fieldinput($name, $value, $size, $max, $placeholder = '') {
-	return sprintf('<input type="text" name="%s" size="%s" maxlength="%s" value="%s"%s>',
-		$name, $size, $max, esc($value), ($placeholder ? ' placeholder="'.$placeholder.'"' : ''));
+function fieldinput($name, $value, $size, $max, $placeholder = '', $type = '') {
+	return sprintf('<input type="%s" name="%s" size="%s" maxlength="%s" value="%s"%s>',
+		($type ?: 'text'), $name, $size, $max, esc($value),
+		($placeholder ? ' placeholder="'.$placeholder.'"' : ''));
 }
 
 function fieldtextarea($name, $value, $rows, $cols) {

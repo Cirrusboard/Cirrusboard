@@ -3,6 +3,10 @@
 {% set title = "Edit profile" %}
 
 	{% block content %}
+{% if error %}
+	<p class="error">The following errors occured when trying to edit your profile: <br>- {{ error | join('<br>- ') | raw }}</p>
+{% endif %}
+
 <form action="editprofile.php" method="post" enctype="multipart/form-data"><table class="c1">
 	<tr class="h"><td colspan="2">Edit profile</td></tr>
 
@@ -12,13 +16,20 @@
 		<td class="n2">ROllerozxa</td>
 	</tr><tr>
 		<td class="n1 center">Password:</td>
-		<td class="n2">{{ field_input('password', '', 13, 64, 'New password') }} {{ field_input('password', '', 13, 32, 'Repeat password') }}</td>
+		<td class="n2">
+			{{ field_input('password', '', 13, 64, 'New password', 'password') }}
+			{{ field_input('password2', '', 13, 32, 'Repeat password', 'password') }}
+			<br><span class="sfont">(Changing your password will also change your token, logging you out of any other sessions)</span></td>
 	</tr>
 
 	<tr class="h"><td colspan="2">Appearance</td></tr>
 	<tr>
 		<td class="n1 center">Title:</td>
 		<td class="n2">{{ field_input('title', user.title, 40, 255) }}</td>
+	</tr><tr>
+		<td class="b n1 center">Avatar:</td>
+		<td class="b n2"><input type="file" name="avatar" size="40"> or {{ field_checkbox('picturedel', 0, "Erase existing avatar") }}
+			<br>Must be PNG, JPG or GIF, within 100kB and 180x180.</td>
 	</tr>
 
 	<tr class="h"><td colspan="2">User information</td></tr>
