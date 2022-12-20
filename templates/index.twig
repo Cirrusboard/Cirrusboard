@@ -11,6 +11,18 @@
 	</table><br>
 {% endif %}
 
+{% if news %}
+	<table class="c1">
+		<tr class="h"><td colspan="2">Latest Announcement</td></tr>
+		<tr class="n1">
+			<td>
+				<a href="thread.php?id={{ news.tid }}">{{ news.title }}</a> - by {{ userlink(news, 'u_') }} on {{ news.date | date('Y-m-d H:i') }}
+				<span class="float-right"><a href="forum.php?id={{ config.newsid }}">All announcements</a></span>
+			</td>
+		</tr>
+	</table><br>
+{% endif %}
+
 {% set last_category = -1 %}
 
 {% for forum in forums %}

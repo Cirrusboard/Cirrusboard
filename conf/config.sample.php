@@ -12,6 +12,8 @@ $config['title'] = "Cool Forum";
 $config['description'] = "A very cool forum.";
 $config['logo'] = 'assets/logo_placeholder.png';
 
+$config['newsid'] = -1; // Designates the id for your announcements forum, the latest post will be shown at the top of the index page.
+
 $config['defaulttheme'] = "voxelmanip_retro";
 $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people do not select their own.
 

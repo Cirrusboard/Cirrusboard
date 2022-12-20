@@ -13,6 +13,14 @@ $forums = query("SELECT $userfields f.* FROM forums f
 		ORDER BY c.ord, c.id, f.ord, f.id",
 	[$userdata['powerlevel']]);
 
+// Get latest announcement to show at the top
+$news = fetch("SELECT $userfields t.id tid, t.title, t.user, p.date date
+			FROM threads t
+			JOIN users u ON u.id = t.user
+			JOIN posts p ON p.thread = t.id
+			WHERE t.forum = ? ORDER BY t.lastdate DESC LIMIT 1",
+		[$config['newsid']]);
+
 // Online users stats
 $args = [(time() - 15*60)];
 
@@ -34,5 +42,6 @@ echo twigloader()->render('index.twig', [
 	'online_users_count' => $onlineUsersCount,
 	'guests_online' => $guestsOnline,
 	'stats' => $stats,
-	'newestuser' => $newestUser
+	'newestuser' => $newestUser,
+	'news' => $news
 ]);
