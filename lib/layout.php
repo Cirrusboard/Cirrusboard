@@ -72,7 +72,7 @@ function fieldselect($name, $selected, $choices) {
 	foreach ($choices as $k => $v)
 		$text .= sprintf('<option value="%s"%s>%s</option>', $k, ($k == $selected ? ' selected' : ''), $v);
 
-	return sprintf('<select name="%s">%s</select>', $name, $text);
+	return sprintf('<select name="%s" id="%s">%s</select>', $name, $name, $text);
 }
 
 function threadStatus($type) {
