@@ -4,7 +4,7 @@
 	{% set title = thread.title %}
 
 	{% if log %}
-		{% if not thread.locked %}
+		{% if not thread.closed %}
 			{% set actions = {("newreply.php?id="~id) : "New reply"} %}
 		{% else %}
 			{% set actions = {"none" : "Thread locked"} %}

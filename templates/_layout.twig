@@ -45,7 +45,7 @@
 			{{ title }}
 
 			<div class="actions">
-				<ul class="pipemenu">{% for url, title in actions %}<li><a href="{{ url }}">{{ title }}</a></li>{% endfor %}</ul>
+				<ul class="pipemenu">{% for url, title in actions %}<li>{% if url != 'none' %}<a href="{{ url }}">{% endif %}{{ title }}{% if url != 'none' %}</a>{% endif %}</li>{% endfor %}</ul>
 			</div>
 		</div>
 	{% endif %}
@@ -59,7 +59,7 @@
 			{{ title }}
 
 			<div class="actions">
-				<ul class="pipemenu">{% for url, title in actions %}<li><a href="{{ url }}">{{ title }}</a></li>{% endfor %}</ul>
+				<ul class="pipemenu">{% for url, title in actions %}<li>{% if url != 'none' %}<a href="{{ url }}">{% endif %}{{ title }}{% if url != 'none' %}</a>{% endif %}</li>{% endfor %}</ul>
 			</div>
 		</div>
 	{% endif %}
