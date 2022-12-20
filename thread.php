@@ -20,7 +20,7 @@ elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread.php?pid=%d to
 	error('400', "I'm confused as to what you want...");
 
 // common fields to select
-$selectfields = 'u.id u_id, u.name u_name, u.powerlevel u_powerlevel, '.postfields_user().
+$selectfields = userfields().postfields_user().
 				'p.*, pt.text, pt.date rev_date, pt.revision cur_revision,
 				f.minreply minreply';
 

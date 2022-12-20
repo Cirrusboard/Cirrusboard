@@ -13,6 +13,8 @@ foreach (glob("lib/*.php") as $file) {
 	require_once($file);
 }
 
+$userfields = userfields();
+
 if (php_sapi_name() != "cli") {
 	// Shorter variables for common $_SERVER values
 	$ipaddr = $_SERVER['REMOTE_ADDR'];

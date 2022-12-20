@@ -4,7 +4,7 @@ require('lib/common.php');
 
 header('Content-Type: text/xml');
 
-$posts = query("SELECT u.id u_id, u.name u_name, p.*, t.title, t.forum, f.id fid, f.title ftitle
+$posts = query("SELECT $userfields p.*, t.title, t.forum, f.id fid, f.title ftitle
 		FROM posts p
 		 JOIN threads t ON t.id = p.thread
 		 JOIN users u ON u.id = p.user
