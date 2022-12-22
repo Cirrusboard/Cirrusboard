@@ -119,6 +119,6 @@ if ($user['birthday']) // Y-m-d format
 echo twigloader()->render('editprofile.twig', [
 	'user' => $user,
 	'timezones' => $timezones,
-	'birthday' => $birthday,
+	'birthday' => $birthday ?? null,
 	'error' => $error ?? null
 ]);

@@ -5,6 +5,7 @@ $user = '';
 $pass = '';
 
 $tplCache = 'templates/cache';
+//$tplCache = '/tmp/cirrusboard';
 $tplNoCache = false; // **DO NOT SET AS TRUE IN PROD - DEV ONLY**
 
 // Customise your forum
