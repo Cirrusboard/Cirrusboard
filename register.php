@@ -38,6 +38,10 @@ if (isset($_POST['action'])) {
 		query("INSERT INTO users (name, password, token, joined) VALUES (?,?,?,?)",
 			[$name, password_hash($pass, PASSWORD_DEFAULT), $token, time()]);
 
+		$id = insertId();
+		// If user is ID 1, make them root.
+		if ($id == 1) query("UPDATE users SET powerlevel = 4 WHERE id = ?", [$id]);
+
 		// Log in user right away.
 		setcookie('token', $token, 2147483647);
 
