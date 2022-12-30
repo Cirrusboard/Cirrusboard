@@ -12,7 +12,7 @@ $forum = fetch("SELECT id, title, minthread FROM forums WHERE id = ?", [$id]);
 
 if (!$forum)
 	error('404', "Forum does not exist.");
-if ($forum['minthread'] > $loguser['powerlevel'])
+if ($forum['minthread'] > $userdata['powerlevel'])
 	error('403', "You have no permissions to create threads in this forum.");
 
 $error = [];
