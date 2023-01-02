@@ -17,7 +17,7 @@
 					{% if post.minreply <= userdata.powerlevel %}
 						| <a href="newreply.php?id={{ post.thread }}&pid={{ post.id }}">Quote</a>
 					{% endif %}
-					{% if post.u_id or userdata.powerlevel > 3 %}
+					{% if post.u_id == userdata.id or userdata.powerlevel > 3 %}
 						| <a href="editpost.php?pid={{ post.id }}">Edit</a>
 					{% endif %}
 				{% endif %}
