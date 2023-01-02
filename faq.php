@@ -1,6 +1,17 @@
 <?php
 require('lib/common.php');
 
+//Smilies List
+$smiliestext = '';
+$x = 0;
+foreach ($smilies as $text => $url) {
+	if ($x % 6 == 0) $smiliestext .= "<tr>";
+	$smiliestext .= sprintf('<td class="b n1"><img class="smiley" src="%s"> %s</td>',
+		$url, htmlspecialchars($text));
+	$x++;
+	if ($x % 6 == 0) $smiliestext .= "</tr>";
+}
+
 // Powerlevel colours
 $nctable = '';
 foreach ($powerlevels as $id => $title)
