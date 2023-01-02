@@ -38,12 +38,30 @@ if ($viewmode == 'thread') {
 
 	query("UPDATE threads SET views = views + 1 WHERE id = ?", [$id]);
 
-	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread FROM threads t
-			JOIN forums f ON f.id = t.forum
+	$readtime = ($log ? ', r.time frtime' : '');
+	$forumsread = ($log ? "LEFT JOIN forumsread r ON (r.fid=f.id AND r.uid=".$userdata['id'].") " : '');
+
+	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread $readtime FROM threads t
+			JOIN forums f ON f.id = t.forum $forumsread
 			WHERE t.id = ? AND ? >= f.minread",
 		[$id, $userdata['powerlevel']]);
 
 	if (!$thread) error('404', "This forum doesn't exist.");
+
+	// check for having to mark the forum as read too
+	if ($log) {
+		if ($thread['lastdate'] > $thread['frtime'])
+			query("REPLACE INTO threadsread VALUES (?,?,?)", [$userdata['id'], $thread['id'], time()]);
+
+		$readstate = result("SELECT ((NOT ISNULL(r.time)) OR t.lastdate < ?) n FROM threads t
+				LEFT JOIN threadsread r ON (r.tid = t.id AND r.uid = ?)
+				WHERE t.forum = ? GROUP BY ((NOT ISNULL(r.time)) OR t.lastdate < ?) ORDER BY n ASC",
+			[$thread['frtime'], $userdata['id'], $thread['forum_id'], $thread['frtime']]);
+
+		// If $readstate is 1, all threads in the forum are read. Mark it as such.
+		if ($readstate == 1)
+			query("REPLACE INTO forumsread VALUES (?,?,?)", [$userdata['id'], $thread['forum_id'], time()]);
+	}
 
 	$posts = query("SELECT $selectfields
 			$join

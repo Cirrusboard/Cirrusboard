@@ -78,12 +78,15 @@ function fieldselect($name, $selected, $choices) {
 function threadStatus($type) {
 	if (!$type) return '';
 
-	// TODO: add new status
 	$text = match ($type) {
-		'o'  => 'OFF'
+		'n'  => 'NEW',
+		'o'  => 'OFF',
+		'on' => 'OFF'
 	};
 	$statusimg = match ($type) {
-		'o'  => 'off.png'
+		'n'  => 'new.png',
+		'o'  => 'off.png',
+		'on' => 'offnew.png'
 	};
 
 	return "<img src=\"assets/status/$statusimg\" alt=\"$text\">";

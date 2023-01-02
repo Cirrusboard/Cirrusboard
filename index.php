@@ -1,14 +1,38 @@
 <?php
 require('lib/common.php');
 
+$action = $_GET['action'] ?? '';
+
+//mark forum read
+if ($log && $action == 'markread') {
+	$fid = $_GET['fid'];
+	if ($fid != 'all') {
+		// Delete obsolete threadsread entries
+		query("DELETE r FROM threadsread r LEFT JOIN threads t ON t.id = r.tid WHERE t.forum = ? AND r.uid = ?", [$fid, $userdata['id']]);
+		// Add new forumsread entry
+		query("REPLACE INTO forumsread VALUES (?,?,?)", [$userdata['id'], $fid, time()]);
+		// Redirect back to forum page
+		redirect("forum.php?id=$fid");
+	} else {
+		// Mark all read
+		query("DELETE FROM threadsread WHERE uid = ?", [$userdata['id']]);
+		query("REPLACE INTO forumsread (uid, fid, time) SELECT ?, f.id, ? FROM forums f", [$userdata['id'], time()]);
+		// Redirect back to index
+		redirect('./');
+	}
+}
+
 $categs = query("SELECT id, title FROM categories ORDER BY ord, id");
 while ($c = $categs->fetch())
 	$categories[$c['id']] = $c['title'];
 
+$readtime = ($log ? "r.time rtime," : '');
+$forumsread = "LEFT JOIN forumsread r ON r.fid = f.id AND r.uid = ".$userdata['id'];
 
-$forums = query("SELECT $userfields f.* FROM forums f
+$forums = query("SELECT $userfields $readtime f.* FROM forums f
 		LEFT JOIN users u ON u.id = f.lastuser
 		JOIN categories c ON c.id = f.cat
+		$forumsread
 		WHERE ? >= f.minread
 		ORDER BY c.ord, c.id, f.ord, f.id",
 	[$userdata['powerlevel']]);

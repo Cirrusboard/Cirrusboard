@@ -4,7 +4,8 @@
 	{% set title = forum.title %}
 
 	{% if log %}
-		{% set actions = {("newthread.php?id="~id) : "New thread"} %}
+		{% set actions = {("index.php?action=markread&fid="~forum.id) : "Mark forum read",
+			("newthread.php?id="~id) : "New thread"} %}
 	{% endif %}
 {% elseif viewmode == "user" %}
 	{% set title = "Threads" %}
@@ -50,7 +51,13 @@
 
 		<tr class="center n{{ zebra }}">
 			<td style="width:30px">
-				{% if thread.closed %}
+				{% if log and not thread.isread %}
+					{% if thread.closed %}
+						{{ thread_status("on") }}
+					{% else %}
+						{{ thread_status("n") }}
+					{% endif %}
+				{% elseif thread.closed %}
 					{{ thread_status("o") }}
 				{% endif %}
 			</td>

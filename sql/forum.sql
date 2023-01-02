@@ -38,6 +38,14 @@ INSERT INTO `forums` (`id`, `cat`, `ord`, `title`, `descr`, `threads`, `posts`, 
 (1,	1,	0,	'General Forum',	'A general forum to start out with.',	0,	0,	NULL,	NULL,	NULL,	-1,	1,	1),
 (2,	2,	0,	'Staff forum',	'Forum only accessible to staff members.',	0,	0,	NULL,	NULL,	NULL,	2,	2,	2);
 
+CREATE TABLE `forumsread` (
+  `uid` int(10) unsigned NOT NULL,
+  `fid` int(10) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  UNIQUE KEY `uid` (`uid`,`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 CREATE TABLE `guests` (
   `ip` char(15) NOT NULL COMMENT 'The IP of the guest',
   `lastview` int(10) unsigned NOT NULL COMMENT 'Timestamp of the guest''s lastview',
@@ -83,6 +91,14 @@ CREATE TABLE `threads` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+CREATE TABLE `threadsread` (
+  `uid` int(10) unsigned NOT NULL,
+  `tid` int(10) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  UNIQUE KEY `uid` (`uid`,`tid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Incrementing ID for each user',
   `name` varchar(32) NOT NULL COMMENT 'Username',
@@ -119,4 +135,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- 2022-12-22 19:53:44
+-- 2023-01-02 18:28:54

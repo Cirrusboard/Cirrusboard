@@ -11,6 +11,10 @@
 	</table><br>
 {% endif %}
 
+{% if log %}
+	<a class="float-right" href="./?action=markread&fid=all">Mark all forums read</a>
+{% endif %}
+
 {% if news %}
 	<table class="c1">
 		<tr class="h"><td colspan="2">Latest Announcement</td></tr>
@@ -43,7 +47,11 @@
 	{% endif %}
 
 	<tr class="center">
-		<td class="n1" style="width:30px"></td>
+		<td class="n1" style="width:30px">
+			{% if log and forum.lastdate > forum.rtime %}
+				{{ thread_status("n") }}
+			{% endif %}
+		</td>
 		<td class="n2 left">
 			<a href="forum.php?id={{ forum.id }}">{{ forum.title }}</a> {% if forum.minread > 0 %}<span class="sfont">(Private)</span>{% endif %}
 			<div style="margin-top:3px">{{ forum.descr | raw }}</div>
