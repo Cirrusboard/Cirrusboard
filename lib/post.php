@@ -1,5 +1,24 @@
 <?php
 
+// Function that does lots of voodoo magic to make sure the post data is (reasonably) safe
+function securityfilter($msg) {
+	$tags = ':a(?:pplet|udio)|b(?:ase|gsound|ody|button)|canvas|embed|frame(?:set)?|form|h(?:ead|tml)|i(?:frame|layer|nput)|l(?:ayer|ink)|m(?:ath|eta|eth)|noscript|object|plaintext|s(?:cript|vg|ource)|title|textarea|video|x(?:ml|mp)';
+	$msg = preg_replace("'<(/?)({$tags})'si", "&lt;$1$2", $msg);
+
+	$msg = preg_replace('@(on)(\w+\s*)=@si', '$1_$2&#x3D;', $msg);
+
+	$msg = preg_replace('#([a-z]*)[\x00-\x20]*=[\x00-\x20]*([`\'"]*)[\x00-\x20]*j[\x00-\x20]*a[\x00-\x20]*v[\x00-\x20]*a[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2jujscript!', $msg);
+
+	$msg = preg_replace("'-moz-binding'si", ' -mo<b></b>z-binding', $msg);
+	$msg = str_ireplace("expression", "ex<b></b>pression", $msg);
+	$msg = preg_replace("'filter:'si", 'filter&#58;>', $msg);
+	$msg = preg_replace("'transform:'si", 'transform&#58;>', $msg);
+
+	$msg = str_replace("<!--", "&lt;!--", $msg);
+
+	return $msg;
+}
+
 function postfilter($text) {
 	global $smilies;
 
@@ -7,6 +26,8 @@ function postfilter($text) {
 
 	// Normalise the text (make it sane(r))
 	$text = str_replace("\r", "", trim($text));
+
+	$text = securityfilter($text);
 
 	// Basic formatting
 	$text = preg_replace("'\[b\](.*?)\[/b\]'si", '<b>\\1</b>', $text);
