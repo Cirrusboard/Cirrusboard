@@ -115,6 +115,8 @@ echo twigloader()->render('thread.twig', [
 	'posts' => $posts,
 	'breadcrumb' => $breadcrumb ?? null,
 	'viewmode' => $viewmode,
+	'uid' => $uid,
 	'time' => $time,
-	'pagelist' => $pagelist ?? null
+	'pagelist' => $pagelist ?? null,
+	'pid' => $_GET['pid'] ?? null
 ]);

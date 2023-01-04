@@ -12,6 +12,15 @@
 	<link rel="stylesheet" href="themes/{{ userdata.theme }}/style.css">
 
 	<link href="rss.php" type="application/atom+xml" rel="alternate">
+
+	{% if noindex %}<meta name="robots" content="noindex,nofollow">{% endif %}
+	<meta property="og:title" content="{% if title != 'Index' %}{{ title }} - {% endif %}{{ config.title }}">
+	<meta name="description" content="{{ config.description }}">
+	<meta property="og:description" content="{{ config.description }}">
+	<meta property="og:site_name" content="{{ config.title }}">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ domain }}{{ uri }}">
+	<link rel="canonical" href="{{ domain }}{{ pagename }}">
 </head>
 <body>
 	<table class="c1 header">

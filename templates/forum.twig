@@ -7,10 +7,16 @@
 		{% set actions = {("index.php?action=markread&fid="~forum.id) : "Mark forum read",
 			("newthread.php?id="~id) : "New thread"} %}
 	{% endif %}
+
+	{% set pagename = "/forum.php?id=" ~ id %}
 {% elseif viewmode == "user" %}
 	{% set title = "Threads" %}
+	{% set pagename = "/forum.php?user=" ~ uid %}
+	{% set noindex = true %}
 {% elseif viewmode == "time" %}
 	{% set title = "Latest posts (by thread)" %}
+	{% set pagename = "/forum.php?time=" ~ time %}
+	{% set noindex = true %}
 {% endif %}
 
 	{% block content %}
