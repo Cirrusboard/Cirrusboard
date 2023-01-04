@@ -20,14 +20,17 @@ function securityfilter($msg) {
 }
 
 function postfilter($text) {
-	global $smilies;
+	global $smilies, $config;
 
 	if (empty($text)) return;
 
 	// Normalise the text (make it sane(r))
 	$text = str_replace("\r", "", trim($text));
 
-	$text = securityfilter($text);
+	if ($config['html'])
+		$text = securityfilter($text);
+	else
+		$text = htmlspecialchars($text);
 
 	// Basic formatting
 	$text = preg_replace("'\[b\](.*?)\[/b\]'si", '<b>\\1</b>', $text);

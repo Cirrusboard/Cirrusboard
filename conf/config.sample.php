@@ -18,6 +18,9 @@ $config['newsid'] = -1; // Designates the id for your announcements forum, the l
 $config['defaulttheme'] = "voxelmanip_retro";
 $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people do not select their own.
 
+// Allow HTML in posts? A reasonable attempt is done to scrub JavaScript and other dangerous HTML elements, but tread with caution.
+$config['html'] = false;
+
 // Uncomment to replace the footer with your own thing. We won't mind if you remove the credits from the footer!
 // (As long as it remains in the /credits.php page and the LICENSE file is kept)
 //$config['customfooter'] = <<<HTML
