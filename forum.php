@@ -89,7 +89,9 @@ echo twigloader()->render('forum.twig', [
 	'id' => $id,
 	'forum' => $forum ?? null,
 	'threads' => $threads,
+	'breadcrumb' => $breadcrumb ?? null,
 	'viewmode' => $viewmode,
+	'uid' => $uid,
 	'time' => $time,
 	'pagelist' => $pagelist ?? null
 ]);

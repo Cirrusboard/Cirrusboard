@@ -6,7 +6,7 @@
  * @return \Twig\Environment Twig object.
  */
 function twigloader($subfolder = '') {
-	global $tplCache, $tplNoCache, $config, $log, $userdata;
+	global $tplCache, $tplNoCache, $config, $log, $userdata, $uri;
 
 	$doCache = ($tplNoCache ? false : $tplCache);
 
@@ -22,6 +22,10 @@ function twigloader($subfolder = '') {
 
 	$twig->addGlobal('log', $log);
 	$twig->addGlobal('userdata', $userdata);
+
+	$twig->addGlobal('uri', $uri);
+	$twig->addGlobal('domain', (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']);
+	$twig->addGlobal('pagename', substr($_SERVER['PHP_SELF'], 0, -4));
 
 	return $twig;
 }
