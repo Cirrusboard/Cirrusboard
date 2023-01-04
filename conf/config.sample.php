@@ -18,6 +18,12 @@ $config['newsid'] = -1; // Designates the id for your announcements forum, the l
 $config['defaulttheme'] = "voxelmanip_retro";
 $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people do not select their own.
 
+// Uncomment to replace the footer with your own thing. We won't mind if you remove the credits from the footer!
+// (As long as it remains in the /credits.php page and the LICENSE file is kept)
+//$config['customfooter'] = <<<HTML
+// (put some stuff inside here)
+//HTML;
+
 // List of smilies, if you want them.
 $smilies = [
 	//'-_-' => 'assets/smilies/annoyed.png',

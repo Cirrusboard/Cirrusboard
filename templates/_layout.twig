@@ -76,10 +76,12 @@
 		<tr><td class="n3">
 			<span class="stats nom">{{ profiler_stats() }}</span>
 
-			<img src="assets/poweredbyvoxelmanip.png" class="poweredby" title="like a warm hug from someone you love">
+			{% if config.customfooter %}{{ config.customfooter | raw }}{% else %}
+			<img src="assets/poweredbycirrus.png" class="poweredby" title="~~ I'm in the clouds ~~">
 
-			Voxelmanip Forums (Cirrusboard)<br>
+			Cirrusboard<br>
 			&copy; 2022-2023 ROllerozxa, <a href="credits.php">et al</a>.
+			{% endif %}
 		</td></tr>
 	</table>
 
