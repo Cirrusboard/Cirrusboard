@@ -10,6 +10,7 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 
 			new \Twig\TwigFunction('userlink', 'userlink', ['is_safe' => ['html']]),
 			new \Twig\TwigFunction('threadpost', 'threadpost', ['is_safe' => ['html']]),
+			new \Twig\TwigFunction('postform', 'postform', ['is_safe' => ['html']]),
 			new \Twig\TwigFunction('posttoolbar', 'posttoolbar', ['is_safe' => ['html']]),
 
 			new \Twig\TwigFunction('timelinks', 'timelinks', ['is_safe' => ['html']]),

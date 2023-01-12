@@ -41,6 +41,16 @@ function threadpost($post) {
 	]);
 }
 
+function postform($action, $name, $postTitle, $postMessage, $editableTitle) {
+	return twigloader('components')->render('postform.twig', [
+		'action' => $action,
+		'name' => $name,
+		'post_title' => $postTitle,
+		'post_message' => $postMessage,
+		'editable_title' => $editableTitle
+	]);
+}
+
 function pagination($levels, $lpp, $url, $current) {
 	return twigloader('components')->render('pagination.twig', [
 		'levels' => $levels, 'lpp' => $lpp, 'url' => $url, 'current' => $current

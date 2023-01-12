@@ -12,24 +12,5 @@
 	{{ threadpost(post) }}
 {% endif %}
 
-<form action="editpost.php?pid={{ pid }}" method="POST"><table class="c1 postform">
-	<tr class="h"><td colspan="2">New reply</td></tr>
-	<tr class="n1">
-		<td class="nb center" style="width:120px;height:32px"><strong>Title:</strong></td>
-		<td class="nb">{{ thread.title }}</td>
-	</tr>
-	<tr class="n1">
-		<td class="nb"></td>
-		<td class="nb">
-			{{ posttoolbar() }}
-
-			<textarea name="message" id="message" rows="12" cols="80">{{ message }}</textarea>
-
-			<div class="actionbar">
-				<input type="submit" name="action" value="Preview">
-				<input type="submit" name="action" value="Submit">
-			</div>
-		</td>
-	</tr>
-</table></form>
+{{ postform('editpost.php?pid='~pid, 'Edit post', thread.title, message, false) }}
 	{% endblock %}

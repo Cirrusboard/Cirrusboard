@@ -48,7 +48,7 @@
 	<table class="c1"><tr><td class="n1 center" colspan="6"><p>No posts found.</p></td></tr></table>
 {% endif %}
 
-{% if viewmode == "thread" and userdata.powerlevel >= thread.minreply and not thread.closed %}
+{% if viewmode == "thread" and log and userdata.powerlevel >= thread.minreply and not thread.closed %}
 <form action="newreply.php?id={{ id }}" method="POST"><table class="c1 postform">
 	<tr class="h"><td>Quick Reply</a></td>
 	<tr class="n1"><td class="center">
