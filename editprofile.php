@@ -27,7 +27,7 @@ if (isset($_POST['action'])) {
 
 		if ($error == []) {
 			if (move_uploaded_file($fname['tmp_name'], 'userpic/'.$userdata['id']))
-				$fields['avatar'] = 1;
+				$avatar = 1;
 			else
 				trigger_error("Avatar uploading broken, check userpic/ permissions", E_USER_ERROR);
 		}

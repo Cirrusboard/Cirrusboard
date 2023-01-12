@@ -4,7 +4,7 @@ function getThemeInfo($id) {
 	$path = 'themes/'.$id.'/meta.json';
 
 	if (!file_exists($path))
-		return ['name' => $id.' (missing meta!)'];
+		return ['name' => $id.' (missing meta!)', 'author' => 'N/A'];
 
 	$info = json_decode(file_get_contents($path), true);
 
