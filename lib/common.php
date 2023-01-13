@@ -13,6 +13,9 @@ foreach (glob("lib/*.php") as $file) {
 	require_once($file);
 }
 
+// Prevent running any javascript even if it's somehow injected
+header("Content-Security-Policy: script-src 'self'; style-src 'self' 'unsafe-inline';");
+
 $userfields = userfields();
 
 if (php_sapi_name() != "cli") {

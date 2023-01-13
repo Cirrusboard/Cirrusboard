@@ -78,13 +78,13 @@ function postfilter($text) {
 
 function posttoolbutton($name, $title, $tag) {
 	return sprintf(
-		'<td><button onclick="formatText(\'%s\');return false" title="%s">%s</button></td>',
+		'<td><button id="postformatting-%s" title="%s" type="button">%s</button></td>',
 	$tag, $title, $name);
 }
 
 function posttoolbar() {
 	// TODO: I'd really want some better icons for this... Font awesome?
-	return '<table class="postformatting nom"><tr>'
+	return '<table class="postformatting nom" id="postformatting"><tr>'
 			.posttoolbutton('B', 'Bold', 'b')
 			.posttoolbutton('<i>I</i>', 'Italics', 'i')
 			.posttoolbutton('<u>U</u>', 'Underline', 'u')
