@@ -5,7 +5,9 @@
 
 	{% if log %}
 		{% if not thread.closed %}
-			{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+			{% if userdata.powerlevel >= thread.minreply %}
+				{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+			{% endif %}
 		{% else %}
 			{% set actions = {"none" : "Thread locked"} %}
 		{% endif %}

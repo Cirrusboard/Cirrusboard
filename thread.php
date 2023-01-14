@@ -41,7 +41,7 @@ if ($viewmode == 'thread') {
 	$readtime = ($log ? ', r.time frtime' : '');
 	$forumsread = ($log ? "LEFT JOIN forumsread r ON (r.fid=f.id AND r.uid=".$userdata['id'].") " : '');
 
-	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread $readtime FROM threads t
+	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread, f.minreply $readtime FROM threads t
 			JOIN forums f ON f.id = t.forum $forumsread
 			WHERE t.id = ? AND ? >= f.minread",
 		[$id, $userdata['powerlevel']]);

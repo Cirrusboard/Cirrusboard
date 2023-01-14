@@ -14,7 +14,7 @@
 	<tr class="h"><td colspan="2">Login information</td></tr>
 	<tr>
 		<td class="n1 center">Username:</td>
-		<td class="n2">ROllerozxa</td>
+		<td class="n2">{{ user.name }}</td>
 	</tr><tr>
 		<td class="n1 center">Password:</td>
 		<td class="n2">
@@ -24,10 +24,13 @@
 	</tr>
 
 	<tr class="h"><td colspan="2">Appearance</td></tr>
+	{% if userdata.powerlevel > 1 %}
 	<tr>
 		<td class="n1 center">Title:</td>
 		<td class="n2">{{ field_input('title', user.title, 40, 255) }}</td>
-	</tr><tr>
+	</tr>
+	{% endif %}
+	<tr>
 		<td class="n1 center">Avatar:</td>
 		<td class="n2"><input type="file" name="avatar" size="40"> or {{ field_checkbox('picturedel', 0, "Erase existing avatar") }}
 			<br>Must be PNG, JPG or GIF, within 100kB and 180x180.</td>

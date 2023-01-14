@@ -3,6 +3,8 @@ require('lib/common.php');
 
 needsLogin();
 
+if ($userdata['powerlevel'] < 0) error('403', "You are banned and cannot edit your profile.");
+
 // TODO: only current user can be edited, make admins able to edit others
 $user = fetch("SELECT * FROM users WHERE id = ?", [$userdata['id']]);
 
@@ -83,7 +85,7 @@ if (isset($_POST['action'])) {
 			$fields['token'] = $newtoken;
 		}
 
-		if ($userdata['powerlevel'] > 2)
+		if ($userdata['powerlevel'] > 1)
 			$fields['title'] = $_POST['title'];
 
 		// Construct a query containing all fields.
