@@ -36,8 +36,6 @@ $offset = (($page - 1) * $ppp);
 
 if ($viewmode == 'thread') {
 
-	query("UPDATE threads SET views = views + 1 WHERE id = ?", [$id]);
-
 	$readtime = ($log ? ', r.time frtime' : '');
 	$forumsread = ($log ? "LEFT JOIN forumsread r ON (r.fid=f.id AND r.uid=".$userdata['id'].") " : '');
 
@@ -62,6 +60,8 @@ if ($viewmode == 'thread') {
 		if ($readstate == 1)
 			query("REPLACE INTO forumsread VALUES (?,?,?)", [$userdata['id'], $thread['forum_id'], time()]);
 	}
+
+	query("UPDATE threads SET views = views + 1 WHERE id = ?", [$id]);
 
 	$posts = query("SELECT $selectfields
 			$join

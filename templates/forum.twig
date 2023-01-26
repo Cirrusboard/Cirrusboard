@@ -57,7 +57,7 @@
 
 		<tr class="center n{{ zebra }}">
 			<td style="width:30px">
-				{% if log and viewmode == 'thread' and not thread.isread %}
+				{% if log and viewmode == 'forum' and not thread.isread %}
 					{% if thread.closed %}
 						{{ thread_status("on") }}
 					{% else %}
