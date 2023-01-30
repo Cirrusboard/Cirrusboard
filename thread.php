@@ -13,9 +13,12 @@ elseif ($uid)
 elseif ($time)
 	$viewmode = 'time';
 elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread.php?pid=%d to point to a particular post
-	// TODO: When I implement pagination this needs to be expanded
-	$id = result("SELECT thread FROM posts WHERE id = ?", [$_GET['pid']]);
-	$viewmode = 'thread';
+	$pid = (int)$_GET['pid'];
+	if (!result("SELECT id FROM posts WHERE id = ?", [$pid])) error('404', "Post does not exist.");
+
+	$id = result("SELECT thread FROM posts WHERE id = ?", [$pid]);
+	$page = floor(result("SELECT COUNT(*) FROM posts WHERE thread = ? AND id < ?", [$id, $pid]) / $ppp) + 1;
+	$viewmode = "thread";
 } else
 	error('400', "I'm confused as to what you want...");
 
