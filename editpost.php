@@ -17,7 +17,7 @@ if (!$thread)
 	error('404', "Invalid post ID.");
 if ($thread['closed'] && $userdata['powerlevel'] <= 1)
 	error('403', "You can't edit a post in closed threads.");
-if ($userdata['powerlevel'] < 3 && $userdata['id'] != $thread['puser'])
+if ($userdata['powerlevel'] < 3 && $userdata['id'] != $thread['p_user'])
 	error('403', "You do not have permission to edit this post.");
 
 $editpost = fetch("SELECT u.id, p.user, pt.text FROM posts p

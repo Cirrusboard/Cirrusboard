@@ -18,7 +18,7 @@ if ($forum['minthread'] > $userdata['powerlevel'])
 $error = [];
 
 if ($action == 'Submit') {
-	if (strlen(trim($title)) < 15)
+	if (strlen(trim($title)) < 10)
 		$error[] = "You need to enter a longer title.";
 
 	if (strlen(trim($message)) == 0)
