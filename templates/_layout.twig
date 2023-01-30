@@ -33,7 +33,7 @@
 			</td>
 			<td class="n2 nb menu right">
 				{% if log %}
-					{{ userlink(userdata) }}{% if userdata.powerlevel > 0 %}<a href="editprofile.php">Edit profile</a>{% endif %}<a href="javascript:document.logout.submit()">Log out</a>
+					{{ userlink(userdata) }}{% if userdata.powerlevel > 0 %}<a href="editprofile.php">Edit profile</a>{% endif %}<a href="login.php?action=logout">Log out</a>
 				{% else %}
 					<a href="register.php">Register</a><a href="login.php">Log in</a>
 				{% endif %}

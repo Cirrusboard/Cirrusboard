@@ -22,7 +22,7 @@ if ($action == 'Login') {
 		// Redirect to index... or should it redirect to the last page?
 		redirect('./');
 	}
-} elseif ($action == 'Logout') {
+} elseif (isset($_GET['action']) && $_GET['action'] == 'logout') {
 	// Destroy the token cookie to log out the user.
 	setcookie('token', '');
 	redirect('./');
