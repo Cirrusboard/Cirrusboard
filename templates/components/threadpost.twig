@@ -1,16 +1,36 @@
+{% if log %}
+	{% set header = post.u_header %}
+	{% set signature = post.u_signature %}
+{% endif %}
+{% if signature %}
+	{% if post.u_signsep %}
+		{% set signsep = '<hr>' %}
+	{% endif %}
 
-
+	{% if not post.u_header %}
+		{% set signature = '<br><br><small>' ~ signsep ~ signature ~ '</small>' %}
+	{% else %}
+		{% set signature = signsep ~ signature %}
+	{% endif %}
+{% endif %}
 <table class="c1 threadpost" id="{{ post.id }}">
 	{% if post.headerbar %}<tr class="h"><td colspan="2">{{ post.headerbar }}</td></tr>{% endif %}
 	<tr>
-		<td class="n1 topbar_1 nom">{{ userlink(post, 'u_') }}</td>
-		<td class="b n1 topbar_1 blkm nod clearfix">
-			<span class="float-left" style="margin-right:10px">{% if post.u_avatar %}<img src="userpic/{{ post.u_id }}">{% endif %}</span>
+		<td class="n1 topbar_1 topbar{{ post.u_id }}_1 nom">{{ userlink(post, 'u_') }}</td>
+
+		<td class="b n1 topbar_1 topbar{{ post.u_id }}_1 blkm nod clearfix">
+			{% if post.u_avatar %}
+				<img class="float-left" src="userpic/{{ post.u_id }}" style="margin-right:10px">
+			{% endif %}
 			{{ userlink(post, 'u_') }} <div class="sfont" style="margin-top:0.5em">{% if post.u_title %}{{ post.u_title | raw }}{% endif %}</div>
 		</td>
-		<td class="n1 topbar_2 sfont blkm clearfix">Posted on {{ post.date | date('Y-m-d H:i') }}
+
+		<td class="n1 topbar_2 topbar{{ post.u_id }}_2 sfont blkm clearfix">Posted on {{ post.date | date('Y-m-d H:i') }}
 			{%- if post.tid %}, in <a href="thread.php?id={{ post.tid }}">{{ post.ttitle }}</a>{% endif %}
-			{% if post.revision >= 2 %}(edited {{ post.rev_date | date('Y-m-d H:i') }}){% endif %}
+			{% if post.revision >= 2 %}
+				(edited {{ post.rev_date | date('Y-m-d H:i') }})
+			{% endif %}
+
 			<span class="float-right">{% if post.id %}
 				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a>
 				{% if log %}
@@ -24,13 +44,15 @@
 				| ID: {{ post.id }}
 			{% endif %}</span>
 		</td>
-	</tr><tr valign="top">
-		<td class="n1 sfont sidebar nom">
+	</tr>
+	<tr valign="top">
+		<td class="n1 sfont sidebar sidebar{{ post.u_id }} nom">
 			{% if post.u_title %}{{ post.u_title | raw }}{% endif %}
 			{% if post.u_avatar %}<img src="userpic/{{ post.u_id }}">{% endif %}
 			<br>Posts: {{ post.u_posts }}<br>
 			<br>Joined: {{ post.u_joined | date('Y-m-d') }}<br>
 		</td>
-		<td class="n2 mainbar">{{ post.text | postfilter }}</td>
+
+		<td class="n2 mainbar mainbar{{ post.u_id }}">{{ (header ~ post.text ~ signature) | postfilter }}</td>
 	</tr>
 </table>

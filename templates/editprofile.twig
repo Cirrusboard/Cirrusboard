@@ -55,6 +55,24 @@
 			<br>{{ field_checkbox('showemail', user.showemail, "Show email on profile page") }}</td>
 	</tr>
 
+	{% if config.postlayouts and config.html %}
+	<tr class="h"><td colspan="2">Post layout</td></tr>
+	<tr>
+		<td class="n1 center">Header:</td>
+		<td class="n2">{{ field_textarea('header', user.header, 7, 80) }}</td>
+	</tr><tr>
+		<td class="n1 center">Signature:</td>
+		<td class="n2">{{ field_textarea('signature', user.signature, 7, 80) }}
+			<br>{{ field_checkbox('signsep', user.signsep, "Show signature separator") }}</td>
+	</tr>
+	{% else %}
+	<tr class="h"><td colspan="2">Signature</td></tr>
+	<tr>
+		<td class="n1 center">Signature:</td>
+		<td class="n2">{{ field_textarea('signature', user.signature, 7, 80) }}</td>
+	</tr>
+	{% endif %}
+
 	<tr class="h"><td colspan="2">Options</td></tr>
 	<tr>
 		<td class="n1 center">Theme:</td>

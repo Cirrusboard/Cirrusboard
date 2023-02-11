@@ -23,7 +23,7 @@ function userfields($prefix = 'u') {
 }
 
 function postfields_user() {
-	$fields = ['joined', 'posts', 'title', 'avatar'];
+	$fields = ['joined', 'posts', 'title', 'avatar', 'header', 'signature'];
 	$str = '';
 	foreach ($fields as $field)
 		$str .= "u.$field u_$field,";

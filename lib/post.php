@@ -19,6 +19,25 @@ function securityfilter($msg) {
 	return $msg;
 }
 
+// Apply voodoo magic on styling as well.
+function filterstyle($match) {
+	$style = $match[2];
+
+	// Strip newlines, to prevent <br> tags from being inserted and messing up styling.
+	$style = str_replace("\n", '', $style);
+
+	$style = preg_replace("'@(?:keyframes|-webkit-keyframe)'si",'(no animations pls)', $style);
+
+	$style = preg_replace("'\*( *{+)'", 'no\\1', $style);
+
+	$style = str_ireplace(
+		['body', 'html', '@import', 'content:', ':root', ':not', '.boardlogo'],
+		['bodeh', 'hetemel', '@export', '', '', '', ''],
+	$style);
+
+	return $match[1].$style.$match[3];
+}
+
 function postfilter($text) {
 	global $smilies, $config;
 
@@ -27,9 +46,11 @@ function postfilter($text) {
 	// Normalise the text (make it sane(r))
 	$text = str_replace("\r", "", trim($text));
 
-	if ($config['html'])
+	if ($config['html']) {
+		$text = preg_replace_callback("@(<style.*?>)(.*?)(</style.*?>)@si", 'filterstyle', $text);
+
 		$text = securityfilter($text);
-	else
+	} else
 		$text = htmlspecialchars($text);
 
 	// Basic formatting

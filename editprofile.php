@@ -74,6 +74,13 @@ if (isset($_POST['action'])) {
 			'tpp'		=> $_POST['tpp'],
 		];
 
+		if ($config['html'] && $config['postlayouts']) {
+			$fields['header'] = $_POST['header'] ?: null;
+			$fields['signsep']	= isset($_POST['signsep']) ? 1 : 0;
+		}
+
+		$fields['signature'] = $_POST['signature'] ?: null;
+
 		if (isset($avatar))
 			$fields['avatar'] = $avatar;
 

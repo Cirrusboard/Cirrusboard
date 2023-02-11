@@ -14,7 +14,7 @@ foreach (glob("lib/*.php") as $file) {
 }
 
 // Prevent running any javascript even if it's somehow injected
-header("Content-Security-Policy: script-src 'self'; style-src 'self' 'unsafe-inline';");
+header("Content-Security-Policy: script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'self'; font-src 'self';");
 
 $userfields = userfields();
 

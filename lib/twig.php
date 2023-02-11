@@ -28,6 +28,7 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 	public function getFilters() {
 		return [
 			new \Twig\TwigFilter('postfilter', 'postfilter', ['is_safe' => ['html']]),
+			new \Twig\TwigFilter('relative_time', 'relTime'),
 		];
 	}
 }

@@ -21,6 +21,11 @@ $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people d
 // Allow HTML in posts? A reasonable attempt is done to scrub JavaScript and other dangerous HTML elements, but tread with caution.
 $config['html'] = false;
 
+// This will enable Acmlmboard-style post layouts where users can customise their post layout with CSS. Requires HTML be enabled.
+// When disabled, it will turn the signature into a regular forum one. Please be careful with disabling this on an existing forum
+// as users with post layouts will be cut in half and create trailing HTML elements that break the layout.
+$config['postlayouts'] = true;
+
 // Uncomment to replace the footer with your own thing. We won't mind if you remove the credits from the footer!
 // (As long as it remains in the /credits.php page and the LICENSE file is kept)
 //$config['customfooter'] = <<<HTML

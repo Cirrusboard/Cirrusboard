@@ -23,11 +23,11 @@ function powIdToName($id) {
 
 function powIdToColour($id) {
 	return match ($id) {
-		-1 => '858585',
+		-1 => '9d9d9d',
 		0  => 'ffffff',
-		1  => '839ef9',
+		1  => '5eb2fb',
 		2  => '4fe840',
-		3  => 'aa3c3c',
+		3  => 'e34d4d',
 		4  => 'ffd21b',
 		default => ''
 	};
