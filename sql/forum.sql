@@ -10,7 +10,8 @@ SET NAMES utf8mb4;
 CREATE TABLE `categories` (
   `id` tinyint(3) unsigned NOT NULL COMMENT 'ID of the category',
   `title` varchar(100) NOT NULL COMMENT 'Title of the category',
-  `ord` tinyint(3) unsigned NOT NULL COMMENT 'Display order of category, ascending'
+  `ord` tinyint(3) unsigned NOT NULL COMMENT 'Display order of category, ascending',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `categories` (`id`, `title`, `ord`) VALUES
@@ -31,7 +32,9 @@ CREATE TABLE `forums` (
   `minread` tinyint(4) NOT NULL DEFAULT -1 COMMENT 'Minimum powerlevel to read/view forum',
   `minthread` tinyint(4) NOT NULL DEFAULT 1 COMMENT 'Minimum powerlevel to make new threads',
   `minreply` tinyint(4) NOT NULL DEFAULT 1 COMMENT 'Minimum powerlevel to reply to threads',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `cat` (`cat`),
+  CONSTRAINT `forums_ibfk_1` FOREIGN KEY (`cat`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `forums` (`id`, `cat`, `ord`, `title`, `descr`, `threads`, `posts`, `lastdate`, `lastuser`, `lastid`, `minread`, `minthread`, `minreply`) VALUES
@@ -42,7 +45,10 @@ CREATE TABLE `forumsread` (
   `uid` int(10) unsigned NOT NULL,
   `fid` int(10) unsigned NOT NULL,
   `time` int(10) unsigned NOT NULL,
-  UNIQUE KEY `uid` (`uid`,`fid`)
+  UNIQUE KEY `uid` (`uid`,`fid`),
+  KEY `fid` (`fid`),
+  CONSTRAINT `forumsread_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `forumsread_ibfk_3` FOREIGN KEY (`fid`) REFERENCES `forums` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -63,7 +69,11 @@ CREATE TABLE `posts` (
   `revision` smallint(5) unsigned NOT NULL DEFAULT 1 COMMENT 'The current text revision of the post.',
   `ip` char(15) NOT NULL COMMENT 'IP address of the poster.',
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT 'Is post deleted?',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `threadid` (`thread`),
+  KEY `user` (`user`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`thread`) REFERENCES `threads` (`id`),
+  CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -71,7 +81,9 @@ CREATE TABLE `poststext` (
   `id` int(10) unsigned NOT NULL COMMENT 'ID of the post',
   `text` text NOT NULL COMMENT 'Teh text lol',
   `revision` smallint(5) unsigned NOT NULL DEFAULT 1 COMMENT 'The revision of this post text',
-  `date` int(10) unsigned DEFAULT NULL COMMENT 'Date of the last revision'
+  `date` int(10) unsigned DEFAULT NULL COMMENT 'Date of the last revision',
+  PRIMARY KEY (`id`,`revision`),
+  CONSTRAINT `poststext_ibfk_1` FOREIGN KEY (`id`) REFERENCES `posts` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -87,7 +99,16 @@ CREATE TABLE `threads` (
   `lastid` int(10) unsigned DEFAULT NULL COMMENT 'ID of last post in thread',
   `closed` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT 'Is thread closed/locked?',
   `sticky` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT 'Is thread sticky? (Shows up at the top of the thread listing)',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `forum` (`forum`),
+  KEY `user` (`user`),
+  KEY `lastdate` (`lastdate`),
+  KEY `lastid` (`lastid`),
+  KEY `lastuser` (`lastuser`),
+  CONSTRAINT `threads_ibfk_1` FOREIGN KEY (`forum`) REFERENCES `forums` (`id`),
+  CONSTRAINT `threads_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
+  CONSTRAINT `threads_ibfk_3` FOREIGN KEY (`lastid`) REFERENCES `posts` (`id`),
+  CONSTRAINT `threads_ibfk_4` FOREIGN KEY (`lastuser`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -95,7 +116,10 @@ CREATE TABLE `threadsread` (
   `uid` int(10) unsigned NOT NULL,
   `tid` int(10) unsigned NOT NULL,
   `time` int(10) unsigned NOT NULL,
-  UNIQUE KEY `uid` (`uid`,`tid`)
+  UNIQUE KEY `uid` (`uid`,`tid`),
+  KEY `tid` (`tid`),
+  CONSTRAINT `threadsread_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `threadsread_ibfk_2` FOREIGN KEY (`tid`) REFERENCES `threads` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -135,4 +159,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- 2023-01-02 18:28:54
+-- 2023-02-11 15:41:46
