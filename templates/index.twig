@@ -72,7 +72,7 @@
 	<tr class="h"><td class="left">Online users (over the past 15 minutes)</td></tr>
 	<tr><td class="n1">
 		<p>{{ online_users_count }} user{% if online_users_count != 1 %}s{% endif %} online:
-			{% for user in online_users %}{{ userlink(user) }} {% endfor %}</p>
+			{% for user in online_users %}{% if not loop.first %}, {% endif %}{{ userlink(user) }}{% endfor %}</p>
 
 		{% if guests_online %}
 		<p>In addition there {% if guests_online != 1 %}are{% else %}is{% endif %} {{ guests_online }} guest{% if guests_online != 1 %}s{% endif %} online.</p>
