@@ -15,7 +15,7 @@ foreach ($smilies as $text => $url) {
 // Powerlevel colours
 $nctable = '';
 foreach ($powerlevels as $id => $title)
-	$nctable .= sprintf('<td class="n1" width="140"><b><span style="color:#%s">%s</span></b></td>', powIdToColour($id), $title);
+	$nctable .= sprintf('<td class="n1" width="120"><b><span style="color:#%s">%s</span></b></td>', powIdToColour($id), $title);
 
 if (file_exists('conf/faq.php'))
 	require('conf/faq.php');

@@ -24,3 +24,26 @@ if (themepicker = document.getElementById('theme')) {
 		document.head.getElementsByTagName('link')[1].href = 'themes/'+themepicker.value+'/style.css';
 	});
 }
+
+// Manageforums stuff...
+
+if (delforum = document.getElementById('delforum')) {
+	delforum.addEventListener('click', function (e) {
+		if (!confirm('Really delete this forum?'))
+			e.preventDefault();
+	});
+}
+
+// meow
+if (delcat = document.getElementById('delcat')) {
+	delcat.addEventListener('click', function (e) {
+		if (!confirm('Really delete this category?'))
+			e.preventDefault();
+	});
+}
+
+if (mfback = document.getElementById('mfback')) {
+	mfback.addEventListener('click', function (e) {
+		window.location = 'manageforums.php';
+	});
+}

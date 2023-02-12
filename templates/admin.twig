@@ -1,0 +1,65 @@
+{% extends "_layout.twig" %}
+
+{% set title = "Admin panel" %}
+
+	{% block content %}
+<table class="c1 faq">
+	<tr class="h"><td>Admin panel</td></tr>
+	<tr><td class="n1">
+		<p>Welcome to the Cirrusboard administration panel. Here you can view statistics of the forum along with links to other administrative pages to manage the board.</p>
+	</tr>
+	<tr class="h"><td>Management links</td></tr>
+	<tr><td class="n1 center">
+		<p><a href="manageforums.php"><input type="submit" name="action" value="Manage Forums"></a></p>
+	</tr>
+</table>
+
+<h3>Database status</h3>
+
+<table class="c1">
+	<tr class="h">
+		<td>Table name</td>
+		<td>Rows</td>
+		<td>Avg. data/row</td>
+		<td>Data size</td>
+		<td>Index size</td>
+		<td>Unused data</td>
+		<td>Total size</td>
+	</tr>
+	{% for t in tablestatus %}
+	<tr class="right">
+		<td class="n1 left">{{ t.Name }}</td>
+		<td class="n2" style="width:175px">{{ t.Rows }}</td>
+		<td class="n2" style="width:175px">{{ t.Avg_row_length }}</td>
+		<td class="n2" style="width:175px">{{ t.Data_length }}</td>
+		<td class="n2" style="width:175px">{{ t.Index_length }}</td>
+		<td class="n2" style="width:175px">{{ t.Data_free }}</td>
+		<td class="n2" style="width:175px">{{ t.Data_length+t.Index_length }}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<h3>User statistics</h3>
+
+<div class="two-columns">
+	<table class="c1">
+		<tr class="h"><td colspan="2">Latest registered users</td></tr>
+		{% for user in latest_registered_users %}
+			<tr>
+				<td class="n1" style="width:50%">{{ userlink(user) }}</td>
+				<td class="n2 right">{{ user.joined | date() }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<table class="c1">
+		<tr class="h"><td colspan="2">Latest seen users</td></tr>
+		{% for user in latest_seen_users %}
+			<tr>
+				<td class="n1" style="width:50%">{{ userlink(user) }}</td>
+				<td class="n2 right">{{ user.lastview | relative_time }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+	{% endblock %}
