@@ -13,6 +13,7 @@ table.c1 {
 
 tr.h {
 	font-weight: bold;
+	background: rgba(32,98,2,0.8);
 }
 
 tr.c, tr.h {
@@ -25,25 +26,18 @@ td {
 	padding: 5px;
 }
 
-tr.h {
-	background: rgba(32,98,2,0.8);
-}
-
 tr.n1, td.n1 { background: rgba(5, 9, 3, 0.6); }
 tr.n2, td.n2 { background: rgba(16, 48, 2, 0.65); }
 tr.n3, td.n3 { background: rgba(0,0,0,0.6); }
 
 input[type='text'], input[type='password'], input[type='email'], textarea, select, input[type='submit'], input[type='button'], button {
-	background-color: #000;
+	background: #000;
 	color: #efe;
-	padding: 4px;
 	border: 2px solid #106202;
 }
 
 input[type='submit'], input[type='button'], button {
 	background: #021800;
-	font-weight: bold;
-	padding: 5px 10px;
 }
 
 input[type='text']:hover, input[type='password']:hover, input[type='email']:hover, textarea:hover, select:hover, input[type='text']:focus, input[type='password']:focus, input[type='email']:focus, textarea:focus, select:focus,
