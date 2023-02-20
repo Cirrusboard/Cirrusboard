@@ -43,9 +43,19 @@ $post = ['date' => time(), 'text' => $samplepost ?? 'um hi', 'headerbar' => 'Sam
 foreach ($profile as $field => $val)
 	$post['u_'.$field] = $val;
 
+// Profile actions
+
+$actions = [
+	"forum.php?user=$id" => 'View threads',
+	"thread.php?user=$id" => 'Show posts'];
+
+if ($userdata['powerlevel'] > 2 && $userdata['powerlevel'] > $profile['powerlevel'])
+	$actions["editprofile.php?id=$id"] = 'Edit user';
+
 echo twigloader()->render('profile.twig', [
 	'uid' => $id,
 	'profile' => $profile,
 	'profilefields' => $profilefields,
-	'sample_post' => $post
+	'sample_post' => $post,
+	'actions' => $actions
 ]);

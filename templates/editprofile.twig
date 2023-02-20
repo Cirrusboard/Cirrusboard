@@ -8,7 +8,7 @@
 	<p class="error">The following errors occured when trying to edit your profile: <br>- {{ error | join('<br>- ') | raw }}</p>
 {% endif %}
 
-<form action="editprofile.php" method="post" enctype="multipart/form-data"><table class="c1">
+<form method="post" enctype="multipart/form-data"><table class="c1">
 	<tr class="h"><td colspan="2">Edit profile</td></tr>
 
 	<tr class="h"><td colspan="2">Login information</td></tr>
@@ -24,6 +24,12 @@
 	</tr>
 
 	<tr class="h"><td colspan="2">Appearance</td></tr>
+	{% if userdata.powerlevel > 2 and userdata.id != user.id %}
+	<tr>
+		<td class="n1 center">Rank:</td>
+		<td class="n2">{{ field_select('powerlevel', user.powerlevel, powerlevels) }}</td>
+	</tr>
+	{% endif %}
 	{% if userdata.powerlevel > 1 %}
 	<tr>
 		<td class="n1 center">Title:</td>

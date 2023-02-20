@@ -5,8 +5,14 @@ needsLogin();
 
 if ($userdata['powerlevel'] < 0) error('403', "You are banned and cannot edit your profile.");
 
-// TODO: only current user can be edited, make admins able to edit others
-$user = fetch("SELECT * FROM users WHERE id = ?", [$userdata['id']]);
+$userid = $_GET['id'] ?? $userdata['id'];
+
+$user = fetch("SELECT * FROM users WHERE id = ?", [$userid]);
+
+if ($userdata['id'] != $userid && ($userdata['powerlevel'] < 3 || $userdata['powerlevel'] <= $user['powerlevel']))
+	error('403', "You are not allowed to edit this user's profile.");
+
+$canedituser = $userdata['powerlevel'] > 2 && ($userdata['powerlevel'] > $user['powerlevel'] || $userid == $userdata['id']);
 
 if (isset($_POST['action'])) {
 
@@ -28,7 +34,7 @@ if (isset($_POST['action'])) {
 			$error[] = "Avatar: The image filesize is too big.";
 
 		if ($error == []) {
-			if (move_uploaded_file($fname['tmp_name'], 'userpic/'.$userdata['id']))
+			if (move_uploaded_file($fname['tmp_name'], 'userpic/'.$user['id']))
 				$avatar = 1;
 			else
 				trigger_error("Avatar uploading broken, check userpic/ permissions", E_USER_ERROR);
@@ -51,11 +57,20 @@ if (isset($_POST['action'])) {
 		if ($pass == $pass2) {
 			if (strlen($pass) < 15) {
 				$newtoken = bin2hex(random_bytes(32));
-				setcookie('token', $newtoken, 2147483647);
+				if ($userdata['id'] == $user['id'])
+					setcookie('token', $newtoken, 2147483647);
 			} else
 				$error[] = "Password: Password is too short (needs to be at least 15 characters).";
 		} else
 			$error[] = "Password: The new passwords don't match.";
+	}
+
+
+	if ($canedituser) {
+		$targetrank = $_POST['powerlevel'];
+
+		if ($targetrank >= $userdata['powerlevel'] && $targetrank != $user['powerlevel'])
+			$error[] = "You do not have the permissions to assign this rank.";
 	}
 
 	if ($error == []) {
@@ -91,6 +106,9 @@ if (isset($_POST['action'])) {
 			$fields['password'] = password_hash($pass, PASSWORD_DEFAULT);
 			$fields['token'] = $newtoken;
 		}
+
+		if (isset($targetrank))
+			$fields['powerlevel'] = $targetrank;
 
 		if ($userdata['powerlevel'] > 1)
 			$fields['title'] = $_POST['title'];
@@ -129,5 +147,6 @@ echo twigloader()->render('editprofile.twig', [
 	'user' => $user,
 	'timezones' => $timezones,
 	'birthday' => $birthday ?? null,
-	'error' => $error ?? null
+	'error' => $error ?? null,
+	'powerlevels' => $powerlevels
 ]);

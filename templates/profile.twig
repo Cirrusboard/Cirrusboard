@@ -2,8 +2,6 @@
 
 {% set title = profile.name %}
 
-{% set actions = {("thread.php?user="~uid): "Show posts", ("forum.php?user="~uid): "Show threads"} %}
-
 	{% block content %}
 {% for cat, fields in profilefields %}
 	<table class="c1">
