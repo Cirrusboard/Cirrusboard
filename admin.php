@@ -1,10 +1,10 @@
 <?php
 require('lib/common.php');
 
-if ($userdata['powerlevel'] < 3) error('403', "You shouldn't be here, get out!");
+if ($userdata['rank'] < 3) error('403', "You shouldn't be here, get out!");
 
-$latestRegisteredUsers = query("SELECT id, name, powerlevel, joined FROM users ORDER BY joined DESC LIMIT 7");
-$latestSeenUsers = query("SELECT id, name, powerlevel, lastview FROM users ORDER BY lastview DESC LIMIT 7");
+$latestRegisteredUsers = query("SELECT id, name, rank, joined FROM users ORDER BY joined DESC LIMIT 7");
+$latestSeenUsers = query("SELECT id, name, rank, lastview FROM users ORDER BY lastview DESC LIMIT 7");
 
 $tbs = $sql->query('SHOW TABLE STATUS');
 while ($t = $tbs->fetch())

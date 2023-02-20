@@ -35,7 +35,7 @@ $forums = query("SELECT $userfields $readtime f.* FROM forums f
 		$forumsread
 		WHERE ? >= f.minread
 		ORDER BY c.ord, c.id, f.ord, f.id",
-	[$userdata['powerlevel']]);
+	[$userdata['rank']]);
 
 // Get latest announcement to show at the top
 $news = fetch("SELECT $userfields t.id tid, t.title, t.user, p.date date
@@ -48,7 +48,7 @@ $news = fetch("SELECT $userfields t.id tid, t.title, t.user, p.date date
 // Online users stats
 $args = [(time() - 15*60)];
 
-$onlineUsers = query("SELECT id,name,powerlevel,lastview FROM users WHERE lastview > ? ORDER BY name", $args);
+$onlineUsers = query("SELECT id, name, rank FROM users WHERE lastview > ? ORDER BY name", $args);
 $onlineUsersCount = result("SELECT COUNT(*) FROM users WHERE lastview > ?", $args);
 
 $guestsOnline = result("SELECT COUNT(*) guests FROM guests WHERE lastview > ?", $args);
@@ -56,7 +56,7 @@ $guestsOnline = result("SELECT COUNT(*) guests FROM guests WHERE lastview > ?", 
 
 $stats = fetch("SELECT (SELECT COUNT(*) FROM users) u, (SELECT COUNT(*) FROM threads) t, (SELECT COUNT(*) FROM posts) p");
 
-$newestUser = fetch("SELECT id, name, powerlevel FROM users ORDER BY id DESC LIMIT 1");
+$newestUser = fetch("SELECT id, name, rank FROM users ORDER BY id DESC LIMIT 1");
 
 echo twigloader()->render('index.twig', [
 	'categories' => $categories ?? null,

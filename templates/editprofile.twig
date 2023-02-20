@@ -24,13 +24,13 @@
 	</tr>
 
 	<tr class="h"><td colspan="2">Appearance</td></tr>
-	{% if userdata.powerlevel > 2 and userdata.id != user.id %}
+	{% if userdata.rank > 2 and userdata.id != user.id %}
 	<tr>
 		<td class="n1 center">Rank:</td>
-		<td class="n2">{{ field_select('powerlevel', user.powerlevel, powerlevels) }}</td>
+		<td class="n2">{{ field_select('rank', user.rank, ranks) }}</td>
 	</tr>
 	{% endif %}
-	{% if userdata.powerlevel > 1 %}
+	{% if userdata.rank > 1 %}
 	<tr>
 		<td class="n1 center">Title:</td>
 		<td class="n2">{{ field_input('title', user.title, 40, 255) }}</td>

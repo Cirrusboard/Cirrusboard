@@ -13,9 +13,9 @@ $thread = fetch("SELECT t.*, f.title f_title, f.minreply f_minreply
 
 if (!$thread)
 	error('404', "Thread does not exist.");
-if ($thread['f_minreply'] > $userdata['powerlevel'])
+if ($thread['f_minreply'] > $userdata['rank'])
 	error('403', "You have no permissions to create posts in this forum.");
-if ($thread['closed'] && $userdata['powerlevel'] < 2)
+if ($thread['closed'] && $userdata['rank'] < 2)
 	error('403', "You can't post in closed threads!");
 
 $error = [];
@@ -66,7 +66,7 @@ if ($pid) {
 			[$pid]);
 
 	//does the user have reading access to the quoted post?
-	if ($userdata['powerlevel'] < $qpost['minread'])
+	if ($userdata['rank'] < $qpost['minread'])
 		$qpost['name'] = $qpost['text'] = '[redacted]';
 
 	$message = sprintf(

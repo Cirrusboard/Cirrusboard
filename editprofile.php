@@ -3,16 +3,16 @@ require('lib/common.php');
 
 needsLogin();
 
-if ($userdata['powerlevel'] < 0) error('403', "You are banned and cannot edit your profile.");
+if ($userdata['rank'] < 0) error('403', "You are banned and cannot edit your profile.");
 
 $userid = $_GET['id'] ?? $userdata['id'];
 
 $user = fetch("SELECT * FROM users WHERE id = ?", [$userid]);
 
-if ($userdata['id'] != $userid && ($userdata['powerlevel'] < 3 || $userdata['powerlevel'] <= $user['powerlevel']))
+if ($userdata['id'] != $userid && ($userdata['rank'] < 3 || $userdata['rank'] <= $user['rank']))
 	error('403', "You are not allowed to edit this user's profile.");
 
-$canedituser = $userdata['powerlevel'] > 2 && ($userdata['powerlevel'] > $user['powerlevel'] || $userid == $userdata['id']);
+$canedituser = $userdata['rank'] > 2 && ($userdata['rank'] > $user['rank'] || $userid == $userdata['id']);
 
 if (isset($_POST['action'])) {
 
@@ -67,9 +67,9 @@ if (isset($_POST['action'])) {
 
 
 	if ($canedituser) {
-		$targetrank = $_POST['powerlevel'];
+		$targetrank = $_POST['rank'];
 
-		if ($targetrank >= $userdata['powerlevel'] && $targetrank != $user['powerlevel'])
+		if ($targetrank >= $userdata['rank'] && $targetrank != $user['rank'])
 			$error[] = "You do not have the permissions to assign this rank.";
 	}
 
@@ -108,9 +108,9 @@ if (isset($_POST['action'])) {
 		}
 
 		if (isset($targetrank))
-			$fields['powerlevel'] = $targetrank;
+			$fields['rank'] = $targetrank;
 
-		if ($userdata['powerlevel'] > 1)
+		if ($userdata['rank'] > 1)
 			$fields['title'] = $_POST['title'];
 
 		// Construct a query containing all fields.
@@ -148,5 +148,5 @@ echo twigloader()->render('editprofile.twig', [
 	'timezones' => $timezones,
 	'birthday' => $birthday ?? null,
 	'error' => $error ?? null,
-	'powerlevels' => $powerlevels
+	'ranks' => $ranks
 ]);

@@ -56,7 +56,7 @@ if ($log) {
 	// Fallback userdata for guests (NYI)
 	$userdata = [
 		'id' => -1,
-		'powerlevel' => 0,
+		'rank' => 0,
 		'theme' => $config['defaulttheme']
 	];
 

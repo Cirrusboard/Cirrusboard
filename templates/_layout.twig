@@ -33,7 +33,7 @@
 			</td>
 			<td class="n2 nb menu right">
 				{% if log %}
-					{{ userlink(userdata) }}{% if userdata.powerlevel > 0 %}<a href="editprofile.php">Edit profile</a>{% endif %}{% if userdata.powerlevel > 2 %}<a href="admin.php">Admin</a>{% endif %}<a href="login.php?action=logout">Log out</a>
+					{{ userlink(userdata) }}{% if userdata.rank > 0 %}<a href="editprofile.php">Edit profile</a>{% endif %}{% if userdata.rank > 2 %}<a href="admin.php">Admin</a>{% endif %}<a href="login.php?action=logout">Log out</a>
 				{% else %}
 					<a href="register.php">Register</a><a href="login.php">Log in</a>
 				{% endif %}

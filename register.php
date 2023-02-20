@@ -40,7 +40,7 @@ if (isset($_POST['action'])) {
 
 		$id = insertId();
 		// If user is ID 1, make them root.
-		if ($id == 1) query("UPDATE users SET powerlevel = 4 WHERE id = ?", [$id]);
+		if ($id == 1) query("UPDATE users SET rank = 4 WHERE id = ?", [$id]);
 
 		// Log in user right away.
 		setcookie('token', $token, 2147483647);

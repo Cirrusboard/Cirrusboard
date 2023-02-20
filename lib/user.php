@@ -9,11 +9,11 @@ function userlink($user, $pre = '') {
 function userlabel($user, $pre = '') {
 	return sprintf(
 		'<span style="color:#%s;">%s</span>',
-	powIdToColour($user[$pre.'powerlevel']), htmlspecialchars($user[$pre.'name'] ?? 'null'));
+	powIdToColour($user[$pre.'rank']), htmlspecialchars($user[$pre.'name'] ?? 'null'));
 }
 
 function userfields($prefix = 'u') {
-	$fields = ['id', 'name', 'powerlevel'];
+	$fields = ['id', 'name', 'rank'];
 
 	$out = '';
 	foreach ($fields as $field)

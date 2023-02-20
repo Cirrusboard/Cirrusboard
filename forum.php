@@ -23,13 +23,13 @@ if ($viewmode == 'forum') {
 
 	if ($log) {
 		$forum = fetch("SELECT f.*, r.time rtime FROM forums f LEFT JOIN forumsread r ON (r.fid = f.id AND r.uid = ?)
-			WHERE f.id = ? AND ? >= minread", [$userdata['id'], $id, $userdata['powerlevel']]);
+			WHERE f.id = ? AND ? >= minread", [$userdata['id'], $id, $userdata['rank']]);
 		if (!$forum['rtime']) $forum['rtime'] = 0;
 
 		$isread = ", (NOT (r.time < t.lastdate OR isnull(r.time)) OR t.lastdate < '".$forum['rtime']."') isread";
 		$threadsread = "LEFT JOIN threadsread r ON (r.tid = t.id AND r.uid = ".$userdata['id'].")";
 	} else
-		$forum = fetch("SELECT * FROM forums WHERE id = ? AND ? >= minread", [$id, $userdata['powerlevel']]);
+		$forum = fetch("SELECT * FROM forums WHERE id = ? AND ? >= minread", [$id, $userdata['rank']]);
 
 	if (!$forum) error('404', "This forum doesn't exist.");
 
@@ -50,7 +50,7 @@ if ($viewmode == 'forum') {
 	$forum['threads'] = result("SELECT COUNT(*) FROM threads t
 			LEFT JOIN forums f ON f.id = t.forum
 			WHERE t.user = ? AND ? >= f.minread",
-		[$uid, $userdata['powerlevel']]);
+		[$uid, $userdata['rank']]);
 
 	$threads = query("SELECT $userfields t.* FROM threads t
 			JOIN users u ON u.id = t.user
@@ -58,7 +58,7 @@ if ($viewmode == 'forum') {
 			JOIN forums f ON f.id = t.forum
 			WHERE t.user = ? AND ? >= f.minread
 			ORDER BY t.id DESC LIMIT ?,?",
-		[$uid, $userdata['powerlevel'], $offset, $tpp]);
+		[$uid, $userdata['rank'], $offset, $tpp]);
 
 	$breadcrumb = ['profile.php?id='.$uid => $user['name']];
 
@@ -69,7 +69,7 @@ if ($viewmode == 'forum') {
 	$forum['threads'] = result("SELECT COUNT(*) FROM threads t
 			LEFT JOIN forums f ON f.id = t.forum
 			WHERE t.lastdate > ? AND ? >= f.minread",
-		[$mintime, $userdata['powerlevel']]);
+		[$mintime, $userdata['rank']]);
 
 	$threads = query("SELECT $userfields t.* FROM threads t
 			JOIN users u ON u.id = t.user
@@ -77,7 +77,7 @@ if ($viewmode == 'forum') {
 			JOIN forums f ON f.id = t.forum
 			WHERE t.lastdate > ? AND ? >= f.minread
 			ORDER BY t.id DESC LIMIT ?,?",
-		[$mintime, $userdata['powerlevel'], $offset, $tpp]);
+		[$mintime, $userdata['rank'], $offset, $tpp]);
 
 	$url = "forum.php?time=$time";
 }

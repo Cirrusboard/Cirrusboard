@@ -22,7 +22,7 @@ if ($profile['birthday']) {
 $profilefields = [
 	"General information" => [
 		'Name'			=> $profile['name'],
-		'Power'			=> powIdToName($profile['powerlevel']),
+		'Power'			=> powIdToName($profile['rank']),
 		'Title'			=> $profile['title'],
 		'Total posts'	=> sprintf('%s (%1.02f per day)', $profile['posts'], $profile['posts'] / $days),
 		'Total threads'	=> sprintf('%s (%1.02f per day)', $profile['threads'], $profile['threads'] / $days),
@@ -49,7 +49,7 @@ $actions = [
 	"forum.php?user=$id" => 'View threads',
 	"thread.php?user=$id" => 'Show posts'];
 
-if ($userdata['powerlevel'] > 2 && $userdata['powerlevel'] > $profile['powerlevel'])
+if ($userdata['rank'] > 2 && $userdata['rank'] > $profile['rank'])
 	$actions["editprofile.php?id=$id"] = 'Edit user';
 
 echo twigloader()->render('profile.twig', [

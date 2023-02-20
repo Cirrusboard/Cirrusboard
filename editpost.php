@@ -11,13 +11,13 @@ $thread = fetch("SELECT p.user p_user, t.*, f.title f_title
 			LEFT JOIN threads t ON t.id = p.thread
 			LEFT JOIN forums f ON f.id = t.forum
 			WHERE p.id = ? AND ? >= f.minread",
-		[$pid, $userdata['powerlevel']]);
+		[$pid, $userdata['rank']]);
 
 if (!$thread)
 	error('404', "Invalid post ID.");
-if ($thread['closed'] && $userdata['powerlevel'] <= 1)
+if ($thread['closed'] && $userdata['rank'] <= 1)
 	error('403', "You can't edit a post in closed threads.");
-if ($userdata['powerlevel'] < 3 && $userdata['id'] != $thread['p_user'])
+if ($userdata['rank'] < 3 && $userdata['id'] != $thread['p_user'])
 	error('403', "You do not have permission to edit this post.");
 
 $editpost = fetch("SELECT u.id, p.user, pt.text FROM posts p

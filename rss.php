@@ -11,7 +11,7 @@ $posts = query("SELECT $userfields p.*, t.title, t.forum, f.id fid, f.title ftit
 		 JOIN forums f ON f.id = t.forum
 		WHERE ? >= f.minread
 		ORDER BY p.date DESC LIMIT 30",
-	[$userdata['powerlevel']]);
+	[$userdata['rank']]);
 
 $fullurl = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']
 	.str_replace('/rss.php', '', $_SERVER['SCRIPT_NAME']);

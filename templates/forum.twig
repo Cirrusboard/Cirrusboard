@@ -3,7 +3,7 @@
 {% if viewmode == "forum" %}
 	{% set title = forum.title %}
 
-	{% if log and userdata.powerlevel >= forum.minthread %}
+	{% if log and userdata.rank >= forum.minthread %}
 		{% set actions = {("index.php?action=markread&fid="~forum.id) : "Mark forum read",
 			("newthread.php?id="~id) : "New thread"} %}
 	{% endif %}

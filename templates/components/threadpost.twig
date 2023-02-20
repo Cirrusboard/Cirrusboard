@@ -34,10 +34,10 @@
 			<span class="float-right">{% if post.id %}
 				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a>
 				{% if log %}
-					{% if post.minreply <= userdata.powerlevel %}
+					{% if post.minreply <= userdata.rank %}
 						| <a href="newreply.php?id={{ post.thread }}&pid={{ post.id }}">Quote</a>
 					{% endif %}
-					{% if post.u_id == userdata.id or userdata.powerlevel > 3 %}
+					{% if post.u_id == userdata.id or userdata.rank > 3 %}
 						| <a href="editpost.php?pid={{ post.id }}">Edit</a>
 					{% endif %}
 				{% endif %}

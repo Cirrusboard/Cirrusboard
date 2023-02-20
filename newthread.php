@@ -12,7 +12,7 @@ $forum = fetch("SELECT id, title, minthread FROM forums WHERE id = ?", [$id]);
 
 if (!$forum)
 	error('404', "Forum does not exist.");
-if ($forum['minthread'] > $userdata['powerlevel'])
+if ($forum['minthread'] > $userdata['rank'])
 	error('403', "You have no permissions to create threads in this forum.");
 
 $error = [];
@@ -24,7 +24,7 @@ if ($action == 'Submit') {
 	if (strlen(trim($message)) == 0)
 		$error[] = "You need to enter a message to your thread.";
 
-	if ($userdata['lastpost'] > time() - 30 && $userdata['powerlevel'] < 4)
+	if ($userdata['lastpost'] > time() - 30 && $userdata['rank'] < 4)
 		$error[] = "Please wait at least 30 seconds before starting a new thread.";
 
 	if ($error == []) {

@@ -45,7 +45,7 @@ if ($viewmode == 'thread') {
 	$thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread, f.minreply $readtime FROM threads t
 			JOIN forums f ON f.id = t.forum $forumsread
 			WHERE t.id = ? AND ? >= f.minread",
-		[$id, $userdata['powerlevel']]);
+		[$id, $userdata['rank']]);
 
 	if (!$thread) error('404', "This forum doesn't exist.");
 
@@ -88,7 +88,7 @@ if ($viewmode == 'thread') {
 			$join
 			WHERE p.user = ? AND ? >= f.minread
 			ORDER BY p.date DESC LIMIT ?,?",
-		[$uid, $userdata['powerlevel'], $offset, $ppp]);
+		[$uid, $userdata['rank'], $offset, $ppp]);
 
 	$breadcrumb = ['profile.php?id='.$uid => $user['name']];
 
@@ -104,7 +104,7 @@ if ($viewmode == 'thread') {
 			$join
 			WHERE p.date > ? AND ? >= f.minread
 			ORDER BY p.date DESC LIMIT ?,?",
-		[$mintime, $userdata['powerlevel'], $offset, $ppp]);
+		[$mintime, $userdata['rank'], $offset, $ppp]);
 
 	$url = "thread.php?time=$time";
 }
