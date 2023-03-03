@@ -13,12 +13,12 @@ foreach (glob("lib/*.php") as $file) {
 	require_once($file);
 }
 
-// Prevent running any javascript even if it's somehow injected
-header("Content-Security-Policy: script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'self'; font-src 'self';");
-
 $userfields = userfields();
 
 if (php_sapi_name() != "cli") {
+	// Prevent running any javascript even if it's somehow injected
+	header("Content-Security-Policy: script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'self'; font-src 'self';");
+	
 	// Shorter variables for common $_SERVER values
 	$ipaddr = $_SERVER['REMOTE_ADDR'];
 	$useragent = $_SERVER['HTTP_USER_AGENT'] ?? null;
