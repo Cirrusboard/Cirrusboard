@@ -1,10 +1,10 @@
 <?php
 require('lib/common.php');
 
-$id = $_GET['id'] ?? null;
-$uid = $_GET['user'] ?? null;
-$time = $_GET['time'] ?? null;
-$page = $_GET['page'] ?? 1;
+$id = (int)($_GET['id'] ?? null);
+$uid = (int)($_GET['user'] ?? null);
+$time = (int)($_GET['time'] ?? null);
+$page = (int)($_GET['page'] ?? 1);
 
 if ($id)
 	$viewmode = 'thread';

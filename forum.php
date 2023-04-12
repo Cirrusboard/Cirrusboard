@@ -1,10 +1,10 @@
 <?php
 require('lib/common.php');
 
-$id = $_GET['id'] ?? null;
-$uid = $_GET['user'] ?? null;
-$time = $_GET['time'] ?? null;
-$page = $_GET['page'] ?? 1;
+$id = (int)($_GET['id'] ?? null);
+$uid = (int)($_GET['user'] ?? null);
+$time = (int)($_GET['time'] ?? null);
+$page = (int)($_GET['page'] ?? 1);
 
 if ($id)
 	$viewmode = 'forum';
@@ -24,6 +24,9 @@ if ($viewmode == 'forum') {
 	if ($log) {
 		$forum = fetch("SELECT f.*, r.time rtime FROM forums f LEFT JOIN forumsread r ON (r.fid = f.id AND r.uid = ?)
 			WHERE f.id = ? AND ? >= minread", [$userdata['id'], $id, $userdata['rank']]);
+
+		if (!$forum) error('404', "This forum doesn't exist.");
+
 		if (!$forum['rtime']) $forum['rtime'] = 0;
 
 		$isread = ", (NOT (r.time < t.lastdate OR isnull(r.time)) OR t.lastdate < '".$forum['rtime']."') isread";
