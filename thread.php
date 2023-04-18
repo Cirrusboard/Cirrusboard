@@ -78,17 +78,17 @@ if ($viewmode == 'thread') {
 
 } elseif ($viewmode == 'user') {
 
-	$user = fetch("SELECT name FROM users WHERE id = ?", [$uid]);
+	$user = fetch("SELECT name, posts FROM users WHERE id = ?", [$uid]);
 
 	if (!$user) error('404', "This user doesn't exist.");
 
-	$thread['posts'] = result("SELECT COUNT(*) FROM posts WHERE user = ?", [$uid]);
+	$thread['posts'] = $user['posts'];
 
-	$posts = query("SELECT $selectfields, t.id tid, t.title ttitle
+	$posts = query("SELECT $selectfields, t.id tid, t.title ttitle, f.minread
 			$join
-			WHERE p.user = ? AND ? >= f.minread
+			WHERE p.user = ?
 			ORDER BY p.date DESC LIMIT ?,?",
-		[$uid, $userdata['rank'], $offset, $ppp]);
+		[$uid, $offset, $ppp]);
 
 	$breadcrumb = ['profile.php?id='.$uid => $user['name']];
 

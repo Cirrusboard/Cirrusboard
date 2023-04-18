@@ -36,9 +36,15 @@ function error($title, $message) {
 }
 
 function threadpost($post) {
-	return twigloader('components')->render('threadpost.twig', [
-		'post' => $post
-	]);
+	global $userdata;
+
+	if (isset($post['minread']) and $post['minread'] > $userdata['rank']) {
+		return '<table class="c1 threadpost"><tr><td class="n1 center">(post in restricted forum)</td></tr></table>';
+	} else {
+		return twigloader('components')->render('threadpost.twig', [
+			'post' => $post
+		]);
+	}
 }
 
 function postform($action, $name, $postTitle, $postMessage, $editableTitle) {
