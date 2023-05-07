@@ -9,16 +9,15 @@ $profiler = new Profiler();
 
 require_once('conf/config.php');
 require_once('vendor/autoload.php');
-foreach (glob("lib/*.php") as $file) {
+foreach (glob("lib/*.php") as $file)
 	require_once($file);
-}
 
 $userfields = userfields();
 
 if (php_sapi_name() != "cli") {
 	// Prevent running any javascript even if it's somehow injected
 	header("Content-Security-Policy: script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'self'; font-src 'self';");
-	
+
 	// Shorter variables for common $_SERVER values
 	$ipaddr = $_SERVER['REMOTE_ADDR'];
 	$useragent = $_SERVER['HTTP_USER_AGENT'] ?? null;
@@ -63,6 +62,9 @@ if ($log) {
 	if (!isset($rss))
 		query("REPLACE INTO guests (lastview, ip) VALUES (?,?)", [time(), $ipaddr]);
 }
+
+if (isset($_GET['theme']))
+	$userdata['theme'] = $_GET['theme'];
 
 $ppp = $userdata['ppp'] ?? 20;
 $tpp = $userdata['tpp'] ?? 50;

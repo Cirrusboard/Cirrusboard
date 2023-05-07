@@ -90,7 +90,7 @@ function postfilter($text) {
 
 	// Smil(ies|eys)
 	foreach ($smilies as $code => $image)
-		$text = str_replace(" $code ", sprintf(' <img class="smiley" src="%s" alt="%s" title="%s"> ', $image, $code, $code), $text);
+		$text = str_replace(" $code", sprintf(' <img class="smiley" src="%s" alt="%s" title="%s"> ', $image, $code, $code), $text);
 
 	$text = str_replace("\n", '<br>', $text);
 

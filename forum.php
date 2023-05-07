@@ -37,8 +37,8 @@ if ($viewmode == 'forum') {
 	if (!$forum) error('404', "This forum doesn't exist.");
 
 	$threads = query("SELECT $userfields t.* $isread FROM threads t
-			JOIN users u ON u.id = t.user
-			JOIN users ul ON ul.id = t.lastuser
+			LEFT JOIN users u ON u.id = t.user
+			LEFT JOIN users ul ON ul.id = t.lastuser
 			$threadsread
 			WHERE t.forum = ?
 			ORDER BY t.sticky DESC, t.lastdate DESC LIMIT ?,?",

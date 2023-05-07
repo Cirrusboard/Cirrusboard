@@ -83,7 +83,7 @@ CREATE TABLE `poststext` (
   `revision` smallint(5) unsigned NOT NULL DEFAULT 1 COMMENT 'The revision of this post text',
   `date` int(10) unsigned DEFAULT NULL COMMENT 'Date of the last revision',
   PRIMARY KEY (`id`,`revision`),
-  CONSTRAINT `poststext_ibfk_1` FOREIGN KEY (`id`) REFERENCES `posts` (`id`)
+  CONSTRAINT `poststext_ibfk_2` FOREIGN KEY (`id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -107,8 +107,8 @@ CREATE TABLE `threads` (
   KEY `lastuser` (`lastuser`),
   CONSTRAINT `threads_ibfk_1` FOREIGN KEY (`forum`) REFERENCES `forums` (`id`),
   CONSTRAINT `threads_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
-  CONSTRAINT `threads_ibfk_3` FOREIGN KEY (`lastid`) REFERENCES `posts` (`id`),
-  CONSTRAINT `threads_ibfk_4` FOREIGN KEY (`lastuser`) REFERENCES `users` (`id`)
+  CONSTRAINT `threads_ibfk_7` FOREIGN KEY (`lastid`) REFERENCES `posts` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `threads_ibfk_8` FOREIGN KEY (`lastuser`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -149,7 +149,7 @@ CREATE TABLE `users` (
   `title` varchar(255) DEFAULT NULL COMMENT 'Custom user title.',
   `avatar` tinyint(1) unsigned DEFAULT NULL COMMENT 'Does user have an avatar?',
   `birthday` varchar(10) DEFAULT NULL COMMENT 'Birthday (in Y-M-d format)',
-  `customcolour` char(6) DEFAULT NULL COMMENT 'Custom username colour',
+  `customcolour` char(6) NOT NULL DEFAULT '000000' COMMENT 'Custom username colour',
   `timezone` varchar(32) DEFAULT NULL COMMENT 'The user''s timezone',
   `location` varchar(150) DEFAULT NULL COMMENT 'User''s location',
   `header` text DEFAULT NULL COMMENT 'Post layout header',
@@ -159,4 +159,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- 2023-02-11 15:41:46
+-- 2023-05-07 16:45:37
