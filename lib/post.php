@@ -1,5 +1,20 @@
 <?php
 
+function get_username_link($matches) {
+	$name = str_replace('"', '', $matches[1]);
+
+	static $cache;
+	if (!isset($cache[$name])) {
+		$u = fetch("SELECT id,name,rank FROM users WHERE UPPER(name) = UPPER(?)", [$name]);
+		$cache[$name] = $u;
+	} else $u = $cache[$name];
+
+	if ($u)
+		$ulink = "@".userlink($u);
+
+	return $ulink ?? $matches[0];
+}
+
 // Function that does lots of voodoo magic to make sure the post data is (reasonably) safe
 function securityfilter($msg) {
 	$tags = ':a(?:pplet|udio)|b(?:ase|gsound|ody|button)|canvas|embed|frame(?:set)?|form|h(?:ead|tml)|i(?:frame|layer|nput)|l(?:ayer|ink)|m(?:ath|eta|eth)|noscript|object|plaintext|s(?:cript|vg|ource)|title|textarea|video|x(?:ml|mp)';
@@ -67,6 +82,7 @@ function postfilter($text) {
 	$text = preg_replace("'\[color=([a-f0-9]{6})\](.*?)\[/color\]'si", '<span style="color: #\\1">\\2</span>', $text);
 
 	// Userlinks and post links
+	$text = preg_replace_callback('\'@\"((([^"]+))|([A-Za-z0-9_\-%]+))\"\'si', "get_username_link", $text);
 	$text = preg_replace("'>>([0-9]+)'si", '>><a href=thread.php?pid=\\1#\\1>\\1</a>', $text);
 
 	// Quotes (not from cave story LOL)
