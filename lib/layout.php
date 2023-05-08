@@ -41,9 +41,15 @@ function threadpost($post) {
 	if (isset($post['minread']) and $post['minread'] > $userdata['rank']) {
 		return '<table class="c1 threadpost"><tr><td class="n1 center">(post in restricted forum)</td></tr></table>';
 	} else {
-		return twigloader('components')->render('threadpost.twig', [
-			'post' => $post
-		]);
+		if ($post['deleted']) {
+			return twigloader('components')->render('threadpost_deleted.twig', [
+				'post' => $post
+			]);
+		} else {
+			return twigloader('components')->render('threadpost.twig', [
+				'post' => $post
+			]);
+		}
 	}
 }
 

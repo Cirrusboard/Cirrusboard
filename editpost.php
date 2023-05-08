@@ -6,6 +6,17 @@ needsLogin();
 $pid = $_GET['pid'] ?? null;
 $action = $_POST['action'] ?? null;
 
+// Post deletion, stuffed into editpost because why not.
+if (isset($_GET['delete']) || isset($_GET['undelete'])) {
+	if ($userdata['rank'] <= 1)
+		error('403', "You do not have the permission to do this.");
+
+	query("UPDATE posts SET deleted = ? WHERE id = ?", [(isset($_GET['delete']) ? 1 : 0), $pid]);
+
+	redirect("thread.php?pid=$pid#$pid");
+}
+
+
 $thread = fetch("SELECT p.user p_user, t.*, f.title f_title
 			FROM posts p
 			LEFT JOIN threads t ON t.id = p.thread

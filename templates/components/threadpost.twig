@@ -40,6 +40,9 @@
 					{% if post.u_id == userdata.id or userdata.rank > 3 %}
 						| <a href="editpost.php?pid={{ post.id }}">Edit</a>
 					{% endif %}
+					{% if userdata.rank > 1 %}
+						| <a href="editpost.php?pid={{ post.id }}&delete">Delete</a>
+					{% endif %}
 				{% endif %}
 				| ID: {{ post.id }}
 			{% endif %}</span>

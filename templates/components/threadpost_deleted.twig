@@ -1,0 +1,11 @@
+<table class="c1 threadpost" id="{{ post.id }}"><tr>
+	<td class="n1 topbar_1">{{ userlink(post, 'u_') }}</td>
+	<td class="n1 sfont topbar_2">
+		(post deleted)
+		<span class="float-right">
+			{% if userdata.rank > 1 %}
+				<a href="editpost.php?pid={{ post.id }}&undelete">Undelete</a> |
+			{% endif %}
+			ID: {{ post.id }}
+		</span></td>
+</tr></table>
