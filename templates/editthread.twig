@@ -1,0 +1,21 @@
+{% extends "_layout.twig" %}
+
+{% set title = "Edit thread" %}
+{% set noindex = true %}
+
+	{% block content %}
+<form method="post" enctype="multipart/form-data"><table class="c1">
+	<tr class="h"><td colspan="2">Edit thread</td></tr>
+
+	<tr>
+		<td class="n1 center">Title:</td>
+		<td class="n2">{{ field_input('title', thread.title, 40, 127, "Thread title") }}</td>
+	</tr>
+
+	<tr class="h"><td colspan="2">&nbsp;</td></tr>
+	<tr class="n1">
+		<td class="nb"></td>
+		<td class="nb"><input type="submit" name="action" value="Save"></td>
+	</tr>
+</table></form>
+	{% endblock %}
