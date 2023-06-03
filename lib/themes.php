@@ -18,6 +18,9 @@ function themeList() {
 	foreach ($themes as $theme) {
 		$id = explode("/", $theme)[1];
 		$info = getThemeInfo($id);
+
+		if (isset($info['hidden']) && $info['hidden']) continue;
+
 		$list[$id] = sprintf('%s (%s)', $info['name'], $info['author']);
 	}
 
