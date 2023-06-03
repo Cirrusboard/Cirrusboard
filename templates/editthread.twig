@@ -12,6 +12,21 @@
 		<td class="n2">{{ field_input('title', thread.title, 40, 127, "Thread title") }}</td>
 	</tr>
 
+	{% if userdata.rank > 1 %}
+		<tr>
+			<td class="n1 center">Move to:</td>
+			<td class="n2">{{ forumlist(thread.forum_id) }}</td>
+		</tr>
+
+		<tr>
+			<td class="n1 center" height="35">Thread options:</td>
+			<td class="n2">
+				{{ field_checkbox('close', thread.closed, "Lock") }} &nbsp;
+				{{ field_checkbox('sticky', thread.sticky, "Sticky") }}
+			</td>
+		</tr>
+	{% endif %}
+
 	<tr class="h"><td colspan="2">&nbsp;</td></tr>
 	<tr class="n1">
 		<td class="nb"></td>

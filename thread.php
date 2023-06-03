@@ -76,6 +76,8 @@ if ($viewmode == 'thread') {
 
 	$url = "thread.php?id=$id";
 
+	$threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
+
 } elseif ($viewmode == 'user') {
 
 	$user = fetch("SELECT name, posts FROM users WHERE id = ?", [$uid]);
@@ -121,5 +123,6 @@ echo twigloader()->render('thread.twig', [
 	'uid' => $uid,
 	'time' => $time,
 	'pagelist' => $pagelist ?? null,
-	'pid' => $_GET['pid'] ?? null
+	'pid' => $_GET['pid'] ?? null,
+	'threadcreator' => $threadcreator ?? null
 ]);

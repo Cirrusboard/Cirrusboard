@@ -125,3 +125,28 @@ function threadStatus($type) {
 
 	return "<img src=\"assets/status/$statusimg\" alt=\"$text\">";
 }
+
+function forumlist($currentforum = -1) {
+	global $userdata;
+
+	$r = query("SELECT c.title ctitle,f.id,f.title,f.cat
+			FROM forums f LEFT JOIN categories c ON c.id = f.cat
+			WHERE ? >= f.minread ORDER BY c.ord,c.id,f.ord,f.id",
+		[$userdata['rank']]);
+	$out = '<select id="forumselect" name="forumselect">';
+	$c = -1;
+	while ($d = $r->fetch()) {
+		if ($d['cat'] != $c) {
+			if ($c != -1)
+				$out .= '</optgroup>';
+			$c = $d['cat'];
+			$out .= '<optgroup label="'.$d['ctitle'].'">';
+		}
+		$out .= sprintf(
+			'<option value="%s"%s>%s</option>',
+		$d['id'], ($d['id'] == $currentforum ? ' selected="selected"' : ''), $d['title']);
+	}
+	$out .= "</optgroup></select>";
+
+	return $out;
+}

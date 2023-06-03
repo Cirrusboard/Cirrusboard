@@ -6,7 +6,13 @@
 	{% if log %}
 		{% if not thread.closed %}
 			{% if userdata.rank >= thread.minreply %}
-				{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+				{% if userdata.id == threadcreator or userdata.rank > 1 %}
+					{% set actions = {
+						("editthread.php?id="~id) : "Edit thread",
+						("newreply.php?id="~id) : "New reply"} %}
+				{% else %}
+					{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+				{% endif %}
 			{% endif %}
 		{% else %}
 			{% set actions = {"none" : "Thread locked"} %}

@@ -17,11 +17,23 @@ if ($userdata['rank'] < 3 && $userdata['id'] != $threadcreator) error('403', "Yo
 if (isset($_POST['action'])) {
 	$title = $_POST['title'] ?? '';
 
-	if (trim($title) != '') {
+	if (trim($title) != '' && $title != $thread['title'])
 		query("UPDATE threads SET title = ? WHERE id = ?", [$title, $id]);
 
-		redirect("thread.php?id=$id");
+	if ($userdata['rank'] > 1) {
+		$moveforum = $_POST['forumselect'] ?? null;
+
+		if ($moveforum && $moveforum != $thread['forum_id'])
+			movethread($thread['id'], $moveforum);
+
+		$close = isset($_POST['close']) ? 1 : 0;
+		$sticky = isset($_POST['sticky']) ? 1 : 0;
+
+		query("UPDATE threads SET closed = ?, sticky = ? WHERE id = ?",
+			[$close, $sticky, $id]);
 	}
+
+	redirect("thread.php?id=$id");
 }
 
 $breadcrumb = [

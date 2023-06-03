@@ -22,6 +22,8 @@ class ForumExtension extends \Twig\Extension\AbstractExtension {
 
 			new \Twig\TwigFunction('thread_status', 'threadStatus', ['is_safe' => ['html']]),
 			new \Twig\TwigFunction('theme_list', 'themeList', ['is_safe' => ['html']]),
+
+			new \Twig\TwigFunction('forumlist', 'forumlist', ['is_safe' => ['html']]),
 		];
 	}
 
