@@ -4,11 +4,11 @@
 {% set noindex = true %}
 
 	{% block content %}
-<form method="post" enctype="multipart/form-data"><table class="c1">
+<form method="post"><table class="c1">
 	<tr class="h"><td colspan="2">Edit thread</td></tr>
 
 	<tr>
-		<td class="n1 center">Title:</td>
+		<td class="n1 center" width="200">Title:</td>
 		<td class="n2">{{ field_input('title', thread.title, 40, 127, "Thread title") }}</td>
 	</tr>
 

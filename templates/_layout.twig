@@ -25,7 +25,9 @@
 <body>
 	<table class="c1 header">
 		<tr><td class="n1 text" colspan="2">
-			<a href="./"><img alt="{{ config.title }}" src="{{ config.logo }}"></a>
+			<a href="./"><img alt="{{ config.title }}" src="{{ config.logo }}" {% if config.logotitle %}title="{{ config.logotitle }}"{% endif %}></a>
+
+			{% if config.tagline %}<br><em>{{ config.tagline }}</em>{% endif %}
 		</td></tr>
 		<tr>
 			<td class="n2 nb menu">

@@ -135,6 +135,6 @@ function posttoolbar() {
 			.'<td>&nbsp;</td>'
 			.posttoolbutton('[]', 'Image', 'img')
 			.posttoolbutton('YT', 'YouTube embed', 'youtube')
-			.'<td>&nbsp;</td><td><a href="faq.php#smile">More...</a></td>'
+			.'<td>&nbsp;</td><td><a href="faq.php#smile" target="_blank">More...</a></td>'
 			.'</tr></table>';
 }

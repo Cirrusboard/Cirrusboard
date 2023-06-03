@@ -5,16 +5,24 @@
  *
  * @return \Twig\Environment Twig object.
  */
-function twigloader($subfolder = '') {
+function twigloader($subfolder = '', $customloader = null, $customenv = null) {
 	global $tplCache, $tplNoCache, $config, $log, $userdata, $uri;
 
 	$doCache = ($tplNoCache ? false : $tplCache);
 
-	$loader = new \Twig\Loader\FilesystemLoader('templates/'.$subfolder);
+	if (!isset($customloader)) {
+		$loader = new \Twig\Loader\FilesystemLoader('templates/' . $subfolder);
+	} else {
+		$loader = $customloader();
+	}
 
-	$twig = new \Twig\Environment($loader, [
-		'cache' => $doCache,
-	]);
+	if (!isset($customenv)) {
+		$twig = new \Twig\Environment($loader, [
+			'cache' => $doCache,
+		]);
+	} else {
+		$twig = $customenv($loader, $doCache);
+	}
 
 	$twig->addExtension(new ForumExtension());
 

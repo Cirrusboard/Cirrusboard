@@ -12,6 +12,8 @@ $tplNoCache = false; // **DO NOT SET AS TRUE IN PROD - DEV ONLY**
 $config['title'] = "Cool Forum";
 $config['description'] = "A very cool forum.";
 $config['logo'] = 'assets/logo_placeholder.png';
+//$config['logotitle'] = ''; // Add a title attribute to the logo, which will be visible when hovered on it.
+//$config['tagline'] = ''; // Add a tagline which will be shown in the header right below the logo.
 
 $config['newsid'] = -1; // Designates the id for your announcements forum, the latest post will be shown at the top of the index page.
 
