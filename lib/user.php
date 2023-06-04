@@ -9,7 +9,7 @@ function userlink($user, $pre = '') {
 function userlabel($user, $pre = '') {
 	return sprintf(
 		'<span style="color:#%s;">%s</span>',
-	powIdToColour($user[$pre.'rank']), htmlspecialchars($user[$pre.'name'] ?? 'null'));
+	rankIdToColour($user[$pre.'rank']), htmlspecialchars($user[$pre.'name'] ?? 'null'));
 }
 
 function userfields($prefix = 'u') {

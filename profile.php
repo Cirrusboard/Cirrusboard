@@ -22,7 +22,7 @@ if ($profile['birthday']) {
 $profilefields = [
 	"General information" => [
 		'Name'			=> $profile['name'],
-		'Power'			=> powIdToName($profile['rank']),
+		'Power'			=> rankIdToName($profile['rank']),
 		'Title'			=> $profile['title'],
 		'Total posts'	=> sprintf('%s (%1.02f per day)', $profile['posts'], $profile['posts'] / $days),
 		'Total threads'	=> sprintf('%s (%1.02f per day)', $profile['threads'], $profile['threads'] / $days),

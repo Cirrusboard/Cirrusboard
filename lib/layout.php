@@ -109,21 +109,24 @@ function fieldselect($name, $selected, $choices) {
 	return sprintf('<select name="%s" id="%s">%s</select>', $name, $name, $text);
 }
 
+$statusalt = [
+	'n'  => 'NEW',
+	'o'  => 'OFF',
+	'on' => 'OFF'];
+
+$statusimg = [
+	'n'  => 'new.png',
+	'o'  => 'off.png',
+	'on' => 'offnew.png'];
+
 function threadStatus($type) {
+	global $statusalt, $statusimg;
+
 	if (!$type) return '';
 
-	$text = match ($type) {
-		'n'  => 'NEW',
-		'o'  => 'OFF',
-		'on' => 'OFF'
-	};
-	$statusimg = match ($type) {
-		'n'  => 'new.png',
-		'o'  => 'off.png',
-		'on' => 'offnew.png'
-	};
-
-	return "<img src=\"assets/status/$statusimg\" alt=\"$text\">";
+	return sprintf(
+		'<img src="assets/status/%s" alt="%s">',
+	$statusimg[$type], $statusalt[$type]);
 }
 
 function forumlist($currentforum = -1) {
