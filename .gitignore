@@ -6,8 +6,10 @@ assets/css/
 assets/coolgreen2.png
 assets/voxelmanip_forums.png
 progress
-userpic
+userpic/*
+!userpic/dummy.txt
 themes/voxelmanip_retro/style.css
-assets/smilies
-conf/faq.sample.php
+assets/smilies/*
+!assets/smilies/dummy.txt
+conf/faq.php
 acmlmboard.code-workspace
