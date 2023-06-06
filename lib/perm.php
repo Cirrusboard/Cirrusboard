@@ -19,10 +19,12 @@ $rankColours = [
 ];
 
 function rankIdToName($id) {
+	global $ranks;
 	return $ranks[$id] ?? 'N/A';
 }
 
 function rankIdToColour($id) {
+	global $rankColours;
 	return $rankColours[$id] ?? '';
 }
 
