@@ -1,6 +1,4 @@
 <?php
 require('lib/common.php');
 
-echo twigloader()->render('credits.twig', [
-
-]);
+echo twigloader()->render('credits.twig');

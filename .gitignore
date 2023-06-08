@@ -1,13 +1,32 @@
+# Composer
 vendor/
 composer.lock
-conf/config.php
-templates/cache/
+
+# Compiled CSS
 assets/css/
-assets/coolgreen2.png
-assets/voxelmanip_forums.png
-progress
-userpic
 themes/voxelmanip_retro/style.css
-assets/smilies
-conf/faq.sample.php
-acmlmboard.code-workspace
+
+# Cache
+templates/cache/
+
+# Userpics
+userpic/*
+!userpic/.gitkeep
+
+# Config directory
+conf/*
+!conf/config.sample.php
+!conf/faq.sample.php
+
+# Misc.
+test/
+uploader/
+
+# Don't check in VMF-specific assets
+assets/voxelmanip_forums.png
+assets/voxelmanip_forums*
+assets/poweredbyvoxelmanip.png
+assets/smilies/
+
+# Cluttered drawer of stuff
+contrib/
