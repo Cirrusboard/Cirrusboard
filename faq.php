@@ -19,6 +19,8 @@ foreach ($ranks as $id => $title)
 
 if (file_exists('conf/faq.php'))
 	require('conf/faq.php');
+elseif (!file_exists('conf/faq.sample.php'))
+	error('404', 'The FAQ page was not found. In any case, common sense prevails.');
 else
 	require('conf/faq.sample.php');
 
