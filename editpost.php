@@ -42,7 +42,7 @@ $error = [];
 $message = $_POST['message'] ?? $editpost['text'];
 
 if ($action == 'Submit') {
-	if ($message == $post['text'])
+	if ($message == $editpost['text'])
 		$error[] = "No changes detected.";
 	if (strlen($message) < 15)
 		$error[] = "You can't blank out your post!";
@@ -77,5 +77,6 @@ echo twigloader()->render('editpost.twig', [
 	'action' => $action,
 	'pid' => $pid,
 	'message' => $message,
-	'breadcrumb' => $breadcrumb
+	'breadcrumb' => $breadcrumb,
+	'error' => $error
 ]);
