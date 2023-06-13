@@ -25,11 +25,11 @@
 	{% endif %}
 {% elseif viewmode == "user" %}
 	{% set title = "Posts" %}
-	{% set pagename = "/thread?user=" ~ uid %}
+	{% set pagename = "/thread.php?user=" ~ uid %}
 	{% set noindex = true %}
 {% elseif viewmode == "time" %}
 	{% set title = "Latest posts (by post)" %}
-	{% set pagename = "/thread?time=" ~ time %}
+	{% set pagename = "/thread.php?time=" ~ time %}
 	{% set noindex = true %}
 {% endif %}
 

@@ -24,7 +24,7 @@
 	</tr>
 
 	<tr class="h"><td colspan="2">Appearance</td></tr>
-	{% if userdata.rank > 2 and userdata.id != user.id %}
+	{% if canedituser %}
 	<tr>
 		<td class="n1 center">Rank:</td>
 		<td class="n2">{{ field_select('rank', user.rank, ranks) }}</td>

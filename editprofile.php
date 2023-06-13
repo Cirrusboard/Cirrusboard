@@ -148,5 +148,6 @@ echo twigloader()->render('editprofile.twig', [
 	'timezones' => $timezones,
 	'birthday' => $birthday ?? null,
 	'error' => $error ?? null,
-	'ranks' => $ranks
+	'ranks' => $ranks,
+	'canedituser' => $canedituser
 ]);

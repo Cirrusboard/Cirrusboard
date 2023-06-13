@@ -33,7 +33,7 @@ function twigloader($subfolder = '', $customloader = null, $customenv = null) {
 
 	$twig->addGlobal('uri', $uri);
 	$twig->addGlobal('domain', (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']);
-	$twig->addGlobal('pagename', substr($_SERVER['PHP_SELF'], 0, -4));
+	$twig->addGlobal('pagename', $_SERVER['PHP_SELF']);
 
 	return $twig;
 }
@@ -83,7 +83,7 @@ function redirect($url) {
 }
 
 function esc($text) {
-	return htmlspecialchars($text);
+	return $text ? htmlspecialchars($text) : '';
 }
 
 function fieldinput($name, $value, $size, $max, $placeholder = '', $type = '') {
