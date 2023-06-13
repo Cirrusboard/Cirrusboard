@@ -92,8 +92,9 @@ function postfilter($text) {
 	$text = preg_replace("'\[/quote\][\n\r]*'", '</div></div>', $text);
 
 	// Code block
-	$text = preg_replace_callback("'\[code\](.*?)\[/code\]'si", function ($match) {
-		return '<div class="codeblock">'.htmlspecialchars($match[1]).'</div>';
+	$text = preg_replace_callback("'\[code\](.*?)\[/code\]'si", function ($match) use ($config) {
+		$text = $config['html'] ? esc($match[1]) : $match[1];
+		return '<div class="codeblock">'.$text.'</div>';
 	}, $text);
 	$text = preg_replace("'\[pre\](.*?)\[/pre\]'si", '<code>\\1</code>', $text);
 
