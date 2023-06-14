@@ -20,6 +20,9 @@ $config['newsid'] = -1; // Designates the id for your announcements forum, the l
 $config['defaulttheme'] = "voxelmanip_retro";
 $config['defaulttimezone'] = "Europe/Stockholm"; // Default timezone if people do not select their own.
 
+// Whether the forum list table should be merged, akin to the traditional Acmlmboard index page.
+$config['mergedforumlist'] = false;
+
 // Allow HTML in posts? A reasonable attempt is done to scrub JavaScript and other dangerous HTML elements, but tread with caution.
 $config['html'] = false;
 

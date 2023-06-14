@@ -28,21 +28,35 @@
 
 {% set last_category = -1 %}
 
+{% if config.mergedforumlist %}
+<table class="c1">
+	<tr class="h">
+		<td colspan="2">Forum</td>
+		<td class="nom" style="width:60px">Threads</td>
+		<td class="nom" style="width:60px">Posts</td>
+		<td style="width:180px">Last post</td>
+	</tr>
+{% endif %}
+
 {% for forum in forums %}
 	{% if forum.cat != last_category %}
-		{% if last_category != -1 %}
-			</table><br>
+		{% if config.mergedforumlist %}
+			<tr class="c"><td colspan="5">{{ categories[forum.cat] }}</td></tr>
+		{% else %}
+			{% if last_category != -1 -%}
+				</table><br>
+			{%- endif %}
+
+<table class="c1">
+	<tr class="h">
+		<td colspan="2" class="left">{{ categories[forum.cat] }}</td>
+		<td class="nom" style="width:60px">Threads</td>
+		<td class="nom" style="width:60px">Posts</td>
+		<td style="width:180px">Last post</td>
+	</tr>
 		{% endif %}
 
 		{% set last_category = forum.cat %}
-
-		<table class="c1">
-			<tr class="h">
-				<td colspan="2" class="left">{{ categories[forum.cat] }}</td>
-				<td class="nom" style="width:60px">Threads</td>
-				<td class="nom" style="width:60px">Posts</td>
-				<td style="width:180px">Last post</td>
-			</tr>
 	{% endif %}
 
 	<tr class="center">
