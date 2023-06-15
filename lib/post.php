@@ -79,7 +79,7 @@ function postfilter($text) {
 	$text = preg_replace("'\[url\](.*?)\[/url\]'si", '<a href=\\1>\\1</a>', $text);
 	$text = preg_replace("'\[url=(.*?)\](.*?)\[/url\]'si", '<a href=\\1>\\2</a>', $text);
 	$text = preg_replace("'\[img\](.*?)\[/img\]'si", '<img src=\\1>', $text);
-	$text = preg_replace("'\[color=([a-f0-9]{6})\](.*?)\[/color\]'si", '<span style="color: #\\1">\\2</span>', $text);
+	$text = preg_replace("'\[color=([a-f0-9]{6})\](.*?)\[/color\]'si", '<span style="color:#\\1">\\2</span>', $text);
 
 	// Userlinks and post links
 	$text = preg_replace_callback('\'@\"((([^"]+))|([A-Za-z0-9_\-%]+))\"\'si', "get_username_link", $text);

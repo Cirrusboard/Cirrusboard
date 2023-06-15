@@ -8,7 +8,7 @@ function userlink($user, $pre = '') {
 
 function userlabel($user, $pre = '') {
 	return sprintf(
-		'<span style="color:#%s;">%s</span>',
+		'<span style="color:#%s">%s</span>',
 	rankIdToColour($user[$pre.'rank']), htmlspecialchars($user[$pre.'name'] ?? 'null'));
 }
 
