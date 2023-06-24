@@ -55,7 +55,7 @@ if (isset($_POST['action'])) {
 	$pass2 = $_POST['password2'] ?? null;
 	if ($pass) {
 		if ($pass == $pass2) {
-			if (strlen($pass) < 15) {
+			if (strlen($pass) >= 15) {
 				$newtoken = bin2hex(random_bytes(32));
 				if ($userdata['id'] == $user['id'])
 					setcookie('token', $newtoken, 2147483647);
