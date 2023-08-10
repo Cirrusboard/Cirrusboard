@@ -29,21 +29,25 @@ if ($action == "Submit") {
 		$error[] = "Your post is empty. Enter a message and try again.";
 
 	if ($error == []) {
-		query("UPDATE users SET posts = posts + 1, lastpost = ? WHERE id = ?", [time(), $userdata['id']]);
-		query("INSERT INTO posts (user, thread, date, ip) VALUES (?,?,?,?)",
-			[$userdata['id'], $id, time(), $ipaddr]);
+		insertInto('posts', [
+			'user' => $userdata['id'],
+			'thread' => $id,
+			'date' => time(),
+			'ip' => $ipaddr
+		]);
 
-		$postid = insertid();
-		query("INSERT INTO poststext (id, text) VALUES (?,?)",
-			[$postid, $message]);
+		$pid = insertId();
+		insertInto('poststext', ['id' => $pid, 'text' => $message]);
 
 		query("UPDATE threads SET posts = posts + 1, lastdate = ?, lastuser = ?, lastid = ? WHERE id = ?",
-			[time(), $userdata['id'], $postid, $id]);
+			[time(), $userdata['id'], $pid, $id]);
 
 		query("UPDATE forums SET posts = posts + 1, lastdate = ?, lastuser = ?, lastid = ? WHERE id = ?",
-			[time(), $userdata['id'], $postid, $thread['forum']]);
+			[time(), $userdata['id'], $pid, $thread['forum']]);
 
-		redirect("thread.php?pid=$postid#$postid");
+		query("UPDATE users SET posts = posts + 1, lastpost = ? WHERE id = ?", [time(), $userdata['id']]);
+
+		redirect("thread.php?pid=$pid#$pid");
 	}
 } elseif ($action == 'Preview') {
 	$post['date'] = time();

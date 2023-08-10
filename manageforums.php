@@ -3,34 +3,36 @@ require('lib/common.php');
 
 if ($userdata['rank'] < 3) error('403', 'You have no permissions to do this!');
 
-if (isset($_POST['savecat'])) {
-	// save new/existing category
+if (isset($_POST['savecat'])) { // save new/existing category
+
 	$cid = $_GET['cid'];
 	$title = $_POST['title'];
-	$ord = (int)$_POST['ord'];
+	$order = $_POST['ord'];
+
 	if (!trim($title))
 		error('400', 'Please enter a title for the category.');
-	else {
-		if ($cid == 'new') {
-			$cid = result("SELECT MAX(id) FROM categories");
-			if (!$cid) $cid = 0;
-			$cid++;
-			query("INSERT INTO categories (id,title,ord) VALUES (?,?,?)", [$cid, $title, $ord]);
-		} else {
-			$cid = (int)$cid;
-			if (!result("SELECT COUNT(*) FROM categories WHERE id = ?", [$cid])) redirect('manageforums.php');
-			query("UPDATE categories SET title = ?, ord = ? WHERE id = ?", [$title, $ord, $cid]);
-		}
-		redirect('manageforums.php?cid='.$cid);
-	}
-} elseif (isset($_POST['delcat'])) {
-	// delete category
-	$cid = (int)$_GET['cid'];
-	query("DELETE FROM categories WHERE id = ?",[$cid]);
 
+	if ($cid == 'new') {
+		$cid = (result("SELECT MAX(id) FROM categories") ?: 0)+1;
+
+		insertInto('categories', [
+			'id' => $cid, 'title' => $title, 'ord' => $order
+		]);
+	} else {
+		if (!result("SELECT COUNT(*) FROM categories WHERE id = ?", [$cid]))
+			redirect('manageforums.php');
+
+		query("UPDATE categories SET title = ?, ord = ? WHERE id = ?", [$title, $ord, $cid]);
+	}
+	redirect('manageforums.php?cid=%s', $cid);
+
+} elseif (isset($_POST['delcat'])) { // delete category
+
+	query("DELETE FROM categories WHERE id = ?", [$_GET['cid']]);
 	redirect('manageforums.php');
-} elseif (isset($_POST['saveforum'])) {
-	// save new/existing forum
+
+} elseif (isset($_POST['saveforum'])) { // save new/existing forum
+
 	$fid = $_GET['fid'];
 	$cat = (int)$_POST['cat'];
 	$title = $_POST['title'];
@@ -43,55 +45,54 @@ if (isset($_POST['savecat'])) {
 
 	if (!trim($title))
 		error('400', 'Please enter a title for the forum.');
-	else {
-		if ($fid == 'new') {
-			$fid = result("SELECT MAX(id) FROM forums");
-			if (!$fid) $fid = 0;
-			$fid++;
-			query("INSERT INTO forums (id,cat,title,descr,ord,minread,minthread,minreply) VALUES (?,?,?,?,?,?,?,?)",
-				[$fid, $cat, $title, $descr, $ord, $minread, $minthread, $minreply]);
-		} else {
-			$fid = (int)$fid;
-			if (!result("SELECT COUNT(*) FROM forums WHERE id = ?", [$fid]))
-				redirect('manageforums.php');
-			query("UPDATE forums SET cat=?, title=?, descr=?, ord=?, minread=?, minthread=?, minreply=? WHERE id=?",
-				[$cat, $title, $descr, $ord, $minread, $minthread, $minreply, $fid]);
-		}
-		redirect('manageforums.php?fid='.$fid);
+
+	if ($fid == 'new') {
+		$fid = (result("SELECT MAX(id) FROM forums") ?: 0)+1;
+
+		insertInto('forums', [
+			'id' => $fid, 'cat' => $cat, 'title' => $title, 'descr' => $descr, 'ord' => $ord,
+			'minread' => $minread, 'minthread' => $minthread, 'minreply' => $minreply
+		]);
+	} else {
+		$fid = (int)$fid;
+		if (!result("SELECT COUNT(*) FROM forums WHERE id = ?", [$fid]))
+			redirect('manageforums.php');
+
+		query("UPDATE forums SET cat=?, title=?, descr=?, ord=?, minread=?, minthread=?, minreply=? WHERE id=?",
+			[$cat, $title, $descr, $ord, $minread, $minthread, $minreply, $fid]);
 	}
-} elseif (isset($_POST['delforum'])) {
-	// delete forum
-	$fid = (int)$_GET['fid'];
-	query("DELETE FROM forums WHERE id = ?",[$fid]);
+	redirect('manageforums.php?fid=%s', $fid);
+
+} elseif (isset($_POST['delforum'])) { // delete forum
+
+	query("DELETE FROM forums WHERE id = ?", [$_GET['fid']]);
 	redirect('manageforums.php');
 }
 
 $twig = twigloader();
 
-if (isset($_GET['cid']) && $cid = $_GET['cid']) {
-	// category editor
-	if ($cid == 'new') {
+if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
+
+	if ($cid == 'new')
 		$cat = ['id' => 0, 'title' => '', 'ord' => 0];
-	} else {
-		$cid = (int)$cid;
+	else
 		$cat = fetch("SELECT * FROM categories WHERE id=?",[$cid]);
-	}
 
 	echo $twig->render("manageforums_category.twig", [
 		'cid' => $cid,
 		'cat' => $cat
 	]);
-} elseif (isset($_GET['fid']) && $fid = $_GET['fid']) {
-	// forum editor
+} elseif (isset($_GET['fid']) && $fid = $_GET['fid']) { // forum editor
+
+
 	if ($fid == 'new') {
 		$forum = [
 			'id' => 0, 'cat' => 1, 'title' => '', 'descr' => '',
 			'ord' => 0,
 			'minread' => -1, 'minthread' => 1, 'minreply' => 1];
-	} else {
-		$fid = (int)$fid;
-		$forum = fetch("SELECT * FROM forums WHERE id = ?",[$fid]);
-	}
+	} else
+		$forum = fetch("SELECT * FROM forums WHERE id = ?", [$fid]);
+
 	$qcats = query("SELECT id,title FROM categories ORDER BY ord, id");
 	$cats = [];
 	while ($cat = $qcats->fetch())

@@ -35,8 +35,12 @@ if (isset($_POST['action'])) {
 		// Generate a random 64-length hexadecimal string for token.
 		$token = bin2hex(random_bytes(32));
 
-		query("INSERT INTO users (name, password, token, joined) VALUES (?,?,?,?)",
-			[$name, password_hash($pass, PASSWORD_DEFAULT), $token, time()]);
+		insertInto('users', [
+			'name' => $name,
+			'password' => password_hash($pass, PASSWORD_DEFAULT),
+			'token' => $token,
+			'joined' => time()
+		]);
 
 		$id = insertId();
 		// If user is ID 1, make them root.

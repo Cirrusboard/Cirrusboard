@@ -41,3 +41,32 @@ function insertId() {
 	global $sql;
 	return $sql->lastInsertId();
 }
+
+
+function commasep($str) {
+	return implode(',', $str);
+}
+
+/**
+ * Helper function to insert a row into a table.
+ */
+function insertInto($table, $data, $dry = false) {
+	$fields = [];
+	$placeholders = [];
+	$values = [];
+
+	foreach ($data as $field => $value) {
+		$fields[] = $field;
+		$placeholders[] = '?';
+		$values[] = $value;
+	}
+
+	$query = sprintf(
+		"INSERT INTO %s (%s) VALUES (%s)",
+	$table, commasep($fields), commasep($placeholders));
+
+	if ($dry)
+		return $query;
+	else
+		return query($query, $values);
+}

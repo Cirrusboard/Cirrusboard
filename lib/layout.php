@@ -77,8 +77,8 @@ function pagination($levels, $lpp, $url, $current) {
 	]);
 }
 
-function redirect($url) {
-	header(sprintf('Location: %s', $url));
+function redirect($url, ...$args) {
+	header('Location: '.sprintf($url, ...$args));
 	die();
 }
 
