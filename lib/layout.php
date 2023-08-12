@@ -39,7 +39,11 @@ function twigloader($subfolder = '', $customloader = null, $customenv = null) {
 }
 
 function error($title, $message) {
-	echo twigloader()->render('_error.twig', ['err_title' => $title, 'err_message' => $message]);
+	if ($title >= 400 && $title < 500) http_response_code($title);
+	
+	echo twigloader()->render('_error.twig', [
+		'err_title' => $title, 'err_message' => $message
+	]);
 	die();
 }
 
