@@ -12,7 +12,11 @@ if (!$thread) error('404', "This thread doesn't exist.");
 
 $threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
 
-if ($userdata['rank'] < 3 && $userdata['id'] != $threadcreator) error('403', "You are not allowed to edit this thread.");
+if ($userdata['rank'] < 2 && $userdata['id'] != $threadcreator) error('403', "You are not allowed to edit this thread.");
+
+if ($thread['closed'] && $userdata['rank'] < 2) error('403', "This thread is closed.");
+
+if ($userdata['rank'] == -1) error('403', "You are banned and cannot edit threads.");
 
 if (isset($_POST['action'])) {
 	$title = $_POST['title'] ?? '';
