@@ -19,8 +19,9 @@ foreach ($ranks as $id => $title)
 
 if (file_exists('conf/faq.php'))
 	require('conf/faq.php');
-else
+elseif(file_exists('conf/faq.sample.php')
 	require('conf/faq.sample.php');
+else error("404", "No FAQ has been defined."); // this error should also probably appear if the FAQ has nothing in it or has invalid data
 
 echo twigloader()->render('faq.twig', [
 	'faq' => $faq
