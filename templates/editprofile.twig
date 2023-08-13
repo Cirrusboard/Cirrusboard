@@ -11,7 +11,7 @@
 <form method="post" enctype="multipart/form-data"><table class="c1">
 	<tr class="h"><td colspan="2">Edit profile</td></tr>
 
-	<tr class="h"><td colspan="2">Login information</td></tr>
+	<tr class="h c"><td colspan="2">Login information</td></tr>
 	<tr>
 		<td class="n1 center">Username:</td>
 		<td class="n2">{{ user.name }}</td>
@@ -23,7 +23,7 @@
 			<br><span class="sfont">(Changing your password will also change your token, logging you out of any other sessions)</span></td>
 	</tr>
 
-	<tr class="h"><td colspan="2">Appearance</td></tr>
+	<tr class="h c"><td colspan="2">Appearance</td></tr>
 	{% if canedituser %}
 	<tr>
 		<td class="n1 center">Rank:</td>
@@ -42,7 +42,7 @@
 			<br>Must be PNG, JPG or GIF, within 100kB and 180x180.</td>
 	</tr>
 
-	<tr class="h"><td colspan="2">User information</td></tr>
+	<tr class="h c"><td colspan="2">User information</td></tr>
 	<tr>
 		<td class="n1 center">Location:</td>
 		<td class="n2">{{ field_input('location', user.location, 40, 60, "Location") }}</td>
@@ -72,14 +72,14 @@
 			<br>{{ field_checkbox('signsep', user.signsep, "Show signature separator") }}</td>
 	</tr>
 	{% else %}
-	<tr class="h"><td colspan="2">Signature</td></tr>
+	<tr class="h c"><td colspan="2">Signature</td></tr>
 	<tr>
 		<td class="n1 center">Signature:</td>
 		<td class="n2">{{ field_textarea('signature', user.signature, 7, 80) }}</td>
 	</tr>
 	{% endif %}
 
-	<tr class="h"><td colspan="2">Options</td></tr>
+	<tr class="h c"><td colspan="2">Options</td></tr>
 	<tr>
 		<td class="n1 center">Theme:</td>
 		<td class="n2">{{ field_select('theme', user.theme ?? config.defaulttheme, theme_list()) }}</td>
@@ -94,7 +94,7 @@
 		<td class="n2">{{ field_input('tpp', user.tpp, 3, 3, 20) }}</td>
 	</tr>
 
-	<tr class="h"><td colspan="2">&nbsp;</td></tr>
+	<tr class="h c"><td colspan="2">&nbsp;</td></tr>
 	<tr class="n1">
 		<td class="nb"></td>
 		<td class="nb"><input type="submit" name="action" value="Edit profile"></td>
