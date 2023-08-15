@@ -11,13 +11,10 @@ table.c1 {
 	border: 2px solid $primary;
 }
 
-tr.h {
-	font-weight: bold;
-	background: rgba(32,98,2,0.8);
-}
-
 tr.c, tr.h {
+	background: rgba(32,98,2,0.8);
 	font-size: 0.95em;
+	font-weight: bold;
 	text-align: center;
 }
 
