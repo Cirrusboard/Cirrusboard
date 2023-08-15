@@ -62,7 +62,7 @@ HTML
 HTML
 ], [
 	'id' => 'rude',
-	'title' => 'An user is being rude to me. What do I do?',
+	'title' => 'A user is being rude to me. What do I do?',
 	'content' => <<<HTML
 <p>Stay cool. Don't further disrupt the thread by responding <b>at all</b> to the rudeness. Let a member of staff know with a link to the offending post(s). Please note that responding to the rudeness is promoting flaming, which is a punishable offense.</p>
 HTML

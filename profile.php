@@ -49,7 +49,7 @@ $actions = [
 	"forum.php?user=$id" => 'View threads',
 	"thread.php?user=$id" => 'Show posts'];
 
-if ($userdata['rank'] > 2 && $userdata['rank'] > $profile['rank'])
+if (IS_ADMIN && $userdata['rank'] > $profile['rank'])
 	$actions["editprofile.php?id=$id"] = 'Edit user';
 
 echo twigloader()->render('profile.twig', [

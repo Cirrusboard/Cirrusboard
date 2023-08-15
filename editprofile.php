@@ -3,16 +3,16 @@ require('lib/common.php');
 
 needsLogin();
 
-if ($userdata['rank'] < 0) error('403', "You are banned and cannot edit your profile.");
+if (IS_BANNED) error('403', "You are banned and cannot edit your profile.");
 
 $userid = $_GET['id'] ?? $userdata['id'];
 
 $user = fetch("SELECT * FROM users WHERE id = ?", [$userid]);
 
-if ($userdata['id'] != $userid && ($userdata['rank'] < 3 || $userdata['rank'] <= $user['rank']))
+if ($userdata['id'] != $userid && (!IS_ROOT || $userdata['rank'] <= $user['rank']))
 	error('403', "You are not allowed to edit this user's profile.");
 
-$canedituser = $userdata['rank'] > 2 && ($userdata['rank'] > $user['rank'] || $userid == $userdata['id']);
+$canedituser = IS_ADMIN && ($userdata['rank'] > $user['rank'] || $userid == $userdata['id']);
 
 if (isset($_POST['action'])) {
 
@@ -110,7 +110,7 @@ if (isset($_POST['action'])) {
 		if (isset($targetrank))
 			$fields['rank'] = $targetrank;
 
-		if ($userdata['rank'] > 1)
+		if (IS_MOD)
 			$fields['title'] = $_POST['title'];
 
 		// Construct a query containing all fields.

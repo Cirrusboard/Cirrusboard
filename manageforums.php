@@ -1,7 +1,7 @@
 <?php
 require('lib/common.php');
 
-if ($userdata['rank'] < 3) error('403', 'You have no permissions to do this!');
+if (!IS_ADMIN) error('403', 'You have no permissions to do this!');
 
 if (isset($_POST['savecat'])) { // save new/existing category
 
@@ -82,8 +82,8 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 		'cid' => $cid,
 		'cat' => $cat
 	]);
-} elseif (isset($_GET['fid']) && $fid = $_GET['fid']) { // forum editor
 
+} elseif (isset($_GET['fid']) && $fid = $_GET['fid']) { // forum editor
 
 	if ($fid == 'new') {
 		$forum = [
@@ -111,6 +111,7 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 		'ranks' => $ranks,
 		'perms' => $perms
 	]);
+
 } else {
 	// main page -- category/forum listing
 

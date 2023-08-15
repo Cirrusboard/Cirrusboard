@@ -24,7 +24,7 @@ if ($action == 'Submit') {
 	if (strlen(trim($message)) == 0)
 		$error[] = "You need to enter a message to your thread.";
 
-	if ($userdata['lastpost'] > time() - 30 && $userdata['rank'] < 4)
+	if ($userdata['lastpost'] > time() - 30 && !IS_ROOT)
 		$error[] = "Please wait at least 30 seconds before starting a new thread.";
 
 	if ($error == []) {

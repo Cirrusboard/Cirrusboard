@@ -15,7 +15,7 @@ if (!$thread)
 	error('404', "Thread does not exist.");
 if ($thread['f_minreply'] > $userdata['rank'])
 	error('403', "You have no permissions to create posts in this forum.");
-if ($thread['closed'] && $userdata['rank'] < 2)
+if ($thread['closed'] && !IS_MOD)
 	error('403', "You can't post in closed threads!");
 
 $error = [];

@@ -6,11 +6,11 @@ needsLogin();
 $pid = $_GET['pid'] ?? null;
 $action = $_POST['action'] ?? null;
 
-if ($userdata['rank'] < 0) error('403', 'You are banned and cannot edit posts.');
+if (IS_BANNED) error('403', 'You are banned and cannot edit posts.');
 
 // Post deletion, stuffed into editpost because why not.
 if (isset($_GET['delete']) || isset($_GET['undelete'])) {
-	if ($userdata['rank'] <= 1)
+	if (!IS_MOD)
 		error('403', "You do not have the permission to do this.");
 
 	query("UPDATE posts SET deleted = ? WHERE id = ?", [(isset($_GET['delete']) ? 1 : 0), $pid]);
@@ -28,9 +28,9 @@ $thread = fetch("SELECT p.user p_user, t.*, f.title f_title
 
 if (!$thread)
 	error('404', "Invalid post ID.");
-if ($thread['closed'] && $userdata['rank'] <= 1)
+if ($thread['closed'] && !IS_MOD)
 	error('403', "You can't edit a post in closed threads.");
-if ($userdata['rank'] < 3 && $userdata['id'] != $thread['p_user'])
+if ($userdata['id'] != $thread['p_user'] && !IS_ROOT)
 	error('403', "You do not have permission to edit this post.");
 
 $editpost = fetch("SELECT u.id, p.user, pt.text FROM posts p

@@ -3,7 +3,7 @@ require('lib/common.php');
 
 needsLogin();
 
-if ($userdata['rank'] < 0) error('403', 'You are banned and cannot edit posts.');
+if (IS_BANNED) error('403', 'You are banned and cannot edit threads.');
 
 $id = $_GET['id'] ?? null;
 
@@ -16,7 +16,7 @@ if (!$thread) error('404', "This thread doesn't exist.");
 
 $threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
 
-if ($userdata['rank'] < 2 && $userdata['id'] != $threadcreator) error('403', "You are not allowed to edit this thread.");
+if (!IS_MOD && $userdata['id'] != $threadcreator) error('403', "You are not allowed to edit this thread.");
 
 if (isset($_POST['action'])) {
 	$title = $_POST['title'] ?? '';
@@ -24,7 +24,7 @@ if (isset($_POST['action'])) {
 	if (trim($title) != '' && $title != $thread['title'])
 		query("UPDATE threads SET title = ? WHERE id = ?", [$title, $id]);
 
-	if ($userdata['rank'] > 1) {
+	if (IS_MOD) {
 		$moveforum = $_POST['forumselect'] ?? null;
 
 		if ($moveforum && $moveforum != $thread['forum_id'])
