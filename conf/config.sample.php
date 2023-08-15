@@ -37,6 +37,11 @@ $config['postlayouts'] = true;
 // (put some stuff inside here)
 //HTML;
 
+// Enable maintenance mode, which will show a message to members and logged out users.
+$config['maintenance'] = false;
+// Message for maintenance mode.
+// $config['maintenance_msg'] = "<p>The Voxelmanip Forums is temporarily closed for maintenance. Please come back later.</p>";
+
 // List of smilies, if you want them.
 $smilies = [
 	//'-_-' => 'assets/smilies/annoyed.png',

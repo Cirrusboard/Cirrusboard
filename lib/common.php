@@ -1,13 +1,19 @@
 <?php
-if (!file_exists('conf/config.php')) {
+if (!file_exists('conf/config.php'))
 	die('Please read the installing instructions in the README file.');
-}
 
 // load profiler first
 require_once('lib/profiler.php');
 $profiler = new Profiler();
 
 require_once('conf/config.php');
+
+// Check maintenance config so early that it shows up even if Composer or the database isn't present.
+if ($config['maintenance']) {
+	require('lib/misc/maintenance.php');
+	die();
+}
+
 require_once('vendor/autoload.php');
 foreach (glob("lib/*.php") as $file)
 	require_once($file);
