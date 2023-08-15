@@ -25,7 +25,7 @@ if (isset($_POST['action'])) {
 	if (!preg_match('/^[a-zA-Z0-9\-_]+$/', $name))
 		$error[] = "Username contains invalid characters (Only alphanumeric and underscore allowed). ";
 
-	if (result("SELECT COUNT(*) FROM users WHERE ip = ?", [$ipaddr]))
+	if (result("SELECT COUNT(*) FROM users WHERE ip = ?", [$ipaddr]) && !DEBUG)
 		$error[] = "Creating multiple accounts (alts) aren't allowed. ";
 
 	// If no error found, it will register and redirect to index page.

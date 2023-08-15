@@ -40,7 +40,7 @@ function twigloader($subfolder = '', $customloader = null, $customenv = null) {
 
 function error($title, $message) {
 	if ($title >= 400 && $title < 500) http_response_code($title);
-	
+
 	echo twigloader()->render('_error.twig', [
 		'err_title' => $title, 'err_message' => $message
 	]);
@@ -82,6 +82,9 @@ function pagination($levels, $lpp, $url, $current) {
 }
 
 function redirect($url, ...$args) {
+	if (DEBUG)
+		die('This page is supposed to redirect <a href="'.sprintf($url, ...$args).'">here</a>.');
+
 	header('Location: '.sprintf($url, ...$args));
 	die();
 }

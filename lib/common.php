@@ -8,8 +8,15 @@ $profiler = new Profiler();
 
 require_once('conf/config.php');
 
+define('DEBUG', (isset($debug) && $debug));
+
+if (DEBUG) {
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+}
+
 // Check maintenance config so early that it shows up even if Composer or the database isn't present.
-if ($config['maintenance']) {
+if (isset($config['maintenance']) && $config['maintenance']) {
 	require('lib/misc/maintenance.php');
 	die();
 }
