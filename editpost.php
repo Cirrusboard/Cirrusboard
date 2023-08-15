@@ -6,6 +6,8 @@ needsLogin();
 $pid = $_GET['pid'] ?? null;
 $action = $_POST['action'] ?? null;
 
+if ($userdata['rank'] < 0) error('403', 'You are banned and cannot edit posts.');
+
 // Post deletion, stuffed into editpost because why not.
 if (isset($_GET['delete']) || isset($_GET['undelete'])) {
 	if ($userdata['rank'] <= 1)

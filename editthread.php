@@ -1,6 +1,10 @@
 <?php
 require('lib/common.php');
 
+needsLogin();
+
+if ($userdata['rank'] < 0) error('403', 'You are banned and cannot edit posts.');
+
 $id = $_GET['id'] ?? null;
 
 $thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread, f.minreply FROM threads t
