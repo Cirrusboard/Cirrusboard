@@ -49,6 +49,8 @@ if (isset($_POST['action'])) {
 
 	if ($bday > 0 && $bmonth > 0 && $byear > 0 && $bmonth <= 12 && $bday <= 31 && $byear <= 3000) // Y-m-d
 		$birthday = $byear.'-'.str_pad($bmonth, 2, "0", STR_PAD_LEFT).'-'.str_pad($bday, 2, "0", STR_PAD_LEFT);
+	else
+		$birthday = null;
 
 	// Password change
 	$pass = $_POST['password'] ?? null;
@@ -87,6 +89,7 @@ if (isset($_POST['action'])) {
 			'timezone'	=> $_POST['timezone'] != $config['defaulttimezone'] ? $_POST['timezone'] : null,
 			'ppp'		=> $_POST['ppp'],
 			'tpp'		=> $_POST['tpp'],
+			'birthday'	=> $birthday
 		];
 
 		if ($config['html'] && $config['postlayouts']) {
@@ -98,9 +101,6 @@ if (isset($_POST['action'])) {
 
 		if (isset($avatar))
 			$fields['avatar'] = $avatar;
-
-		if (isset($birthday))
-			$fields['birthday'] = $birthday;
 
 		if ($pass) {
 			$fields['password'] = password_hash($pass, PASSWORD_DEFAULT);
