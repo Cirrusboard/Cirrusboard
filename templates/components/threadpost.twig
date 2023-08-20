@@ -13,7 +13,7 @@
 		{% set signature = signsep ~ signature %}
 	{% endif %}
 {% endif %}
-<table class="c1 threadpost" id="{{ post.id }}">
+<table class="c1 threadpost table{{ post.u_id }}" id="{{ post.id }}">
 	{% if post.headerbar %}<tr class="h"><td colspan="2">{{ post.headerbar }}</td></tr>{% endif %}
 	<tr>
 		<td class="n1 topbar_1 topbar{{ post.u_id }}_1 nom">{{ userlink(post, 'u_') }}</td>
