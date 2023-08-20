@@ -98,7 +98,7 @@
 		<p>Total posts: <strong>{{ stats.p }}</strong>
 			&mdash; Total threads: <strong>{{ stats.t }}</strong>
 			&mdash; Total members: <strong>{{ stats.u }}</strong>
-			&mdash; Newest: {{ userlink(newestuser) }}</p>
+			{% if newestuser is iterable %} &mdash; Newest: {{ userlink(newestuser) }}{% endif %}</p>
 	</td></tr>
 </table>
 	{% endblock %}
