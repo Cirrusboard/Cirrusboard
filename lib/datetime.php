@@ -28,7 +28,7 @@ function timelink($timex, $file, $time) {
 	if ($time == $timex)
 		return timeunits($timex);
 	else
-		return sprintf('<a href="%s.php?time=%s">%s</a>', $file, $timex, timeunits($timex));
+		return sprintf('<a href="%s?time=%s">%s</a>', $file, $timex, timeunits($timex));
 }
 
 function timelinks($file, $time) {

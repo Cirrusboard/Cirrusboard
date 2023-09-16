@@ -2,7 +2,7 @@
 
 function userlink($user, $pre = '') {
 	return sprintf(
-		'<a href="profile.php?id=%d">%s</a>',
+		'<a href="profile?id=%d">%s</a>',
 	$user[$pre.'id'], userlabel($user, $pre));
 }
 

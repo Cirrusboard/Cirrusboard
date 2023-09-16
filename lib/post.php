@@ -83,11 +83,11 @@ function postfilter($text) {
 
 	// Userlinks and post links
 	$text = preg_replace_callback('\'@\"((([^"]+))|([A-Za-z0-9_\-%]+))\"\'si', "get_username_link", $text);
-	$text = preg_replace("'>>([0-9]+)'si", '>><a href=thread.php?pid=\\1#\\1>\\1</a>', $text);
+	$text = preg_replace("'>>([0-9]+)'si", '>><a href=thread?pid=\\1#\\1>\\1</a>', $text);
 
 	// Quotes (not from cave story LOL)
 	$text = preg_replace("'\[quote\](.*?)\[/quote\][\n\r]*'si", '<div class="quote"><div class="quotetext">\\1</div></div>', $text);
-	$text = preg_replace("'\[quote=\"(.*?)\" id=\"(.*?)\"\][\n\r]*'si", '<div class="quote"><div class="author"><a href=thread.php?pid=\\2#\\2>Posted by \\1</a></div><div class="quotetext">', $text);
+	$text = preg_replace("'\[quote=\"(.*?)\" id=\"(.*?)\"\][\n\r]*'si", '<div class="quote"><div class="author"><a href=thread?pid=\\2#\\2>Posted by \\1</a></div><div class="quotetext">', $text);
 	$text = preg_replace("'\[quote=(.*?)\][\n\r]*'si", '<div class="quote"><div class="author">Posted by \\1</div><div class="quotetext">', $text);
 	$text = preg_replace("'\[/quote\][\n\r]*'", '</div></div>', $text);
 
@@ -136,6 +136,6 @@ function posttoolbar() {
 			.'<td>&nbsp;</td>'
 			.posttoolbutton('[]', 'Image', 'img')
 			.posttoolbutton('YT', 'YouTube embed', 'youtube')
-			.'<td>&nbsp;</td><td><a href="faq.php#smile" target="_blank">More...</a></td>'
+			.'<td>&nbsp;</td><td><a href="faq#smile" target="_blank">More...</a></td>'
 			.'</tr></table>';
 }

@@ -6,7 +6,7 @@
  * @return \Twig\Environment Twig object.
  */
 function twigloader($subfolder = '') {
-	global $config, $log, $userdata, $uri, $profile;
+	global $config, $log, $userdata, $uri, $path;
 
 	$loader = new \Twig\Loader\FilesystemLoader('templates/'.$subfolder);
 
@@ -24,13 +24,21 @@ function twigloader($subfolder = '') {
 
 	$twig->addGlobal('uri', $uri);
 	$twig->addGlobal('domain', (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']);
-	$twig->addGlobal('pagename', $_SERVER['PHP_SELF']);
+	$twig->addGlobal('pagename', '/'.$path[1]);
 
 	return $twig;
 }
 
-function error($title, $message) {
+function error($title, $message = '') {
 	if ($title >= 400 && $title < 500) http_response_code($title);
+
+	if (!$message) {
+		// Placeholder messages if there is no message.
+		if ($title == '403')
+			$message = "You do not have access to this page or action.";
+		if ($title == '404')
+			$message = "The requested page was not found. The link may be broken, the page may have been deleted, or you may not have access to it.";
+	}
 
 	twigloader()->display('_error.twig', [
 		'err_title' => $title, 'err_message' => $message
@@ -41,9 +49,9 @@ function error($title, $message) {
 function threadpost($post) {
 	global $userdata;
 
-	if (isset($post['minread']) and $post['minread'] > $userdata['rank']) {
+	if (isset($post['minread']) and $post['minread'] > $userdata['rank'])
 		return '<table class="c1 threadpost"><tr><td class="n1 center">(post in restricted forum)</td></tr></table>';
-	} else {
+	else {
 		if (isset($post['deleted']) && $post['deleted']) {
 			return twigloader('components')->render('threadpost_deleted.twig', [
 				'post' => $post
@@ -73,9 +81,6 @@ function pagination($levels, $lpp, $url, $current) {
 }
 
 function redirect($url, ...$args) {
-	if (DEBUG)
-		die('This page is supposed to redirect <a href="'.sprintf($url, ...$args).'">here</a>.');
-
 	header('Location: '.sprintf($url, ...$args));
 	die();
 }

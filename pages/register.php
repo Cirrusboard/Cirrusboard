@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $error = [];
 
 if (isset($_POST['action'])) {

@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $id = (int)($_GET['id'] ?? null);
 $uid = (int)($_GET['user'] ?? null);
 $time = (int)($_GET['time'] ?? null);
@@ -12,9 +10,9 @@ elseif ($uid)
 	$viewmode = 'user';
 elseif ($time)
 	$viewmode = 'time';
-elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread.php?pid=%d to point to a particular post
+elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread?pid=%d to point to a particular post
 	$pid = (int)$_GET['pid'];
-	if (!result("SELECT id FROM posts WHERE id = ?", [$pid])) error('404', "Post does not exist.");
+	if (!result("SELECT id FROM posts WHERE id = ?", [$pid])) error('404');
 
 	$id = result("SELECT thread FROM posts WHERE id = ?", [$pid]);
 	$page = floor(result("SELECT COUNT(*) FROM posts WHERE thread = ? AND id < ?", [$id, $pid]) / $ppp) + 1;
@@ -47,7 +45,7 @@ if ($viewmode == 'thread') {
 			WHERE t.id = ? AND ? >= f.minread",
 		[$id, $userdata['rank']]);
 
-	if (!$thread) error('404', "This forum doesn't exist.");
+	if (!$thread) error('404');
 
 	// check for having to mark the forum as read too
 	if ($log) {
@@ -72,9 +70,9 @@ if ($viewmode == 'thread') {
 			ORDER BY p.id LIMIT ?,?",
 		[$id, $offset, $ppp]);
 
-	$breadcrumb = ['forum.php?id='.$thread['forum_id'] => $thread['forum_title']];
+	$breadcrumb = ['forum?id='.$thread['forum_id'] => $thread['forum_title']];
 
-	$url = "thread.php?id=$id";
+	$url = "thread?id=$id";
 
 	$threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
 
@@ -82,7 +80,7 @@ if ($viewmode == 'thread') {
 
 	$user = fetch("SELECT name, posts FROM users WHERE id = ?", [$uid]);
 
-	if (!$user) error('404', "This user doesn't exist.");
+	if (!$user) error('404');
 
 	$thread['posts'] = $user['posts'];
 
@@ -92,9 +90,9 @@ if ($viewmode == 'thread') {
 			ORDER BY p.date DESC LIMIT ?,?",
 		[$uid, $offset, $ppp]);
 
-	$breadcrumb = ['profile.php?id='.$uid => $user['name']];
+	$breadcrumb = ['profile?id='.$uid => $user['name']];
 
-	$url = "thread.php?user=$uid";
+	$url = "thread?user=$uid";
 
 } elseif ($viewmode == 'time') {
 
@@ -108,7 +106,7 @@ if ($viewmode == 'thread') {
 			ORDER BY p.date DESC LIMIT ?,?",
 		[$mintime, $userdata['rank'], $offset, $ppp]);
 
-	$url = "thread.php?time=$time";
+	$url = "thread?time=$time";
 }
 
 if ($thread['posts'] > $ppp)

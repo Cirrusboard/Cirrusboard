@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 needsLogin();
 
 if (IS_BANNED) error('403', "You are banned and cannot edit your profile.");
@@ -34,7 +32,7 @@ if (isset($_POST['action'])) {
 			$error[] = "Avatar: The image filesize is too big.";
 
 		if ($error == []) {
-			if (move_uploaded_file($fname['tmp_name'], 'userpic/'.$user['id']))
+			if (move_uploaded_file($fname['tmp_name'], 'static/userpic/'.$user['id']))
 				$avatar = 1;
 			else
 				trigger_error("Avatar uploading broken, check userpic/ permissions", E_USER_ERROR);
@@ -125,7 +123,7 @@ if (isset($_POST['action'])) {
 		$placeholders[] = $user['id'];
 		query("UPDATE users SET $fieldquery WHERE id = ?", $placeholders);
 
-		redirect('profile.php?id=%s', $user['id']);
+		redirect('profile?id=%s', $user['id']);
 	} else {
 		foreach ($_POST as $k => $v)
 			$user[$k] = $v;

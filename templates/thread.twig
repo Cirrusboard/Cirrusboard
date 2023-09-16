@@ -8,10 +8,10 @@
 			{% if userdata.rank >= thread.minreply %}
 				{% if userdata.id == threadcreator or userdata.rank > 1 %}
 					{% set actions = {
-						("editthread.php?id="~id) : "Edit thread",
-						("newreply.php?id="~id) : "New reply"} %}
+						("editthread?id="~id) : "Edit thread",
+						("newreply?id="~id) : "New reply"} %}
 				{% else %}
-					{% set actions = {("newreply.php?id="~id) : "New reply"} %}
+					{% set actions = {("newreply?id="~id) : "New reply"} %}
 				{% endif %}
 			{% endif %}
 		{% else %}
@@ -19,17 +19,17 @@
 		{% endif %}
 	{% endif %}
 
-	{% set pagename = "/thread.php?id=" ~ id %}
+	{% set pagename = "/thread?id=" ~ id %}
 	{% if pid %}
 		{% set noindex = true %}
 	{% endif %}
 {% elseif viewmode == "user" %}
 	{% set title = "Posts" %}
-	{% set pagename = "/thread.php?user=" ~ uid %}
+	{% set pagename = "/thread?user=" ~ uid %}
 	{% set noindex = true %}
 {% elseif viewmode == "time" %}
 	{% set title = "Latest posts (by post)" %}
-	{% set pagename = "/thread.php?time=" ~ time %}
+	{% set pagename = "/thread?time=" ~ time %}
 	{% set noindex = true %}
 {% endif %}
 
@@ -38,7 +38,7 @@
 	<table class="c1 autowidth br-after">
 		<tr class="h"><td>Latest posts</td></tr>
 		<tr><td class="n1 center">
-			<a href="forum.php?time={{ time }}">By thread</a> | By post (<a href="rss.php">RSS</a>)
+			<a href="forum?time={{ time }}">By thread</a> | By post (<a href="rss">RSS</a>)
 			<br><br>{{ timelinks('thread', time) }}
 		</td></tr>
 	</table>
@@ -57,7 +57,7 @@
 {% endif %}
 
 {% if viewmode == "thread" and log and userdata.rank >= thread.minreply and not thread.closed %}
-<form action="newreply.php?id={{ id }}" method="POST"><table class="c1 postform">
+<form action="newreply?id={{ id }}" method="POST"><table class="c1 postform">
 	<tr class="h"><td>Quick Reply</a></td>
 	<tr class="n1"><td class="center">
 		<textarea class="postform" name="message" rows="8" cols="80"></textarea>

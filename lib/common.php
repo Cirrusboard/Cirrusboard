@@ -16,7 +16,7 @@ if (DEBUG) {
 }
 
 // Check maintenance config so early that it shows up even if Composer or the database isn't present.
-if (isset($config['maintenance']) && $config['maintenance']) {
+if (isset($config['maintenance']) && $config['maintenance'] && php_sapi_name() != "cli") {
 	require('lib/misc/maintenance.php');
 	die();
 }

@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 needsLogin();
 
 if (IS_BANNED) error('403', 'You are banned and cannot edit threads.');
@@ -12,7 +10,7 @@ $thread = fetch("SELECT t.*, f.title forum_title, f.id forum_id, f.minread, f.mi
 			WHERE t.id = ? AND ? >= f.minread",
 		[$id, $userdata['rank']]);
 
-if (!$thread) error('404', "This thread doesn't exist.");
+if (!$thread) error('404');
 
 $threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
 
@@ -41,12 +39,12 @@ if (isset($_POST['action'])) {
 			[$close, $sticky, $id]);
 	}
 
-	redirect("thread.php?id=$id");
+	redirect("thread?id=$id");
 }
 
 $breadcrumb = [
-	'forum.php?id='.$thread['forum_id'] => $thread['forum_title'],
-	'thread.php?id='.$thread['id'] => $thread['title']];
+	'forum?id='.$thread['forum_id'] => $thread['forum_title'],
+	'thread?id='.$thread['id'] => $thread['title']];
 
 twigloader()->display('editthread.twig', [
 	'id' => $id,

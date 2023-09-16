@@ -2,11 +2,7 @@
 
 common_arguments="--style compressed --load-path ./"
 
-mkdir -p assets/css
+mkdir -p static/css
 
-sassc ${common_arguments} assets/scss/style.scss assets/css/style.css
-sassc ${common_arguments} themes/voxelmanip_retro/style.scss themes/voxelmanip_retro/style.css
-
-# Compress compiled stylesheets for nginx gzip_static
-gzip -fk assets/css/style.css
-gzip -fk themes/voxelmanip_retro/style.css
+sassc ${common_arguments} scss/style.scss css/style.css
+sassc ${common_arguments} static/themes/voxelmanip_retro/style.scss static/themes/voxelmanip_retro/style.css

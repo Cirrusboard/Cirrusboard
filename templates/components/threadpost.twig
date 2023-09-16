@@ -26,22 +26,22 @@
 		</td>
 
 		<td class="n1 topbar_2 topbar{{ post.u_id }}_2 sfont blkm clearfix">Posted on {{ post.date | date('Y-m-d H:i') }}
-			{%- if post.tid %}, in <a href="thread.php?id={{ post.tid }}">{{ post.ttitle }}</a>{% endif %}
+			{%- if post.tid %}, in <a href="thread?id={{ post.tid }}">{{ post.ttitle }}</a>{% endif %}
 			{% if post.revision >= 2 %}
 				(edited {{ post.rev_date | date('Y-m-d H:i') }})
 			{% endif %}
 
 			<span class="float-right">{% if post.id %}
-				<a href="thread.php?pid={{ post.id }}#{{ post.id }}">Link</a>
+				<a href="thread?pid={{ post.id }}#{{ post.id }}">Link</a>
 				{% if log %}
 					{% if post.minreply <= userdata.rank %}
-						| <a href="newreply.php?id={{ post.thread }}&pid={{ post.id }}">Quote</a>
+						| <a href="newreply?id={{ post.thread }}&pid={{ post.id }}">Quote</a>
 					{% endif %}
 					{% if post.u_id == userdata.id or userdata.rank > 3 %}
-						| <a href="editpost.php?pid={{ post.id }}">Edit</a>
+						| <a href="editpost?pid={{ post.id }}">Edit</a>
 					{% endif %}
 					{% if userdata.rank > 1 %}
-						| <a href="editpost.php?pid={{ post.id }}&delete">Delete</a>
+						| <a href="editpost?pid={{ post.id }}&delete">Delete</a>
 					{% endif %}
 				{% endif %}
 				| ID: {{ post.id }}

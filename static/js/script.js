@@ -44,6 +44,6 @@ if (delcat = document.getElementById('delcat')) {
 
 if (mfback = document.getElementById('mfback')) {
 	mfback.addEventListener('click', function (e) {
-		window.location = 'manageforums.php';
+		window.location = 'manageforums';
 	});
 }

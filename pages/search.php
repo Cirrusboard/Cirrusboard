@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $query = trim($_GET['query'] ?? '');
 $where = $_GET['where'] ?? 0;
 

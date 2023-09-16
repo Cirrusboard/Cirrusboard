@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 needsLogin();
 
 $pid = $_GET['pid'] ?? null;
@@ -15,9 +13,8 @@ if (isset($_GET['delete']) || isset($_GET['undelete'])) {
 
 	query("UPDATE posts SET deleted = ? WHERE id = ?", [(isset($_GET['delete']) ? 1 : 0), $pid]);
 
-	redirect("thread.php?pid=$pid#$pid");
+	redirect("thread?pid=$pid#$pid");
 }
-
 
 $thread = fetch("SELECT p.user p_user, t.*, f.title f_title
 			FROM posts p
@@ -27,7 +24,7 @@ $thread = fetch("SELECT p.user p_user, t.*, f.title f_title
 		[$pid, $userdata['rank']]);
 
 if (!$thread)
-	error('404', "Invalid post ID.");
+	error('404');
 if ($thread['closed'] && !IS_MOD)
 	error('403', "You can't edit a post in closed threads.");
 if ($userdata['id'] != $thread['p_user'] && !IS_ROOT)
@@ -57,7 +54,7 @@ if ($action == 'Submit') {
 		query("INSERT INTO poststext (id, text, revision, date) VALUES (?,?,?,?)",
 			[$pid, $_POST['message'], $newrev, time()]);
 
-		redirect("thread.php?pid=$pid#$pid");
+		redirect("thread?pid=$pid#$pid");
 	}
 } elseif ($action == 'Preview') {
 	$euser = fetch("SELECT * FROM users WHERE id = ?", [$editpost['id']]);
@@ -69,8 +66,8 @@ if ($action == 'Submit') {
 }
 
 $breadcrumb = [
-	'forum.php?id='.$thread['forum'] => $thread['f_title'],
-	'thread.php?id='.$thread['id'] => $thread['title']
+	'forum?id='.$thread['forum'] => $thread['f_title'],
+	'thread?id='.$thread['id'] => $thread['title']
 ];
 
 twigloader()->display('editpost.twig', [

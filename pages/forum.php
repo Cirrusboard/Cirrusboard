@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $id = (int)($_GET['id'] ?? null);
 $uid = (int)($_GET['user'] ?? null);
 $time = (int)($_GET['time'] ?? null);
@@ -25,7 +23,7 @@ if ($viewmode == 'forum') {
 		$forum = fetch("SELECT f.*, r.time rtime FROM forums f LEFT JOIN forumsread r ON (r.fid = f.id AND r.uid = ?)
 			WHERE f.id = ? AND ? >= minread", [$userdata['id'], $id, $userdata['rank']]);
 
-		if (!$forum) error('404', "This forum doesn't exist.");
+		if (!$forum) error('404');
 
 		if (!$forum['rtime']) $forum['rtime'] = 0;
 
@@ -34,7 +32,7 @@ if ($viewmode == 'forum') {
 	} else
 		$forum = fetch("SELECT * FROM forums WHERE id = ? AND ? >= minread", [$id, $userdata['rank']]);
 
-	if (!$forum) error('404', "This forum doesn't exist.");
+	if (!$forum) error('404');
 
 	$threads = query("SELECT $userfields t.* $isread FROM threads t
 			LEFT JOIN users u ON u.id = t.user
@@ -44,11 +42,11 @@ if ($viewmode == 'forum') {
 			ORDER BY t.sticky DESC, t.lastdate DESC LIMIT ?,?",
 		[$id, $offset, $tpp]);
 
-	$url = "forum.php?id=$id";
+	$url = "forum?id=$id";
 } elseif ($viewmode == 'user') {
 	$user = fetch("SELECT name FROM users WHERE id = ?", [$uid]);
 
-	if (!$user) error('404', "User does not exist.");
+	if (!$user) error('404');
 
 	$forum['threads'] = result("SELECT COUNT(*) FROM threads t
 			LEFT JOIN forums f ON f.id = t.forum
@@ -63,9 +61,9 @@ if ($viewmode == 'forum') {
 			ORDER BY t.id DESC LIMIT ?,?",
 		[$uid, $userdata['rank'], $offset, $tpp]);
 
-	$breadcrumb = ['profile.php?id='.$uid => $user['name']];
+	$breadcrumb = ['profile?id='.$uid => $user['name']];
 
-	$url = "forum.php?user=$uid";
+	$url = "forum?user=$uid";
 } elseif ($viewmode == 'time') {
 	$mintime = ($time > 0 && $time <= 2592000 ? time() - $time : 604800);
 
@@ -82,7 +80,7 @@ if ($viewmode == 'forum') {
 			ORDER BY t.id DESC LIMIT ?,?",
 		[$mintime, $userdata['rank'], $offset, $tpp]);
 
-	$url = "forum.php?time=$time";
+	$url = "forum?time=$time";
 }
 
 if ($forum['threads'] > $tpp)

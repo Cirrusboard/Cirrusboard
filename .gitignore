@@ -3,15 +3,15 @@ vendor/
 composer.lock
 
 # Compiled CSS
-assets/css/
-themes/voxelmanip_retro/style.css
+static/css/
+static/themes/voxelmanip_retro/style.css
 
 # Cache
 templates/cache/
 
 # Userpics
-userpic/*
-!userpic/.gitkeep
+static/userpic/*
+!static/userpic/.gitkeep
 
 # Config directory
 conf/*
@@ -19,14 +19,13 @@ conf/*
 !conf/faq.sample.php
 
 # Misc.
-test/
 uploader/
 
 # Don't check in VMF-specific assets
-assets/voxelmanip_forums.png
-assets/voxelmanip_forums*
-assets/poweredbyvoxelmanip.png
-assets/smilies/
+static/assets/voxelmanip_forums.png
+static/assets/voxelmanip_forums*
+static/assets/poweredbyvoxelmanip.png
+static/smilies/
 
 # Cluttered drawer of stuff
 contrib/

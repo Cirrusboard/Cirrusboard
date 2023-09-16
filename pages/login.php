@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $error = '';
 
 $action = $_POST['action'] ?? null;

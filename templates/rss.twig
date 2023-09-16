@@ -3,18 +3,18 @@
 	<title>{{ config.title }}</title>
 	<description>The latest posts of {{ config.title }}</description>
 	<link>{{ fullurl }}</link>
-	<atom:link href="{{ fullurl }}/rss.php" rel="self" type="application/rss+xml"/>
+	<atom:link href="{{ fullurl }}/rss" rel="self" type="application/rss+xml"/>
 	{% for post in posts %}
 	<item>
 		<title>{{ post.title }}</title>
 		<description>
-			&lt;a href="{{ fullurl }}/thread.php?pid={{ post.id }}#{{ post.id }}"&gt;New post&lt;/a&gt; in thread "{{ post.title }}"
-			by &lt;a href="{{ fullurl }}/profile.php?id={{ post.u_id }}"&gt;{{ post.u_name }}&lt;/a&gt;
-			in forum &lt;a href="{{ fullurl }}/forum.php?id={{ post.forum }}"&gt;{{ post.ftitle }}&lt;/a&gt;
+			&lt;a href="{{ fullurl }}/thread?pid={{ post.id }}#{{ post.id }}"&gt;New post&lt;/a&gt; in thread "{{ post.title }}"
+			by &lt;a href="{{ fullurl }}/profile?id={{ post.u_id }}"&gt;{{ post.u_name }}&lt;/a&gt;
+			in forum &lt;a href="{{ fullurl }}/forum?id={{ post.forum }}"&gt;{{ post.ftitle }}&lt;/a&gt;
 		</description>
 		<pubDate>{{ post.date | date('r') }}</pubDate>
 		<category>{{ post.ftitle }}</category>
-		<guid>{{ fullurl }}/thread.php?pid={{ post.id }}#{{ post.id }}</guid>
+		<guid>{{ fullurl }}/thread?pid={{ post.id }}#{{ post.id }}</guid>
 	</item>
 	{% endfor %}
 </channel></rss>

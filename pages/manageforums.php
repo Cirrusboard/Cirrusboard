@@ -1,7 +1,5 @@
 <?php
-require('lib/common.php');
-
-if (!IS_ADMIN) error('403', 'You have no permissions to do this!');
+if (!IS_ADMIN) error('403');
 
 if (isset($_POST['savecat'])) { // save new/existing category
 
@@ -20,16 +18,16 @@ if (isset($_POST['savecat'])) { // save new/existing category
 		]);
 	} else {
 		if (!result("SELECT COUNT(*) FROM categories WHERE id = ?", [$cid]))
-			redirect('manageforums.php');
+			redirect('manageforums');
 
 		query("UPDATE categories SET title = ?, ord = ? WHERE id = ?", [$title, $ord, $cid]);
 	}
-	redirect('manageforums.php?cid=%s', $cid);
+	redirect('manageforums?cid=%s', $cid);
 
 } elseif (isset($_POST['delcat'])) { // delete category
 
 	query("DELETE FROM categories WHERE id = ?", [$_GET['cid']]);
-	redirect('manageforums.php');
+	redirect('manageforums');
 
 } elseif (isset($_POST['saveforum'])) { // save new/existing forum
 
@@ -56,17 +54,17 @@ if (isset($_POST['savecat'])) { // save new/existing category
 	} else {
 		$fid = (int)$fid;
 		if (!result("SELECT COUNT(*) FROM forums WHERE id = ?", [$fid]))
-			redirect('manageforums.php');
+			redirect('manageforums');
 
 		query("UPDATE forums SET cat=?, title=?, descr=?, ord=?, minread=?, minthread=?, minreply=? WHERE id=?",
 			[$cat, $title, $descr, $ord, $minread, $minthread, $minreply, $fid]);
 	}
-	redirect('manageforums.php?fid=%s', $fid);
+	redirect('manageforums?fid=%s', $fid);
 
 } elseif (isset($_POST['delforum'])) { // delete forum
 
 	query("DELETE FROM forums WHERE id = ?", [$_GET['fid']]);
-	redirect('manageforums.php');
+	redirect('manageforums');
 }
 
 if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
@@ -125,7 +123,7 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 
 	$catlist = ''; $c = 1;
 	foreach ($cats as $cat) {
-		$catlist .= sprintf('<tr><td class="n%s"><a href="manageforums.php?cid=%s">%s</a></td></tr>', $c, $cat['id'], $cat['title']);
+		$catlist .= sprintf('<tr><td class="n%s"><a href="manageforums?cid=%s">%s</a></td></tr>', $c, $cat['id'], $cat['title']);
 		$c = ($c == 1) ? 2 : 1;
 	}
 
@@ -135,7 +133,7 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 			$lc = $forum['cat'];
 			$forumlist .= sprintf('<tr class="c"><td>%s</td></tr>', $cats[$forum['cat']]['title']);
 		}
-		$forumlist .= sprintf('<tr><td class="n%s"><a href="manageforums.php?fid=%s">%s</a></td></tr>', $c, $forum['id'], $forum['title']);
+		$forumlist .= sprintf('<tr><td class="n%s"><a href="manageforums?fid=%s">%s</a></td></tr>', $c, $forum['id'], $forum['title']);
 		$c = ($c == 1) ? 2 : 1;
 	}
 

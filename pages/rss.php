@@ -1,7 +1,4 @@
 <?php
-$rss = true;
-require('lib/common.php');
-
 header('Content-Type: text/xml');
 
 $posts = query("SELECT $userfields p.*, t.title, t.forum, f.id fid, f.title ftitle
@@ -14,7 +11,7 @@ $posts = query("SELECT $userfields p.*, t.title, t.forum, f.id fid, f.title ftit
 	[$userdata['rank']]);
 
 $fullurl = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']
-	.str_replace('/rss.php', '', $_SERVER['SCRIPT_NAME']);
+	.str_replace('/rss', '', $_SERVER['SCRIPT_NAME']);
 
 twigloader()->display('rss.twig', [
 	'posts' => $posts,

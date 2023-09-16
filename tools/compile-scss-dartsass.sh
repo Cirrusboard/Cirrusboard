@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sass --style=compressed --no-source-map --watch assets/scss/:assets/css/ themes/*/
+sass --style=compressed --no-source-map --watch scss/:static/css/ static/themes/*/

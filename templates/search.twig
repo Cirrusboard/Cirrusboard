@@ -4,7 +4,7 @@
 {% set noindex = true %}
 
 	{% block content %}
-<form action="search.php" method="get"><table class="c1">
+<form action="search" method="get"><table class="c1">
 	<tr class="h"><td>Search</td>
 	<tr><td class="n1 center">
 		<p>Search for: <input type="text" name="query" size="40" value="{{ query }}"></p>
@@ -48,7 +48,7 @@
 			{% endif %}
 
 			<tr class="n{{ zebra }} center">
-				<td class="left"><a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a></td>
+				<td class="left"><a href="thread?id={{ thread.id }}">{{ thread.title }}</a></td>
 				<td>{{ userlink(thread, 'u_') }}</td>
 				<td>{{ thread.lastdate | date('Y-m-d H:i') }}</td>
 			</tr>

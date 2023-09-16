@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $action = $_GET['action'] ?? '';
 
 //mark forum read
@@ -12,7 +10,7 @@ if ($log && $action == 'markread') {
 		// Add new forumsread entry
 		query("REPLACE INTO forumsread VALUES (?,?,?)", [$userdata['id'], $fid, time()]);
 		// Redirect back to forum page
-		redirect("forum.php?id=%s", $fid);
+		redirect("forum?id=%s", $fid);
 	} else {
 		// Mark all read
 		query("DELETE FROM threadsread WHERE uid = ?", [$userdata['id']]);

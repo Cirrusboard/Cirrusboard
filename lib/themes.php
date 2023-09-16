@@ -1,7 +1,7 @@
 <?php
 
 function getThemeInfo($id) {
-	$path = 'themes/'.$id.'/meta.json';
+	$path = 'static/themes/'.$id.'/meta.json';
 
 	if (!file_exists($path))
 		return ['name' => $id.' (missing meta!)', 'author' => 'N/A'];
@@ -12,11 +12,11 @@ function getThemeInfo($id) {
 }
 
 function themeList() {
-	$themes = glob('themes/*', GLOB_ONLYDIR);
+	$themes = glob('static/themes/*', GLOB_ONLYDIR);
 	sort($themes);
 
 	foreach ($themes as $theme) {
-		$id = explode("/", $theme)[1];
+		$id = explode("/", $theme)[2];
 		$info = getThemeInfo($id);
 
 		if (isset($info['hidden']) && $info['hidden']) continue;
@@ -28,5 +28,5 @@ function themeList() {
 }
 
 function isValidTheme($id) {
-	return file_exists('themes/'.$id.'/style.css');
+	return file_exists('static/themes/'.$id.'/style.css');
 }

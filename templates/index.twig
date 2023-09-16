@@ -19,8 +19,8 @@
 		<tr class="h"><td colspan="2">Latest Announcement</td></tr>
 		<tr class="n1">
 			<td>
-				<a href="thread.php?id={{ news.tid }}">{{ news.title }}</a> - by {{ userlink(news, 'u_') }} on {{ news.date | date('Y-m-d H:i') }}
-				<span class="float-right"><a href="forum.php?id={{ config.newsid }}">All announcements</a></span>
+				<a href="thread?id={{ news.tid }}">{{ news.title }}</a> - by {{ userlink(news, 'u_') }} on {{ news.date | date('Y-m-d H:i') }}
+				<span class="float-right"><a href="forum?id={{ config.newsid }}">All announcements</a></span>
 			</td>
 		</tr>
 	</table><br>
@@ -66,7 +66,7 @@
 			{% endif %}
 		</td>
 		<td class="n2 left">
-			<a href="forum.php?id={{ forum.id }}">{{ forum.title }}</a> {% if forum.minread > 0 %}<span class="sfont">(Private)</span>{% endif %}
+			<a href="forum?id={{ forum.id }}">{{ forum.title }}</a> {% if forum.minread > 0 %}<span class="sfont">(Private)</span>{% endif %}
 			<div style="margin-top:3px">{{ forum.descr | raw }}</div>
 		</td>
 		<td class="n1 nom">{{ forum.threads }}</td>
@@ -75,7 +75,7 @@
 			{% if forum.posts > 0 and forum.lastdate > 0 %}
 				<span>{{ forum.lastdate | date('Y-m-d H:i') }}</span><br>
 				<span>by {{ userlink(forum, 'u_') }}
-					<a href="thread.php?pid={{ forum.lastid }}#{{ forum.lastid }}">&raquo;</a></span>
+					<a href="thread?pid={{ forum.lastid }}#{{ forum.lastid }}">&raquo;</a></span>
 			{% else %}None{% endif %}
 		</td>
 	</tr>

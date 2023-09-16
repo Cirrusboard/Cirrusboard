@@ -12,5 +12,5 @@
 	{{ threadpost(post) }}
 {% endif %}
 
-{{ postform('newreply.php?id='~id, 'New reply', thread.title, message, false) }}
+{{ postform('newreply?id='~id, 'New reply', thread.title, message, false) }}
 	{% endblock %}

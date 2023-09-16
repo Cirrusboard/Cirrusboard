@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 needsLogin();
 
 $id = $_GET['id'] ?? null;
@@ -12,7 +10,7 @@ $thread = fetch("SELECT t.*, f.title f_title, f.minreply f_minreply
 	WHERE t.id = ?", [$id]);
 
 if (!$thread)
-	error('404', "Thread does not exist.");
+	error('404');
 if ($thread['f_minreply'] > $userdata['rank'])
 	error('403', "You have no permissions to create posts in this forum.");
 if ($thread['closed'] && !IS_MOD)
@@ -47,7 +45,7 @@ if ($action == "Submit") {
 
 		query("UPDATE users SET posts = posts + 1, lastpost = ? WHERE id = ?", [time(), $userdata['id']]);
 
-		redirect("thread.php?pid=$pid#$pid");
+		redirect("thread?pid=$pid#$pid");
 	}
 } elseif ($action == 'Preview') {
 	$post['date'] = time();
@@ -79,8 +77,8 @@ if ($pid) {
 }
 
 $breadcrumb = [
-	'forum.php?id='.$thread['forum'] => $thread['f_title'],
-	'thread.php?id='.$thread['id'] => $thread['title']
+	'forum?id='.$thread['forum'] => $thread['f_title'],
+	'thread?id='.$thread['id'] => $thread['title']
 ];
 
 twigloader()->display('newreply.twig', [

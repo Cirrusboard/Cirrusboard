@@ -1,6 +1,4 @@
 <?php
-require('lib/common.php');
-
 $time = (int)($_GET['time'] ?? 604800);
 
 $users = query("SELECT u.id, u.name, u.rank, u.posts, u.joined, COUNT(*) num

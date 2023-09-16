@@ -6,12 +6,14 @@
 
 	<title>{% if title != 'Index' %}{{ title }} - {% endif %}{{ config.title }}</title>
 
-	{# inline font styling - update from /assets/css/fonts.css #}
-	<style>@font-face{font-family:"Open Sans";font-style:normal;font-weight:400;font-display:swap;src:local(""),url("assets/fonts/open-sans-v34-400.woff2") format("woff2"),url("assets/fonts/open-sans-v34-400.woff") format("woff")}@font-face{font-family:"Open Sans";font-style:normal;font-weight:700;font-display:swap;src:local(""),url("assets/fonts/open-sans-v34-700.woff2") format("woff2"),url("assets/fonts/open-sans-v34-700.woff") format("woff")}</style>
-	<link rel="stylesheet" href="assets/css/style.css">
+	<base href="/">
+
+	{# inline font styling - update from /static/css/fonts.css #}
+	<style>@font-face{font-family:"Open Sans";font-style:normal;font-weight:400;font-display:swap;src:local(""),url("fonts/open-sans-v34-400.woff2") format("woff2"),url("fonts/open-sans-v34-400.woff") format("woff")}@font-face{font-family:"Open Sans";font-style:normal;font-weight:700;font-display:swap;src:local(""),url("fonts/open-sans-v34-700.woff2") format("woff2"),url("fonts/open-sans-v34-700.woff") format("woff")}</style>
+	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="themes/{{ userdata.theme }}/style.css">
 
-	<link href="rss.php" type="application/atom+xml" rel="alternate">
+	<link href="rss" type="application/atom+xml" rel="alternate">
 
 	{% if noindex %}<meta name="robots" content="noindex,nofollow">{% endif %}
 	<meta property="og:title" content="{% if title != 'Index' %}{{ title }} - {% endif %}{{ config.title }}">
@@ -31,20 +33,20 @@
 		</td></tr>
 		<tr>
 			<td class="n2 nb menu">
-				<a href="./">Index</a><a href="faq.php">FAQ</a><a href="memberlist.php">Member list</a><a href="activeusers.php">Active users</a><a href="forum.php?time=604800">Latest posts</a><a href="search.php">Search</a>
+				<a href="./">Index</a><a href="faq">FAQ</a><a href="memberlist">Member list</a><a href="activeusers">Active users</a><a href="forum?time=604800">Latest posts</a><a href="search">Search</a>
 			</td>
 			<td class="n2 nb menu right">
 				{% if log %}
-					{{ userlink(userdata) }}{% if userdata.rank > 0 %}<a href="editprofile.php">Edit profile</a>{% endif %}{% if userdata.rank > 2 %}<a href="admin.php">Admin</a>{% endif %}<a href="login.php?action=logout">Log out</a>
+					{{ userlink(userdata) }}{% if userdata.rank > 0 %}<a href="editprofile">Edit profile</a>{% endif %}{% if userdata.rank > 2 %}<a href="admin">Admin</a>{% endif %}<a href="login?action=logout">Log out</a>
 				{% else %}
-					<a href="register.php">Register</a><a href="login.php">Log in</a>
+					<a href="register">Register</a><a href="login">Log in</a>
 				{% endif %}
 			</td>
 		</tr>
 	</table>
 	{# Only allow logging out using a POST form, to not have an endpoint
 		where people could be tricked into logging themselves out #}
-	<form action="login.php" method="post" name="logout">
+	<form action="login" method="post" name="logout">
 		<input type="hidden" name="action" value="Logout">
 	</form>
 
@@ -82,11 +84,11 @@
 			<img src="assets/poweredbycirrus.png" class="poweredby" title="~~ I'm in the clouds ~~">
 
 			Cirrusboard<br>
-			&copy; 2022-2023 ROllerozxa, <a href="credits.php">et al</a>.
+			&copy; 2022-2023 ROllerozxa, <a href="credits">et al</a>.
 			{% endif %}
 		</td></tr>
 	</table>
 
-	<script src="assets/script.js"></script>
+	<script src="js/script.js"></script>
 </body>
 </html>

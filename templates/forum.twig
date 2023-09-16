@@ -4,18 +4,18 @@
 	{% set title = forum.title %}
 
 	{% if log and userdata.rank >= forum.minthread %}
-		{% set actions = {("index.php?action=markread&fid="~forum.id) : "Mark forum read",
-			("newthread.php?id="~id) : "New thread"} %}
+		{% set actions = {("index?action=markread&fid="~forum.id) : "Mark forum read",
+			("newthread?id="~id) : "New thread"} %}
 	{% endif %}
 
-	{% set pagename = "/forum.php?id=" ~ id %}
+	{% set pagename = "/forum?id=" ~ id %}
 {% elseif viewmode == "user" %}
 	{% set title = "Threads" %}
-	{% set pagename = "/forum.php?user=" ~ uid %}
+	{% set pagename = "/forum?user=" ~ uid %}
 	{% set noindex = true %}
 {% elseif viewmode == "time" %}
 	{% set title = "Latest posts (by thread)" %}
-	{% set pagename = "/forum.php?time=" ~ time %}
+	{% set pagename = "/forum?time=" ~ time %}
 	{% set noindex = true %}
 {% endif %}
 
@@ -24,7 +24,7 @@
 	<table class="c1 autowidth br-after">
 		<tr class="h"><td>Latest posts</td></tr>
 		<tr><td class="n1 center">
-			By thread | <a href="thread.php?time={{ time }}">By post</a> (<a href="rss.php">RSS</a>)
+			By thread | <a href="thread?time={{ time }}">By post</a> (<a href="rss">RSS</a>)
 			<br><br>{{ timelinks('forum', time) }}
 		</td></tr>
 	</table>
@@ -68,7 +68,7 @@
 				{% endif %}
 			</td>
 			<td class="left">
-				<a href="thread.php?id={{ thread.id }}">{{ thread.title }}</a>
+				<a href="thread?id={{ thread.id }}">{{ thread.title }}</a>
 			</td>
 			<td class="nom">{{ userlink(thread, 'u_') }}</td>
 			<td class="nom">{{ thread.posts-1 }}</td>
@@ -76,7 +76,7 @@
 			<td>
 				<span>{{ thread.lastdate | date('Y-m-d H:i') }}</span><br>
 				<span>by {{ userlink(thread, 'ul_' ) }}
-					<a href="thread.php?pid={{ thread.lastid }}#{{ thread.lastid }}">&raquo;</a></span>
+					<a href="thread?pid={{ thread.lastid }}#{{ thread.lastid }}">&raquo;</a></span>
 			</td>
 		</tr>
 		{% set i = i + 1 %}

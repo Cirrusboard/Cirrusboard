@@ -31,7 +31,7 @@ $config['html'] = false;
 $config['postlayouts'] = true;
 
 // Uncomment to replace the footer with your own thing. We won't mind if you remove the credits from the footer!
-// (As long as it remains in the /credits.php page and the LICENSE file is kept)
+// (As long as it remains in the /credits page and the LICENSE file is kept)
 //$config['customfooter'] = <<<HTML
 // (put some stuff inside here)
 //HTML;

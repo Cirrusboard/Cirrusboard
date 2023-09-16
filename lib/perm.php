@@ -31,7 +31,7 @@ function rankIdToColour($id) {
 function needsLogin() {
 	global $log;
 	if (!$log) {
-		error('403', 'This page requires login. <p><a href="login.php">Login</a></p>');
+		error('403', 'This page requires login. <p><a href="login">Login</a></p>');
 		die();
 	}
 }

@@ -1,11 +1,9 @@
 <?php
-require('lib/common.php');
-
 $id = $_GET['id'] ?? null;
 
 $profile = fetch("SELECT * FROM users WHERE id = ?", [$id]);
 
-if (!$profile) error('404', 'This user does not exist.');
+if (!$profile) error('404');
 
 $days = (time() - $profile['joined']) / 86400;
 
@@ -46,11 +44,11 @@ foreach ($profile as $field => $val)
 // Profile actions
 
 $actions = [
-	"forum.php?user=$id" => 'View threads',
-	"thread.php?user=$id" => 'Show posts'];
+	"forum?user=$id" => 'View threads',
+	"thread?user=$id" => 'Show posts'];
 
 if (IS_ADMIN && $userdata['rank'] > $profile['rank'])
-	$actions["editprofile.php?id=$id"] = 'Edit user';
+	$actions["editprofile?id=$id"] = 'Edit user';
 
 twigloader()->display('profile.twig', [
 	'uid' => $id,

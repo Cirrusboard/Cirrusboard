@@ -1,5 +1,4 @@
 <?php
-require('lib/common.php');
 
 //Smilies List
 $smiliestext = '';

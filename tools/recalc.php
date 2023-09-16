@@ -58,5 +58,3 @@ while ($user = $users->fetch()) {
 
 	query("UPDATE users SET threads = ?, posts = ? WHERE id = ?", [$counts['threads'], $counts['posts'], $user['id']]);
 }
-
-

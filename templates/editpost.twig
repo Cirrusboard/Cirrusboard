@@ -12,5 +12,5 @@
 	{{ threadpost(post) }}
 {% endif %}
 
-{{ postform('editpost.php?pid='~pid, 'Edit post', thread.title, message, false) }}
+{{ postform('editpost?pid='~pid, 'Edit post', thread.title, message, false) }}
 	{% endblock %}
