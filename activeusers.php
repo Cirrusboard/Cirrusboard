@@ -8,7 +8,7 @@ $users = query("SELECT u.id, u.name, u.rank, u.posts, u.joined, COUNT(*) num
 		WHERE p.date > ? GROUP BY u.id ORDER BY num DESC",
 	[(time() - $time)]);
 
-echo twigloader()->render('activeusers.twig', [
+twigloader()->display('activeusers.twig', [
 	'time' => $time,
 	'users' => $users
 ]);

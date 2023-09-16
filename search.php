@@ -31,7 +31,7 @@ if ($query && $where == 1) {
 
 }
 
-echo twigloader()->render('search.twig', [
+twigloader()->display('search.twig', [
 	'query' => $query,
 	'where' => $where,
 	'threads' => $threads ?? null,

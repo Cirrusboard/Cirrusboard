@@ -58,7 +58,7 @@ $stats = fetch("SELECT (SELECT COUNT(*) FROM users) u, (SELECT COUNT(*) FROM thr
 
 $newestUser = fetch("SELECT id, name, rank FROM users ORDER BY id DESC LIMIT 1");
 
-echo twigloader()->render('index.twig', [
+twigloader()->display('index.twig', [
 	'categories' => $categories ?? null,
 	'forums' => $forums,
 	'just_registered' => isset($_GET['rd']),

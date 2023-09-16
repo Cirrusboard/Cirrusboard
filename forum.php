@@ -88,7 +88,7 @@ if ($viewmode == 'forum') {
 if ($forum['threads'] > $tpp)
 	$pagelist = pagination($forum['threads'], $tpp, $url.'&page=%s', $page);
 
-echo twigloader()->render('forum.twig', [
+twigloader()->display('forum.twig', [
 	'id' => $id,
 	'forum' => $forum ?? null,
 	'threads' => $threads,

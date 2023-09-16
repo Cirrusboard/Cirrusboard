@@ -143,7 +143,7 @@ $user['timezone'] = $user['timezone'] ?: $config['defaulttimezone'];
 if ($user['birthday']) // Y-m-d format
 	$birthday = explode('-', $user['birthday']);
 
-echo twigloader()->render('editprofile.twig', [
+twigloader()->display('editprofile.twig', [
 	'user' => $user,
 	'timezones' => $timezones,
 	'birthday' => $birthday ?? null,

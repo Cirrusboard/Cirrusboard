@@ -25,6 +25,6 @@ else
 	error('404', 'There is no FAQ defined.');
 
 
-echo twigloader()->render('faq.twig', [
+twigloader()->display('faq.twig', [
 	'faq' => $faq
 ]);

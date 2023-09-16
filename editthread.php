@@ -44,7 +44,7 @@ $breadcrumb = [
 	'forum.php?id='.$thread['forum_id'] => $thread['forum_title'],
 	'thread.php?id='.$thread['id'] => $thread['title']];
 
-echo twigloader()->render('editthread.twig', [
+twigloader()->display('editthread.twig', [
 	'id' => $id,
 	'thread' => $thread,
 	'breadcrumb' => $breadcrumb

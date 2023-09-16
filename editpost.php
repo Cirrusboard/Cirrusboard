@@ -73,7 +73,7 @@ $breadcrumb = [
 	'thread.php?id='.$thread['id'] => $thread['title']
 ];
 
-echo twigloader()->render('editpost.twig', [
+twigloader()->display('editpost.twig', [
 	'thread' => $thread,
 	'post' => $post ?? null,
 	'action' => $action,

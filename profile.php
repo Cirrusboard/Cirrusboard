@@ -52,7 +52,7 @@ $actions = [
 if (IS_ADMIN && $userdata['rank'] > $profile['rank'])
 	$actions["editprofile.php?id=$id"] = 'Edit user';
 
-echo twigloader()->render('profile.twig', [
+twigloader()->display('profile.twig', [
 	'uid' => $id,
 	'profile' => $profile,
 	'profilefields' => $profilefields,

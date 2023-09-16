@@ -69,8 +69,6 @@ if (isset($_POST['savecat'])) { // save new/existing category
 	redirect('manageforums.php');
 }
 
-$twig = twigloader();
-
 if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 
 	if ($cid == 'new')
@@ -104,7 +102,7 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 		'minreply' => 'Who can reply'
 	];
 
-	echo $twig->render("manageforums_forum.twig", [
+	twigloader()->display("manageforums_forum.twig", [
 		'fid' => $fid,
 		'forum' => $forum,
 		'cats' => $cats,
@@ -141,7 +139,7 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 		$c = ($c == 1) ? 2 : 1;
 	}
 
-	echo $twig->render("manageforums.twig", [
+	twigloader()->display("manageforums.twig", [
 		'catlist' => $catlist,
 		'forumlist' => $forumlist
 	]);

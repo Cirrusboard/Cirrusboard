@@ -114,7 +114,7 @@ if ($viewmode == 'thread') {
 if ($thread['posts'] > $ppp)
 	$pagelist = pagination($thread['posts'], $ppp, $url.'&page=%s', $page);
 
-echo twigloader()->render('thread.twig', [
+twigloader()->display('thread.twig', [
 	'id' => $id,
 	'thread' => $thread ?? null,
 	'posts' => $posts,

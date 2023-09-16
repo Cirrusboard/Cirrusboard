@@ -28,7 +28,7 @@ if ($action == 'Login') {
 	redirect('./');
 }
 
-echo twigloader()->render('login.twig', [
+twigloader()->display('login.twig', [
 	'error' => $error,
 	'name' => $name ?? null
 ]);

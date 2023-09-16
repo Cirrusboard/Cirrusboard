@@ -71,7 +71,7 @@ if ($action == 'Submit') {
 $breadcrumb = [
 	'forum.php?id='.$forum['id'] => $forum['title']];
 
-echo twigloader()->render('newthread.twig', [
+twigloader()->display('newthread.twig', [
 	'breadcrumb' => $breadcrumb,
 	'threadtitle' => $title,
 	'message' => $message,

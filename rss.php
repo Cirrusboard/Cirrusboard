@@ -16,7 +16,7 @@ $posts = query("SELECT $userfields p.*, t.title, t.forum, f.id fid, f.title ftit
 $fullurl = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']
 	.str_replace('/rss.php', '', $_SERVER['SCRIPT_NAME']);
 
-echo twigloader()->render('rss.twig', [
+twigloader()->display('rss.twig', [
 	'posts' => $posts,
 	'fullurl' => $fullurl
 ]);

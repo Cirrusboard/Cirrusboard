@@ -10,7 +10,7 @@ $tbs = $sql->query('SHOW TABLE STATUS');
 while ($t = $tbs->fetch())
 	$tablestatus[$t['Name']] = $t;
 
-echo twigloader()->render('admin.twig', [
+twigloader()->display('admin.twig', [
 	'latest_registered_users' => $latestRegisteredUsers,
 	'latest_seen_users' => $latestSeenUsers,
 	'tablestatus' => $tablestatus

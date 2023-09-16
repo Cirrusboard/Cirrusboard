@@ -32,7 +32,7 @@ function twigloader($subfolder = '') {
 function error($title, $message) {
 	if ($title >= 400 && $title < 500) http_response_code($title);
 
-	echo twigloader()->render('_error.twig', [
+	twigloader()->display('_error.twig', [
 		'err_title' => $title, 'err_message' => $message
 	]);
 	die();

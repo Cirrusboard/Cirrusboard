@@ -83,7 +83,7 @@ $breadcrumb = [
 	'thread.php?id='.$thread['id'] => $thread['title']
 ];
 
-echo twigloader()->render('newreply.twig', [
+twigloader()->display('newreply.twig', [
 	'id' => $id,
 	'breadcrumb' => $breadcrumb,
 	'thread' => $thread,
