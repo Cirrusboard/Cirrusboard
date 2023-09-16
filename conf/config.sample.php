@@ -1,12 +1,11 @@
 <?php
-$host = '127.0.0.1';
-$db   = 'cool_forum';
-$user = '';
-$pass = '';
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'cirrusboard');
+define('DB_USER', '');
+define('DB_PASS', '');
 
-$tplCache = 'templates/cache';
-//$tplCache = '/tmp/cirrusboard';
-$tplNoCache = false; // **DO NOT SET AS TRUE IN PROD - DEV ONLY**
+define('TPL_CACHE', 'templates/cache/');
+//define('TPL_CACHE', '/tmp/cirrusboard/');
 
 // Customise your forum
 $config['title'] = "Cool Forum";
