@@ -16,12 +16,11 @@ if (!$thread) error('404', "This thread doesn't exist.");
 
 $threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
 
-if (!IS_MOD && $userdata['id'] != $threadcreator) error('403', "You are not allowed to edit this thread.");
+if ((!IS_MOD && $userdata['id'] != $threadcreator) || ($thread['minread'] > $userdata['rank']))
+	error('403', "You are not allowed to edit this thread.");
 
-// I'm too stupid to do this properly, so here's an ugly hack.
-if ($thread['minread'] > $userdata['rank']) error('403', "You are not allowed to edit this thread.");
-if (!IS_MOD && $thread['closed']) error('403', "This thread is closed.");
-// End ugly hack
+if (!IS_MOD && $thread['closed'])
+	error('403', "This thread is closed.");
 
 if (isset($_POST['action'])) {
 	$title = $_POST['title'] ?? '';
