@@ -1,8 +1,9 @@
 <form {% if action %}action="{{ action }}"{% endif %} method="POST"><table class="c1 postform">
 	<tr class="h"><td colspan="2">{{ name }}</td></tr>
 	<tr class="n1">
-		<td class="nb center" style="width:120px;height:32px"><strong>Title:</strong></td>
-		<td class="nb">
+		<td class="nb nom center" style="width:120px"><strong>Title:</strong></td>
+		<td class="nb" style="height:32px">
+			<strong class="nod">Title: </strong>
 			{%- if editable_title -%}
 				<input type="text" name="title" style="width:60%" value="{{ post_title }}">
 			{%- else -%}
@@ -11,7 +12,7 @@
 		</td>
 	</tr>
 	<tr class="n1">
-		<td class="nb"></td>
+		<td class="nb nom"></td>
 		<td class="nb">
 			{{ posttoolbar() }}
 
