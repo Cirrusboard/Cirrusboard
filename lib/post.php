@@ -121,7 +121,6 @@ function posttoolbutton($name, $title, $tag) {
 }
 
 function posttoolbar() {
-	// TODO: I'd really want some better icons for this... Font awesome?
 	return '<table class="postformatting nom" id="postformatting"><tr>'
 			.posttoolbutton('B', 'Bold', 'b')
 			.posttoolbutton('<i>I</i>', 'Italics', 'i')

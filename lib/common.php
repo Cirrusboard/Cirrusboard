@@ -21,7 +21,11 @@ if (isset($config['maintenance']) && $config['maintenance'] && php_sapi_name() !
 	die();
 }
 
-require_once('vendor/autoload.php');
+if (file_exists('vendor.phar')) // Load vendor PHAR if it exists
+	require_once('vendor.phar');
+else
+	require_once('vendor/autoload.php');
+
 foreach (glob("lib/*.php") as $file)
 	require_once($file);
 
@@ -65,7 +69,7 @@ if ($log) {
 			$userdata['theme'] = $config['defaulttheme'];
 	}
 } else {
-	// Fallback userdata for guests (NYI)
+	// Fallback userdata for guests
 	$userdata = [
 		'id' => -1,
 		'rank' => 0,
