@@ -6,7 +6,7 @@
 <table class="c1 faq">
 	<tr class="h"><td>FAQ</td></tr>
 	<tr><td class="n1"><ol class="toc">
-		{% for item in faq %}<li><a href="#{{ item.id }}">{{ item.title }}</a></li>{% endfor %}
+		{% for item in faq %}<li><a href="faq#{{ item.id }}">{{ item.title }}</a></li>{% endfor %}
 	</ol></td></tr>
 
 	{% for item in faq %}

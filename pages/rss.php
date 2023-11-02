@@ -10,8 +10,7 @@ $posts = query("SELECT $userfields p.*, t.title, t.forum, f.id fid, f.title ftit
 		ORDER BY p.date DESC LIMIT 30",
 	[$userdata['rank']]);
 
-$fullurl = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']
-	.str_replace('/rss', '', $_SERVER['SCRIPT_NAME']);
+$fullurl = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'];
 
 twigloader()->display('rss.twig', [
 	'posts' => $posts,
