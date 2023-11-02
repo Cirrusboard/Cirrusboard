@@ -3,10 +3,7 @@
 function relTime($time) {
 	if ($time === null) return 'never';
 
-	$relativeTime = new \RelativeTime\RelativeTime([
-		'language' => '\RelativeTime\Languages\English',
-		'separator' => ', ',
-		'suffix' => true,
+	$relativeTime = new RelativeTime([
 		'truncate' => 1,
 	]);
 
@@ -17,26 +14,21 @@ function dateformat($time) {
 	return date('Y-m-d H:i', $time);
 }
 
-function timeunits($sec) {
-	if ($sec < 60)		return "$sec sec.";
-	if ($sec < 3600)	return floor($sec / 60) . ' min.';
-	if ($sec < 86400)	return floor($sec / 3600) . ' hour' . ($sec >= 7200 ? 's' : '');
-	return floor($sec / 86400) . ' day' . ($sec >= 172800 ? 's' : '');
-}
+function timelinks($file, $seltime) {
+	$relativeTime = new RelativeTime([
+		'suffix' => false,
+		'truncate' => 1,
+	]);
 
-function timelink($timex, $file, $time) {
-	if ($time == $timex)
-		return timeunits($timex);
-	else
-		return sprintf('<a href="%s?time=%s">%s</a>', $file, $timex, timeunits($timex));
-}
+	$links = [];
+	foreach ([3600, 86400, 604800, 2592000] as $time) {
+		$timelbl = $relativeTime->convert(1, $time+1);
 
-function timelinks($file, $time) {
-	$lol = [3600, 86400, 604800, 2592000];
-	$out = [];
+		if ($time == $seltime)
+			$links[] = $timelbl;
+		else
+			$links[] = sprintf('<a href="%s?time=%s">%s</a>', $file, $time, $timelbl);
+	}
 
-	foreach ($lol as $lo)
-		$out[] = timelink($lo, $file, $time);
-
-	return implode(" | ", $out);
+	return join(' | ', $links);
 }

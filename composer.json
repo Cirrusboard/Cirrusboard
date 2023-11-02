@@ -1,6 +1,5 @@
 {
 	"require": {
-		"twig/twig": "^3.0",
-		"mpratt/relativetime": "^1.5"
+		"twig/twig": "^3.0"
 	}
 }
