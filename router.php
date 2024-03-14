@@ -2,7 +2,7 @@
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $path = explode('/', $uri);
 
-if ($path[1] == 'rss') $rss = true;
+if (isset($path[1]) && $path[1] == 'rss') $rss = true;
 
 require('lib/common.php');
 
@@ -17,7 +17,7 @@ function fallback() {
 	error('404');
 }
 
-if ($path[1]) {
+if (isset($path[1]) && $path[1] != '') {
 	if (file_exists('pages/'.$path[1].'.php'))
 		require('pages/'.$path[1].'.php');
 	elseif ($path[1] == 'credits')

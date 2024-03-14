@@ -24,7 +24,7 @@ function twigloader($subfolder = '') {
 
 	$twig->addGlobal('uri', $uri);
 	$twig->addGlobal('domain', (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']);
-	$twig->addGlobal('pagename', '/'.$path[1]);
+	$twig->addGlobal('pagename', '/'.($path[1] ?? ''));
 
 	return $twig;
 }
