@@ -8,24 +8,27 @@ on:
 
 jobs:
   linux:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          path: cirrus
 
-      - name: Install Composer dependencies
-        uses: php-actions/composer@v6
-
-      - name: Compile SCSS
+      - name: Do the things
         run: |
-          sudo apt-get install -y sassc
-          bash tools/compile-scss-sassc.sh
-
-      - name: Prepare things
-        run: |
-          rm -rf .git .github DOCKER_ENV docker_tag output.log
+          cd cirrus
+          ./tools/make-dist.sh
 
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cirrus-dist
-          path: .
+          path: ./cirrus-dist.zip
+
+      - name: Upload and tag
+        uses: pyTooling/Actions/releaser@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: 'latest'
+          files: ./cirrus-dist.zip
+        if: github.event_name != 'pull_request'

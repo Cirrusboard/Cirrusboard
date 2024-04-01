@@ -1,6 +1,5 @@
 # Composer
 vendor/
-composer.lock
 
 # Compiled CSS
 static/css/
