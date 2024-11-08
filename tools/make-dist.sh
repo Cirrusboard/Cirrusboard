@@ -1,9 +1,7 @@
-#!/bin/bash
+#!/bin/bash -e
 
-sudo apt-get update
-sudo apt-get install -y php8.2-cli php8.2-zip php8.2-curl composer sassc zip --no-install-recommends
-
-cd Cirrusboard
+apt-get update
+apt-get install -y php8.2-cli php8.2-zip php8.2-curl composer sassc zip --no-install-recommends
 
 composer install -o
 

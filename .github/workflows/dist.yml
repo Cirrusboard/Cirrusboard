@@ -8,7 +8,9 @@ on:
 
 jobs:
   linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm
     steps:
       - uses: actions/checkout@v4
         with:

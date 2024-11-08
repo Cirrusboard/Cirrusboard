@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 common_arguments="--style compressed --load-path ./"
 
