@@ -52,13 +52,13 @@ if ($viewmode == 'thread') {
 		if ($thread['lastdate'] > $thread['frtime'])
 			query("REPLACE INTO threadsread VALUES (?,?,?)", [$userdata['id'], $thread['id'], time()]);
 
-		$readstate = result("SELECT ((NOT ISNULL(r.time)) OR t.lastdate < ?) n FROM threads t
+		$readstate = fetch("SELECT ((NOT ISNULL(r.time)) OR t.lastdate < ?) n FROM threads t
 				LEFT JOIN threadsread r ON (r.tid = t.id AND r.uid = ?)
 				WHERE t.forum = ? GROUP BY ((NOT ISNULL(r.time)) OR t.lastdate < ?) ORDER BY n ASC",
 			[$thread['frtime'], $userdata['id'], $thread['forum_id'], $thread['frtime']]);
 
-		// If $readstate is 1, all threads in the forum are read. Mark it as such.
-		if ($readstate == 1)
+		// If $readstate['n'] is 1, all threads in the forum are read. Mark it as such.
+		if ($readstate['n'] == 1)
 			query("REPLACE INTO forumsread VALUES (?,?,?)", [$userdata['id'], $thread['forum_id'], time()]);
 	}
 
