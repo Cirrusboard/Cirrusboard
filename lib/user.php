@@ -1,5 +1,17 @@
 <?php
 
+function authenticateCookie() {
+
+	if (isset($_COOKIE['token'])) {
+		$id = result("SELECT id FROM users WHERE token = ?", [$_COOKIE['token']]);
+
+		if ($id) // Valid cookie, user is logged in.
+			return $id;
+	}
+
+	return -1;
+}
+
 function userlink($user, $pre = '') {
 	return sprintf(
 		'<a href="profile?id=%d">%s</a>',

@@ -46,21 +46,12 @@ if (php_sapi_name() != "cli") {
 	$uri = '/';
 }
 
-// Whether the user is 'log'ged in
-$log = false;
-
-// Cookie authentication
-if (isset($_COOKIE['token'])) {
-	$id = result("SELECT id FROM users WHERE token = ?", [$_COOKIE['token']]);
-
-	if ($id) // Valid cookie
-		$log = true;
-}
-
+$userId = authenticateCookie();
+$log = $userId != -1;
 
 if ($log) {
 	// Get data for the current user
-	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$id]);
+	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$userId]);
 
 	if (!isset($rss)) {
 		query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
