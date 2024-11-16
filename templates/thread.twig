@@ -8,14 +8,14 @@
 			{% if userdata.rank >= thread.minreply %}
 				{% if userdata.id == threadcreator or userdata.rank > 1 %}
 					{% set actions = {
-						("editthread?id="~id) : "Edit thread",
-						("newreply?id="~id) : "New reply"} %}
+						("editthread?id="~id) : __("Edit thread"),
+						("newreply?id="~id) : __("New reply")} %}
 				{% else %}
-					{% set actions = {("newreply?id="~id) : "New reply"} %}
+					{% set actions = {("newreply?id="~id) : __("New reply")} %}
 				{% endif %}
 			{% endif %}
 		{% else %}
-			{% set actions = {"none" : "Thread locked"} %}
+			{% set actions = {"none" : __("Thread locked")} %}
 		{% endif %}
 	{% endif %}
 
@@ -24,11 +24,11 @@
 		{% set noindex = true %}
 	{% endif %}
 {% elseif viewmode == "user" %}
-	{% set title = "Posts" %}
+	{% set title = __("Posts") %}
 	{% set pagename = "/thread?user=" ~ uid %}
 	{% set noindex = true %}
 {% elseif viewmode == "time" %}
-	{% set title = "Latest posts (by post)" %}
+	{% set title = __("Latest posts (by post)") %}
 	{% set pagename = "/thread?time=" ~ time %}
 	{% set noindex = true %}
 {% endif %}
@@ -36,9 +36,9 @@
 	{% block content %}
 {% if viewmode == "time" %}
 	<table class="c1 autowidth br-after">
-		<tr class="h"><td>Latest posts</td></tr>
+		<tr class="h"><td>{{ __("Latest posts") }}</td></tr>
 		<tr><td class="n1 center">
-			<a href="forum?time={{ time }}">By thread</a> | By post (<a href="rss">RSS</a>)
+			<a href="forum?time={{ time }}">{{ __("By thread") }}</a> | {{ __("By post") }} (<a href="rss">RSS</a>)
 			<br><br>{{ timelinks('thread', time) }}
 		</td></tr>
 	</table>
@@ -53,18 +53,18 @@
 {% endfor %}
 
 {% if i == 1 %}
-	<table class="c1"><tr><td class="n1 center" colspan="6"><p>No posts found.</p></td></tr></table>
+	<table class="c1"><tr><td class="n1 center" colspan="6"><p>{{ __("No posts found.") }}</p></td></tr></table>
 {% endif %}
 
 {% if viewmode == "thread" and log and userdata.rank >= thread.minreply and not thread.closed %}
 <form action="newreply?id={{ id }}" method="POST"><table class="c1 postform">
-	<tr class="h"><td>Quick Reply</a></td>
+	<tr class="h"><td>{{ __("Quick Reply") }}</a></td>
 	<tr class="n1"><td class="center">
 		<textarea class="postform" name="message" rows="8" cols="80"></textarea>
 
 		<div class="actionbar-quick">
-			<input type="submit" name="action" value="Preview">
-			<input type="submit" name="action" value="Submit">
+			<input type="submit" name="action" value="{{ __("Preview") }}">
+			<input type="submit" name="action" value="{{ __("Submit") }}">
 		</div>
 	</td></tr>
 </table></form>

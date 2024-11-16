@@ -5,7 +5,7 @@ $smiliestext = '';
 $x = 0;
 foreach ($smilies as $text => $url) {
 	if ($x % 6 == 0) $smiliestext .= "<tr>";
-	$smiliestext .= sprintf('<td class="b n1"><img class="smiley" src="%s"> %s</td>',
+	$smiliestext .= sprintf('<td class="n1"><img class="smiley" src="%s"> %s</td>',
 		$url, htmlspecialchars($text));
 	$x++;
 	if ($x % 6 == 0) $smiliestext .= "</tr>";

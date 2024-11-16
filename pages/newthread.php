@@ -15,15 +15,15 @@ if ($forum['minthread'] > $userdata['rank'])
 
 $error = [];
 
-if ($action == 'Submit') {
+if ($action == __('Submit')) {
 	if (strlen(trim($title)) < 10)
-		$error[] = "You need to enter a longer title.";
+		$error[] = __("You need to enter a longer title.");
 
 	if (strlen(trim($message)) == 0)
-		$error[] = "You need to enter a message to your thread.";
+		$error[] = __("You need to enter a message to your thread.");
 
 	if ($userdata['lastpost'] > time() - 30 && !IS_ROOT)
-		$error[] = "Please wait at least 30 seconds before starting a new thread.";
+		$error[] = __("Please wait at least 30 seconds before starting a new thread.");
 
 	if ($error == []) {
 		insertInto('threads', [
@@ -58,12 +58,12 @@ if ($action == 'Submit') {
 
 		redirect("thread?id=%s", $tid);
 	}
-} elseif ($action == 'Preview') {
+} elseif ($action == __('Preview')) {
 	$post['date'] = time();
 	$post['text'] = $message;
 	foreach ($userdata as $field => $val)
 		$post['u_'.$field] = $val;
-	$post['headerbar'] = 'Post preview';
+	$post['headerbar'] = __('Post preview');
 }
 
 $breadcrumb = [

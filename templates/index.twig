@@ -1,26 +1,26 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Index" %}
+{% set title = __("Home") %}
 {% set nobreadcrumb = true %}
 
 	{% block content %}
 {% if just_registered %}
 	<table class="c1">
-		<tr><td class="n1">You have successfully registered and are now logged in.</td></tr>
+		<tr><td class="n1">{{ __("You have successfully registered and are now logged in.") }}</td></tr>
 	</table><br>
 {% endif %}
 
 {% if log %}
-	<a class="float-right" href="./?action=markread&fid=all">Mark all forums read</a>
+	<a class="float-right" href="./?action=markread&fid=all">{{ __("Mark all forums read") }}</a>
 {% endif %}
 
 {% if news %}
 	<table class="c1">
-		<tr class="h"><td colspan="2">Latest Announcement</td></tr>
+		<tr class="h"><td colspan="2">{{ __("Latest Announcement") }}</td></tr>
 		<tr class="n1">
 			<td>
-				<a href="thread?id={{ news.tid }}">{{ news.title }}</a> - by {{ userlink(news, 'u_') }} on {{ news.date | date('Y-m-d H:i') }}
-				<span class="float-right"><a href="forum?id={{ config.newsid }}">All announcements</a></span>
+				<a href="thread?id={{ news.tid }}">{{ news.title }}</a> - {{ __("by %s", userlink(news, 'u_')) }} {{ __("on %s", (news.date | date('Y-m-d H:i'))) }}
+				<span class="float-right"><a href="forum?id={{ config.newsid }}">{{ __("All announcements") }}</a></span>
 			</td>
 		</tr>
 	</table><br>
@@ -31,10 +31,10 @@
 {% if config.mergedforumlist %}
 <table class="c1">
 	<tr class="h">
-		<td colspan="2">Forum</td>
-		<td class="nom" style="width:60px">Threads</td>
-		<td class="nom" style="width:60px">Posts</td>
-		<td style="width:180px">Last post</td>
+		<td colspan="2">{{ __("Forum") }}</td>
+		<td class="nom" style="width:60px">{{ __("Threads") }}</td>
+		<td class="nom" style="width:60px">{{ __("Posts") }}</td>
+		<td style="width:180px">{{ __("Last post") }}</td>
 	</tr>
 {% endif %}
 
@@ -50,9 +50,9 @@
 <table class="c1">
 	<tr class="h">
 		<td colspan="2" class="left">{{ categories[forum.cat] }}</td>
-		<td class="nom" style="width:60px">Threads</td>
-		<td class="nom" style="width:60px">Posts</td>
-		<td style="width:180px">Last post</td>
+		<td class="nom" style="width:60px">{{ __("Threads") }}</td>
+		<td class="nom" style="width:60px">{{ __("Posts") }}</td>
+		<td style="width:180px">{{ __("Last post") }}</td>
 	</tr>
 		{% endif %}
 
@@ -66,7 +66,7 @@
 			{% endif %}
 		</td>
 		<td class="n2 left">
-			<a href="forum?id={{ forum.id }}">{{ forum.title }}</a> {% if forum.minread > 0 %}<span class="sfont">(Private)</span>{% endif %}
+			<a href="forum?id={{ forum.id }}">{{ forum.title }}</a> {% if forum.minread > 0 %}<span class="sfont">{{ __("(Private)") }}</span>{% endif %}
 			<div style="margin-top:3px">{{ forum.descr | raw }}</div>
 		</td>
 		<td class="n1 nom">{{ forum.threads }}</td>
@@ -74,31 +74,41 @@
 		<td class="n2">
 			{% if forum.posts > 0 and forum.lastdate > 0 %}
 				<span>{{ forum.lastdate | date('Y-m-d H:i') }}</span><br>
-				<span>by {{ userlink(forum, 'u_') }}
+				<span>{{ __("by %s", userlink(forum, 'u_')) }}
 					<a href="thread?pid={{ forum.lastid }}#{{ forum.lastid }}">&raquo;</a></span>
-			{% else %}None{% endif %}
+			{% else %}{{ __("None") }}{% endif %}
 		</td>
 	</tr>
 {% endfor %}
 </table>
 
 <br><table class="c1 faq">
-	<tr class="h"><td class="left">Online users (over the past 15 minutes)</td></tr>
+	<tr class="h"><td class="left">{{ __("Online users (over the past 15 minutes)") }}</td></tr>
 	<tr><td class="n1">
-		<p>{{ online_users_count }} user{% if online_users_count != 1 %}s{% endif %} online:
-			{% for user in online_users %}{% if not loop.first %}, {% endif %}{{ userlink(user) }}{% endfor %}</p>
+		<p>
+			{% if online_users_count == 1 %}
+				{{ __("%d user online:", online_users_count) }}
+			{% else %}
+				{{ __("%d users online:", online_users_count) }}
+			{% endif %}
+			{% for user in online_users %}{% if not loop.first %}, {% endif %}{{ userlink(user) }}{% endfor %}
+		</p>
 
-		{% if guests_online %}
-		<p>In addition there {% if guests_online != 1 %}are{% else %}is{% endif %} {{ guests_online }} guest{% if guests_online != 1 %}s{% endif %} online.</p>
+		{% if guests_online > 1 %}
+			<p>{{ __("In addition there are %d guests online.", guests_online) }}</p>
+		{% elseif guests_online == 1 %}
+			<p>{{ __("In addition there is %d guest online.", guests_online) }}</p>
 		{% endif %}
 	</td></tr>
 </table><br><table class="c1 faq">
-	<tr class="h"><td class="left">Statistics</td></tr>
+	<tr class="h"><td class="left">{{ __("Statistics") }}</td></tr>
 	<tr><td class="n1">
-		<p>Total posts: <strong>{{ stats.p }}</strong>
-			&mdash; Total threads: <strong>{{ stats.t }}</strong>
-			&mdash; Total members: <strong>{{ stats.u }}</strong>
-			{% if newestuser is iterable %} &mdash; Newest: {{ userlink(newestuser) }}{% endif %}</p>
+		<p>
+			{{ __("Total posts:") }} <strong>{{ stats.p }}</strong>
+			&mdash; {{ __("Total threads:") }} <strong>{{ stats.t }}</strong>
+			&mdash; {{ __("Total members:") }} <strong>{{ stats.u }}</strong>
+			{% if newestuser is iterable %} &mdash; {{ __("Newest:") }} {{ userlink(newestuser) }}{% endif %}
+		</p>
 	</td></tr>
 </table>
 	{% endblock %}

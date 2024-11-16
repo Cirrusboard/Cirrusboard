@@ -4,12 +4,12 @@ needsLogin();
 $pid = $_GET['pid'] ?? null;
 $action = $_POST['action'] ?? null;
 
-if (IS_BANNED) error('403', 'You are banned and cannot edit posts.');
+if (IS_BANNED) error('403', __('You are banned and cannot edit posts.'));
 
 // Post deletion, stuffed into editpost because why not.
 if (isset($_GET['delete']) || isset($_GET['undelete'])) {
 	if (!IS_MOD)
-		error('403', "You do not have the permission to do this.");
+		error('403');
 
 	query("UPDATE posts SET deleted = ? WHERE id = ?", [(isset($_GET['delete']) ? 1 : 0), $pid]);
 
@@ -26,9 +26,9 @@ $thread = fetch("SELECT p.user p_user, t.*, f.title f_title
 if (!$thread)
 	error('404');
 if ($thread['closed'] && !IS_MOD)
-	error('403', "You can't edit a post in closed threads.");
+	error('403', __("You can't edit a post in closed threads."));
 if ($userdata['id'] != $thread['p_user'] && !IS_ROOT)
-	error('403', "You do not have permission to edit this post.");
+	error('403');
 
 $editpost = fetch("SELECT u.id, p.user, pt.text FROM posts p
 			LEFT JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
@@ -40,11 +40,11 @@ $error = [];
 
 $message = $_POST['message'] ?? $editpost['text'];
 
-if ($action == 'Submit') {
+if ($action == __('Submit')) {
 	if ($message == $editpost['text'])
-		$error[] = "No changes detected.";
+		$error[] = __("No changes detected.");
 	if (strlen($message) < 15)
-		$error[] = "You can't blank out your post!";
+		$error[] = __("You can't blank out your post!");
 
 	if ($error == []) {
 		$newrev = result("SELECT revision FROM posts WHERE id = ?", [$pid]) + 1;
@@ -56,13 +56,13 @@ if ($action == 'Submit') {
 
 		redirect("thread?pid=$pid#$pid");
 	}
-} elseif ($action == 'Preview') {
+} elseif ($action == __('Preview')) {
 	$euser = fetch("SELECT * FROM users WHERE id = ?", [$editpost['id']]);
 	$post['date'] = time();
 	$post['text'] = $message;
 	foreach ($euser as $field => $val)
 		$post['u_'.$field] = $val;
-	$post['headerbar'] = 'Post preview';
+	$post['headerbar'] = __('Post preview');
 }
 
 $breadcrumb = [

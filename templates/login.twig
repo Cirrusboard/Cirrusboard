@@ -1,27 +1,27 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Login" %}
+{% set title = __("Log in") %}
 {% set noindex = true %}
 
 	{% block content %}
 <form class="reglog" method="POST"><table class="c1">
-	<tr class="h"><td>Login</td></tr>
+	<tr class="h"><td>{{ __("Log in") }}</td></tr>
 	<tr><td class="n1 center">
 		{% if error %}
-			<p class="error">Error: {{ error }}</p>
+			<p class="error">{{ __("Error:") }} {{ error }}</p>
 		{% endif %}
 
-		<p>Login to your existing {{ config.title }} account.</p>
+		<p>{{ __("Login to your existing %s account.", config.title) }}</p>
 
 		<div>
-			<span>Username:</span>
+			<span>{{ __("Username:") }}</span>
 			<input type="text" name="name" size="25" maxlength="25" value="{{ name }}">
 		</div><div>
-			<span>Password:</span>
+			<span>{{ __("Password:") }}</span>
 			<input type="password" name="password" size="25" maxlength="32">
 		</div>
 
-		<div><input type="submit" class="submit" name="action" value="Login"></div>
+		<div><input type="submit" class="submit" name="action" value="{{ __("Login") }}"></div>
 	</td>
 </table></form>
 	{% endblock %}

@@ -3,7 +3,7 @@ $error = '';
 
 $action = $_POST['action'] ?? null;
 
-if ($action == 'Login') {
+if ($action == __('Login')) {
 	$name = $_POST['name'] ?? null;
 	$pass = $_POST['password'] ?? null;
 
@@ -12,7 +12,7 @@ if ($action == 'Login') {
 	// Don't give any more details than just "invalid credentials".
 
 	if (!$name || !$pass || !$login || !password_verify($pass, $login['password']))
-		$error = 'Invalid credentials.';
+		$error = __('Invalid credentials.');
 
 	if ($error == '') {
 		setcookie('token', $login['token'], 2147483647);

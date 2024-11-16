@@ -1,103 +1,103 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Edit profile" %}
+{% set title = __("Edit profile") %}
 {% set noindex = true %}
 
 	{% block content %}
 {% if error %}
-	<p class="error">The following errors occured when trying to edit your profile: <br>- {{ error | join('<br>- ') | raw }}</p>
+	<p class="error">{{ __("The following errors occurred when trying to edit your profile:") }} <br>- {{ error | join('<br>- ') | raw }}</p>
 {% endif %}
 
 <form method="post" enctype="multipart/form-data"><table class="c1">
-	<tr class="h"><td colspan="2">Edit profile</td></tr>
+	<tr class="h"><td colspan="2">{{ __("Edit profile") }}</td></tr>
 
-	<tr class="c"><td colspan="2">Login information</td></tr>
+	<tr class="c"><td colspan="2">{{ __("Login information") }}</td></tr>
 	<tr>
-		<td class="n1 center">Username:</td>
+		<td class="n1 center">{{ __("Username:") }}</td>
 		<td class="n2">{{ user.name }}</td>
 	</tr><tr>
-		<td class="n1 center">Password:</td>
+		<td class="n1 center">{{ __("Password:") }}</td>
 		<td class="n2">
-			{{ field_input('password', '', 13, 64, 'New password', 'password') }}
-			{{ field_input('password2', '', 13, 32, 'Repeat password', 'password') }}
-			<br><span class="sfont">(Changing your password will also change your token, logging you out of any other sessions)</span></td>
+			{{ field_input('password', '', 13, 64, __("New password"), 'password') }}
+			{{ field_input('password2', '', 13, 32, __("Repeat password"), 'password') }}
+			<br><span class="sfont">{{ __("(Changing your password will also change your token, logging you out of any other sessions)") }}</span></td>
 	</tr>
 
-	<tr class="c"><td colspan="2">Appearance</td></tr>
+	<tr class="c"><td colspan="2">{{ __("Appearance") }}</td></tr>
 	{% if canedituser %}
 	<tr>
-		<td class="n1 center">Rank:</td>
+		<td class="n1 center">{{ __("Rank:") }}</td>
 		<td class="n2">{{ field_select('rank', user.rank, ranks) }}</td>
 	</tr>
 	{% endif %}
 	{% if userdata.rank > 1 %}
 	<tr>
-		<td class="n1 center">Title:</td>
+		<td class="n1 center">{{ __("Title:") }}</td>
 		<td class="n2">{{ field_input('title', user.title, 40, 255) }}</td>
 	</tr>
 	{% endif %}
 	<tr>
-		<td class="n1 center">Avatar:</td>
-		<td class="n2"><input type="file" name="avatar" size="40"> or {{ field_checkbox('picturedel', 0, "Erase existing avatar") }}
-			<br>Must be PNG, JPG or GIF, within 100kB and 180x180.</td>
+		<td class="n1 center">{{ __("Avatar:") }}</td>
+		<td class="n2"><input type="file" name="avatar" size="40"> {{ __("or") }} {{ field_checkbox('picturedel', 0, __("Erase existing avatar")) }}
+			<br>{{ __("Must be PNG, JPG or GIF, within 100kB and 180x180.") }}</td>
 	</tr>
 
-	<tr class="c"><td colspan="2">User information</td></tr>
+	<tr class="c"><td colspan="2">{{ __("User information") }}</td></tr>
 	<tr>
-		<td class="n1 center">Location:</td>
-		<td class="n2">{{ field_input('location', user.location, 40, 60, "Location") }}</td>
+		<td class="n1 center">{{ __("Location:") }}</td>
+		<td class="n2">{{ field_input('location', user.location, 40, 60, __("Location")) }}</td>
 	</tr><tr>
-		<td class="n1 center">Birthday:</td>
+		<td class="n1 center">{{ __("Birthday:") }}</td>
 		<td class="n2">
-			{{ field_input('birthD', birthday[2], 5, 2, "Day") }}
-			{{ field_input('birthM', birthday[1], 5, 2, "Month") }}
-			{{ field_input('birthY', birthday[0], 5, 4, "Year") }}</td>
+			{{ field_input('birthD', birthday[2], 5, 2, __("Day")) }}
+			{{ field_input('birthM', birthday[1], 5, 2, __("Month")) }}
+			{{ field_input('birthY', birthday[0], 5, 4, __("Year")) }}</td>
 	</tr><tr>
-		<td class="n1 center">Bio:</td>
+		<td class="n1 center">{{ __("Bio:") }}</td>
 		<td class="n2">{{ field_textarea('bio', user.bio, 5, 80) }}</td>
 	</tr><tr>
-		<td class="n1 center">Email address:</td>
+		<td class="n1 center">{{ __("Email address:") }}</td>
 		<td class="n2">{{ field_input('email', user.email, 40, 60, "email@example.org") }}
-			<br>{{ field_checkbox('showemail', user.showemail, "Show email on profile page") }}</td>
+			<br>{{ field_checkbox('showemail', user.showemail, __("Show email on profile page")) }}</td>
 	</tr>
 
 	{% if config.postlayouts and config.html %}
-	<tr class="c"><td colspan="2">Post layout</td></tr>
+	<tr class="c"><td colspan="2">{{ __("Post layout") }}</td></tr>
 	<tr>
-		<td class="n1 center">Header:</td>
+		<td class="n1 center">{{ __("Header:") }}</td>
 		<td class="n2">{{ field_textarea('header', user.header, 7, 80) }}</td>
 	</tr><tr>
-		<td class="n1 center">Signature:</td>
+		<td class="n1 center">{{ __("Signature:") }}</td>
 		<td class="n2">{{ field_textarea('signature', user.signature, 7, 80) }}
-			<br>{{ field_checkbox('signsep', user.signsep, "Show signature separator") }}</td>
+			<br>{{ field_checkbox('signsep', user.signsep, __("Show signature separator")) }}</td>
 	</tr>
 	{% else %}
-	<tr class="c"><td colspan="2">Signature</td></tr>
+	<tr class="c"><td colspan="2">{{ __("Signature") }}</td></tr>
 	<tr>
-		<td class="n1 center">Signature:</td>
+		<td class="n1 center">{{ __("Signature:") }}</td>
 		<td class="n2">{{ field_textarea('signature', user.signature, 7, 80) }}</td>
 	</tr>
 	{% endif %}
 
-	<tr class="c"><td colspan="2">Options</td></tr>
+	<tr class="c"><td colspan="2">{{ __("Options") }}</td></tr>
 	<tr>
-		<td class="n1 center">Theme:</td>
+		<td class="n1 center">{{ __("Theme:") }}</td>
 		<td class="n2">{{ field_select('theme', user.theme ?? config.defaulttheme, theme_list()) }}</td>
 	</tr><tr>
-		<td class="n1 center">Timezone:</td>
+		<td class="n1 center">{{ __("Timezone:") }}</td>
 		<td class="n2">{{ field_select('timezone', user.timezone ?? config.defaulttimezone, timezones) }}</td>
 	</tr><tr>
-		<td class="n1 center">Posts per page:</td>
+		<td class="n1 center">{{ __("Posts per page:") }}</td>
 		<td class="n2">{{ field_input('ppp', user.ppp, 3, 3, 20) }}</td>
 	</tr><tr>
-		<td class="n1 center">Threads per page:</td>
+		<td class="n1 center">{{ __("Threads per page:") }}</td>
 		<td class="n2">{{ field_input('tpp', user.tpp, 3, 3, 20) }}</td>
 	</tr>
 
 	<tr class="c"><td colspan="2">&nbsp;</td></tr>
 	<tr class="n1">
 		<td class="nb"></td>
-		<td class="nb"><input type="submit" name="action" value="Edit profile"></td>
+		<td class="nb"><input type="submit" name="action" value="{{ __("Edit profile") }}"></td>
 	</tr>
 </table></form>
 	{% endblock %}

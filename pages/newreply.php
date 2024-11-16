@@ -12,19 +12,19 @@ $thread = fetch("SELECT t.*, f.title f_title, f.minreply f_minreply
 if (!$thread)
 	error('404');
 if ($thread['f_minreply'] > $userdata['rank'])
-	error('403', "You have no permissions to create posts in this forum.");
+	error('403');
 if ($thread['closed'] && !IS_MOD)
-	error('403', "You can't post in closed threads!");
+	error('403', __("You can't post in closed threads."));
 
 $error = [];
 
-if ($action == "Submit") {
+if ($action == __("Submit")) {
 	$lastpost = fetch("SELECT id, user, date FROM posts WHERE thread = ? ORDER BY id DESC LIMIT 1", [$thread['id']]);
 	if ($lastpost['user'] == $userdata['id'] && $lastpost['date'] >= (time() - 60*60*12))
-		$error[] = "You can't double post until it's been at least 12 hours!";
+		$error[] = __("You can't double post until it's been at least 12 hours!");
 
 	if (strlen($message) == 0)
-		$error[] = "Your post is empty. Enter a message and try again.";
+		$error[] = __("Your post is empty. Enter a message and try again.");
 
 	if ($error == []) {
 		insertInto('posts', [
@@ -47,12 +47,12 @@ if ($action == "Submit") {
 
 		redirect("thread?pid=$pid#$pid");
 	}
-} elseif ($action == 'Preview') {
+} elseif ($action == __('Preview')) {
 	$post['date'] = time();
 	$post['text'] = $message;
 	foreach ($userdata as $field => $val)
 		$post['u_'.$field] = $val;
-	$post['headerbar'] = 'Post preview';
+	$post['headerbar'] = __('Post preview');
 }
 
 // Append quoted message to the newreply box, to reply to other messages.

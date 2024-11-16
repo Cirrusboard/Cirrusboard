@@ -1,28 +1,28 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Edit thread" %}
+{% set title = __("Edit thread") %}
 {% set noindex = true %}
 
 	{% block content %}
 <form method="post"><table class="c1">
-	<tr class="h"><td colspan="2">Edit thread</td></tr>
+	<tr class="h"><td colspan="2">{{ __("Edit thread") }}</td></tr>
 
 	<tr>
-		<td class="n1 center" width="200">Title:</td>
-		<td class="n2">{{ field_input('title', thread.title, 40, 127, "Thread title") }}</td>
+		<td class="n1 center" width="200">{{ __("Title:") }}</td>
+		<td class="n2">{{ field_input('title', thread.title, 40, 127, __("Thread title")) }}</td>
 	</tr>
 
 	{% if userdata.rank > 1 %}
 		<tr>
-			<td class="n1 center">Move to:</td>
+			<td class="n1 center">{{ __("Move to:") }}</td>
 			<td class="n2">{{ forumlist(thread.forum_id) }}</td>
 		</tr>
 
 		<tr>
-			<td class="n1 center" height="35">Thread options:</td>
+			<td class="n1 center" height="35">{{ __("Thread options:") }}</td>
 			<td class="n2">
-				{{ field_checkbox('close', thread.closed, "Lock") }} &nbsp;
-				{{ field_checkbox('sticky', thread.sticky, "Sticky") }}
+				{{ field_checkbox('close', thread.closed, __("Lock")) }} &nbsp;
+				{{ field_checkbox('sticky', thread.sticky, __("Sticky")) }}
 			</td>
 		</tr>
 	{% endif %}
@@ -30,7 +30,7 @@
 	<tr class="h"><td colspan="2">&nbsp;</td></tr>
 	<tr class="n1">
 		<td class="nb"></td>
-		<td class="nb"><input type="submit" name="action" value="Save"></td>
+		<td class="nb"><input type="submit" name="action" value="{{ __("Save") }}"></td>
 	</tr>
 </table></form>
 	{% endblock %}

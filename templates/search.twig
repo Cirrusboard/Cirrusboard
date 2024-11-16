@@ -1,26 +1,22 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Search" %}
+{% set title = __("Search") %}
 {% set noindex = true %}
 
 	{% block content %}
 <form action="search" method="get"><table class="c1">
-	<tr class="h"><td>Search</td>
+	<tr class="h"><td>{{ __("Search") }}</td>
 	<tr><td class="n1 center">
-		<p>Search for: <input type="text" name="query" size="40" value="{{ query }}"></p>
-		<p>in
-			<label><input type="radio" class="radio" name="where" value="0"{% if where == 0 %} checked{% endif %}> thread title</label>
-			<label><input type="radio" class="radio" name="where" value="1"{% if where == 1 %} checked{% endif %}> post text</label></p>
-		<p><input type="submit" value="Search"></p>
+		<p>{{ __("Search for:") }} <input type="text" name="query" size="40" value="{{ query }}"></p>
+		<p>{{ __("in") }}
+			<label><input type="radio" class="radio" name="where" value="0"{% if where == 0 %} checked{% endif %}> {{ __("thread title") }}</label>
+			<label><input type="radio" class="radio" name="where" value="1"{% if where == 1 %} checked{% endif %}> {{ __("post text") }}</label></p>
+		<p><input type="submit" value="{{ __("Search") }}"></p>
 	</td></tr>
 </table></form><br>
 
 {# rest is if query has been inputted #}
 {% if query %}
-
-{% if query|length < 3 %}
-	Please enter a search query longer than 3 characters.
-{% endif %}
 
 {% if where == 1 %}
 	{% set i = 1 %}
@@ -29,15 +25,15 @@
 		{% set i = i + 1 %}
 	{% endfor %}
 	{% if i == 1 %}
-		<table class="c1"><tr><td class="n1 center"><p>No results found.</p></td></tr></table>
+		<table class="c1"><tr><td class="n1 center"><p>{{ __("No results found.") }}</p></td></tr></table>
 	{% endif %}
 {% else %}
 	<table class="c1">
-		<tr class="h"><td colspan="3">Results:</td></tr>
+		<tr class="h"><td colspan="3">{{ __("Results:") }}</td></tr>
 		<tr class="c">
-			<td class="b h">Title</td>
-			<td class="b h" style="width:150px">Started by</td>
-			<td class="b h" style="width:180px">Date</td>
+			<td>{{ __("Title") }}</td>
+			<td style="width:150px">{{ __("Started by") }}</td>
+			<td style="width:180px">{{ __("Date") }}</td>
 		</tr>
 		{% set i = 1 %}
 		{% for thread in threads %}
@@ -55,7 +51,7 @@
 			{% set i = i + 1 %}
 		{% endfor %}
 		{% if i == 1 %}
-			<tr><td class="n1 center" colspan="6"><p>No results found.</p></td></tr>
+			<tr><td class="n1 center" colspan="6"><p>{{ __("No results found.") }}</p></td></tr>
 		{% endif %}
 	</table>
 {% endif %}

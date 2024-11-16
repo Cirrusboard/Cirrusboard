@@ -9,22 +9,22 @@ if (isset($_POST['action'])) {
 	// Check to see user should be able to register...
 
 	if (!$name)
-		$error[] = 'Blank username.';
+		$error[] = __('Blank username.');
 
-	if (!$pass || strlen($pass) < 15)
-		$error[] = 'Password is too short (needs to be at least 15 characters).';
+	if (!$pass || strlen($pass) < 12)
+		$error[] = __('Password is too short (needs to be at least %d characters).', 12);
 
 	if (!$pass2 || $pass != $pass2)
-		$error[] = "The passwords don't match.";
+		$error[] = __("The passwords don't match.");
 
 	if (result("SELECT COUNT(*) FROM users WHERE LOWER(name) = ?", [strtolower($name)]))
-		$error[] = "Username has already been taken.";
+		$error[] = __("Username has already been taken.");
 
 	if (!preg_match('/^[a-zA-Z0-9\-_]+$/', $name))
-		$error[] = "Username contains invalid characters (Only alphanumeric and underscore allowed). ";
+		$error[] = __("Username contains invalid characters (Only alphanumeric and underscore allowed).");
 
 	if (result("SELECT COUNT(*) FROM users WHERE ip = ?", [$ipaddr]) && !DEBUG)
-		$error[] = "Creating multiple accounts (alts) aren't allowed. ";
+		$error[] = __("Creating multiple accounts (alts) aren't allowed.");
 
 	// If no error found, it will register and redirect to index page.
 	// Otherwise register page will be shown again, with $error displayed to the user.

@@ -82,53 +82,53 @@ HTML
 <p>Likewise, some BBCode is supported. See the table below.</p>
 <table class="c1 autowidth">
 	<tr class="h">
-		<td class="b h">Tag</td>
-		<td class="b h">Effect</td>
+		<td class="h">Tag</td>
+		<td class="h">Effect</td>
 	</tr><tr>
-		<td class="b n1">[b]<i>text</i>[/b]</td>
-		<td class="b n2"><b>Bold Text</b></td>
+		<td class="n1">[b]<i>text</i>[/b]</td>
+		<td class="n2"><b>Bold Text</b></td>
 	</tr><tr>
-		<td class="b n1">[i]<i>text</i>[/i]</td>
-		<td class="b n2"><i>Italic Text</i></td>
+		<td class="n1">[i]<i>text</i>[/i]</td>
+		<td class="n2"><i>Italic Text</i></td>
 	</tr><tr>
-		<td class="b n1">[u]<i>text</i>[/u]</td>
-		<td class="b n2"><u>Underlined Text</u></td>
+		<td class="n1">[u]<i>text</i>[/u]</td>
+		<td class="n2"><u>Underlined Text</u></td>
 	</tr><tr>
-		<td class="b n1">[s]<i>text</i>[/s]</td>
-		<td class="b n2"><s>Striked-out Text</s></td>
+		<td class="n1">[s]<i>text</i>[/s]</td>
+		<td class="n2"><s>Striked-out Text</s></td>
 	</tr><tr>
-		<td class="b n1">[color=<b>hexcolor</b>]<i>text</i>[/color]</td>
-		<td class="b n2"><span style="color:#BCDE9A">Custom color Text</span></td>
+		<td class="n1">[color=<b>hexcolor</b>]<i>text</i>[/color]</td>
+		<td class="n2"><span style="color:#BCDE9A">Custom color Text</span></td>
 	</tr><tr>
-		<td class="b n1">
+		<td class="n1">
 			[url]<i>URL</i>[/url]<br>
 			[url=<i>URL</i>]<i>Link title</i>[/url]
 		</td>
-		<td class="b n2">Creates a link with or without a title.</td>
+		<td class="n2">Creates a link with or without a title.</td>
 	</tr><tr>
-		<td class="b n1">[spoiler]<i>text</i>[/spoiler]</td>
-		<td class="b n2">Used for hiding spoilers.</td>
+		<td class="n1">[spoiler]<i>text</i>[/spoiler]</td>
+		<td class="n2">Used for hiding spoilers.</td>
 	</tr><tr>
-		<td class="b n1">[quote]<i>text</i>[/quote]</td>
-		<td class="b n2">Displays a blockquote with the text</td>
+		<td class="n1">[quote]<i>text</i>[/quote]</td>
+		<td class="n2">Displays a blockquote with the text</td>
 	</tr><tr>
-		<td class="b n1">[code]<i>code text</i>[/code]</td>
-		<td class="b n2">Displays code in a formatted box.</td>
+		<td class="n1">[code]<i>code text</i>[/code]</td>
+		<td class="n2">Displays code in a formatted box.</td>
 	</tr><tr>
-		<td class="b n1">[pre]<i>text</i>[/pre]</td>
-		<td class="b n2">Inline preformatted text, displayed in monospace.</td>
+		<td class="n1">[pre]<i>text</i>[/pre]</td>
+		<td class="n2">Inline preformatted text, displayed in monospace.</td>
 	</tr><tr>
-		<td class="b n1">[img]<i>URL of image to display</i>[/img]</td>
-		<td class="b n2">Displays an image.</td>
+		<td class="n1">[img]<i>URL of image to display</i>[/img]</td>
+		<td class="n2">Displays an image.</td>
 	</tr><tr>
-		<td class="b n1">[youtube]<i>video id</i>[/youtube]</td>
-		<td class="b n2">Creates an embeded YouTube video.</td>
+		<td class="n1">[youtube]<i>video id</i>[/youtube]</td>
+		<td class="n2">Creates an embedded YouTube video.</td>
 	</tr><tr>
-		<td class="b n1">@"<i>User Name</i>"</td>
-		<td class="b n2">Creates a link to a user's profile complete with name colour.</td>
+		<td class="n1">@"<i>User Name</i>"</td>
+		<td class="n2">Creates a link to a user's profile complete with name colour.</td>
 	</tr><tr>
-		<td class="b n1">&gt;&gt;<i>Post ID</i></td>
-		<td class="b n2">Simple link reference to a particular post for replying to it.</td>
+		<td class="n1">&gt;&gt;<i>Post ID</i></td>
+		<td class="n2">Simple link reference to a particular post for replying to it.</td>
 	</tr>
 </table>
 <p>Most HTML tags are also able to be used in your posts. But with great power comes great responsibility.</p>

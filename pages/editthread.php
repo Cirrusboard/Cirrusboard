@@ -15,10 +15,10 @@ if (!$thread) error('404');
 $threadcreator = result("SELECT user FROM threads WHERE id = ?", [$id]);
 
 if ((!IS_MOD && $userdata['id'] != $threadcreator) || ($thread['minread'] > $userdata['rank']))
-	error('403', "You are not allowed to edit this thread.");
+	error('403');
 
 if (!IS_MOD && $thread['closed'])
-	error('403', "This thread is closed.");
+	error('403', __("This thread is closed."));
 
 if (isset($_POST['action'])) {
 	$title = $_POST['title'] ?? '';

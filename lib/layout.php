@@ -35,9 +35,9 @@ function error($title, $message = '') {
 	if (!$message) {
 		// Placeholder messages if there is no message.
 		if ($title == '403')
-			$message = "You do not have access to this page or action.";
+			$message = __("You do not have access to this page or action.");
 		if ($title == '404')
-			$message = "The requested page was not found. The link may be broken, the page may have been deleted, or you may not have access to it.";
+			$message = __("The requested page was not found. The link may be broken, the page may have been deleted, or you may not have access to it.");
 	}
 
 	twigloader()->display('_error.twig', [
@@ -50,7 +50,7 @@ function threadpost($post) {
 	global $userdata;
 
 	if (isset($post['minread']) and $post['minread'] > $userdata['rank'])
-		return '<table class="c1 threadpost"><tr><td class="n1 center">(post in restricted forum)</td></tr></table>';
+		return '<table class="c1 threadpost"><tr><td class="n1 center">'.__("(post in restricted forum)").'</td></tr></table>';
 	else {
 		if (isset($post['deleted']) && $post['deleted']) {
 			return twigloader('components')->render('threadpost_deleted.twig', [

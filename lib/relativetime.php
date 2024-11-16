@@ -10,32 +10,7 @@ class RelativeTime {
 	/** @var array Array With configuration options **/
 	protected $config = [];
 
-	protected $strings = [
-		'seconds' => [
-			'plural' => '%d seconds',
-			'singular' => '%d second',
-		],
-		'minutes' => [
-			'plural' => '%d minutes',
-			'singular' => '%d minute',
-		],
-		'hours' => [
-			'plural' => '%d hours',
-			'singular' => '%d hour',
-		],
-		'days' => [
-			'plural' => '%d days',
-			'singular' => '%d day',
-		],
-		'months' => [
-			'plural' => '%d months',
-			'singular' => '%d month',
-		],
-		'years' => [
-			'plural' => '%d years',
-			'singular' => '%d year',
-		],
-	];
+	protected $strings = [];
 
 	/**
 	 * Construct
@@ -48,6 +23,33 @@ class RelativeTime {
 			'suffix' => true,
 			'truncate' => 0,
 		], $config);
+
+		$this->strings = [
+			'seconds' => [
+				'plural' => __('%%d seconds'),
+				'singular' => __('%%d second'),
+			],
+			'minutes' => [
+				'plural' => __('%%d minutes'),
+				'singular' => __('%%d minute'),
+			],
+			'hours' => [
+				'plural' => __('%%d hours'),
+				'singular' => __('%%d hour'),
+			],
+			'days' => [
+				'plural' => __('%%d days'),
+				'singular' => __('%%d day'),
+			],
+			'months' => [
+				'plural' => __('%%d months'),
+				'singular' => __('%%d month'),
+			],
+			'years' => [
+				'plural' => __('%%d years'),
+				'singular' => __('%%d year'),
+			],
+		];
 	}
 
 	/**
@@ -113,7 +115,7 @@ class RelativeTime {
 
 	/**
 	 * Given a DateInterval, creates an array with the time
-	 * units and truncates it when necesary.
+	 * units and truncates it when necessary.
 	 *
 	 * @param DateInterval $interval
 	 * @return array
@@ -145,7 +147,7 @@ class RelativeTime {
 	 */
 	protected function translate(array $units = [], $direction = 0) {
 		if (empty($units))
-			return 'just now';
+			return __('just now');
 
 		$translation = [];
 		foreach ($units as $unit => $v) {
@@ -160,8 +162,8 @@ class RelativeTime {
 			return $string;
 
 		if ($direction > 0)
-			return sprintf("%s ago", $string);
+			return __("%s ago", $string);
 		else
-			return sprintf("%s left", $string);
+			return __("%s left", $string);
 	}
 }

@@ -1,14 +1,14 @@
 <?php
 needsLogin();
 
-if (IS_BANNED) error('403', "You are banned and cannot edit your profile.");
+if (IS_BANNED) error('403');
 
 $userid = $_GET['id'] ?? $userdata['id'];
 
 $user = fetch("SELECT * FROM users WHERE id = ?", [$userid]);
 
 if ($userdata['id'] != $userid && (!IS_ROOT || $userdata['rank'] <= $user['rank']))
-	error('403', "You are not allowed to edit this user's profile.");
+	error('403');
 
 $canedituser = IS_ADMIN && ($userdata['rank'] > $user['rank'] || $userid == $userdata['id']);
 
@@ -23,13 +23,13 @@ if (isset($_POST['action'])) {
 		$res = getimagesize($fname['tmp_name']);
 
 		if (!in_array(str_replace('image/','',$res['mime']),$types))
-			$error[] = "Avatar: Invalid file type.";
+			$error[] = __("Avatar: Invalid file type.");
 
 		if ($res[0] > 180 || $res[1] > 180)
-			$error[] = "Avatar: The image is too big. Please resize it to be under 180x180.";
+			$error[] = __("Avatar: The image is too big. Please resize it to be under 180x180.");
 
 		if ($fname['size'] > 100*1024)
-			$error[] = "Avatar: The image filesize is too big.";
+			$error[] = __("Avatar: The image filesize is too big.");
 
 		if ($error == []) {
 			if (move_uploaded_file($fname['tmp_name'], 'static/userpic/'.$user['id']))
@@ -55,14 +55,14 @@ if (isset($_POST['action'])) {
 	$pass2 = $_POST['password2'] ?? null;
 	if ($pass) {
 		if ($pass == $pass2) {
-			if (strlen($pass) >= 15) {
+			if (strlen($pass) >= 12) {
 				$newtoken = bin2hex(random_bytes(32));
 				if ($userdata['id'] == $user['id'])
 					setcookie('token', $newtoken, 2147483647);
 			} else
-				$error[] = "Password: Password is too short (needs to be at least 15 characters).";
+				$error[] = __("Password: Password is too short (needs to be at least %d characters).", 12);
 		} else
-			$error[] = "Password: The new passwords don't match.";
+			$error[] = __("Password: The new passwords don't match.");
 	}
 
 
@@ -70,7 +70,7 @@ if (isset($_POST['action'])) {
 		$targetrank = $_POST['rank'];
 
 		if ($targetrank >= $userdata['rank'] && $targetrank != $user['rank'])
-			$error[] = "You do not have the permissions to assign this rank.";
+			$error[] = __("You do not have the permissions to assign this rank.");
 	}
 
 	if ($error == []) {

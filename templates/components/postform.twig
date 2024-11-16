@@ -1,14 +1,14 @@
 <form {% if action %}action="{{ action }}"{% endif %} method="POST"><table class="c1 postform">
 	<tr class="h"><td colspan="2">{{ name }}</td></tr>
 	<tr class="n1">
-		<td class="nb nom center" style="width:120px"><strong>Title:</strong></td>
+		<td class="nb nom center" style="width:120px"><strong>{{ __("Title:") }}</strong></td>
 		<td class="nb" style="height:32px">
-			<strong class="nod">Title: </strong>
-			{%- if editable_title -%}
+			<strong class="nod">{{ __("Title:") }} </strong>
+			{% if editable_title %}
 				<input type="text" name="title" style="width:60%" value="{{ post_title }}">
-			{%- else -%}
+			{% else %}
 				{{ post_title }}
-			{%- endif -%}
+			{% endif %}
 		</td>
 	</tr>
 	<tr class="n1">
@@ -19,8 +19,8 @@
 			<textarea name="message" id="message" rows="12" cols="80">{{ post_message }}</textarea>
 
 			<div class="actionbar">
-				<input type="submit" name="action" value="Preview">
-				<input type="submit" name="action" value="Submit">
+				<input type="submit" name="action" value="{{ __("Preview") }}">
+				<input type="submit" name="action" value="{{ __("Submit") }}">
 			</div>
 		</td>
 	</tr>

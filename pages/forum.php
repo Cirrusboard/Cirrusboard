@@ -11,7 +11,7 @@ elseif ($uid)
 elseif ($time)
 	$viewmode = 'time';
 else
-	error('400', "I'm confused as to what you want...");
+	error('404');
 
 $userfields = userfields().userfields('ul');
 $offset = (($page - 1) * $tpp);

@@ -1,16 +1,16 @@
 {% extends "_layout.twig" %}
 
-{% set title = "New thread" %}
+{% set title = __("New thread") %}
 {% set noindex = true %}
 
 	{% block content %}
 {% if error %}
-	<p class="error">The following errors occured when trying to make a new thread: <br>- {{ error | join('<br>- ') | raw }}</p>
+	<p class="error">{{ __("The following errors occurred when trying to make a new thread:") }} <br>- {{ error | join('<br>- ') | raw }}</p>
 {% endif %}
 
 {% if action == 'Preview' %}
 	{{ threadpost(post) }}
 {% endif %}
 
-{{ postform('', 'New thread', threadtitle, message, true) }}
+{{ postform('', __("New thread"), threadtitle, message, true) }}
 	{% endblock %}

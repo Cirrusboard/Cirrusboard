@@ -18,25 +18,25 @@ if ($profile['birthday']) {
 }
 
 $profilefields = [
-	"General information" => [
-		'Name'			=> $profile['name'],
-		'Power'			=> rankIdToName($profile['rank']),
-		'Title'			=> $profile['title'],
-		'Total posts'	=> sprintf('%s (%1.02f per day)', $profile['posts'], $profile['posts'] / $days),
-		'Total threads'	=> sprintf('%s (%1.02f per day)', $profile['threads'], $profile['threads'] / $days),
-		'Registered on'	=> sprintf('%s (%s)', dateformat($profile['joined']), relTime($profile['joined'])),
-		'Last post'		=> ($profile['lastpost'] ? sprintf('%s (%s)', dateformat($profile['lastpost']), relTime($profile['lastpost'])) : "None"),
-		'Last view'		=> sprintf('%s (%s)', dateformat($profile['lastview']), relTime($profile['lastview']))
+	__("General information") => [
+		__('Name')			=> $profile['name'],
+		__('Rank')			=> rankIdToName($profile['rank']),
+		__('Title')			=> $profile['title'],
+		__('Total posts')	=> sprintf('%s (%1.02f per day)', $profile['posts'], $profile['posts'] / $days),
+		__('Total threads')	=> sprintf('%s (%1.02f per day)', $profile['threads'], $profile['threads'] / $days),
+		__('Registered on')	=> sprintf('%s (%s)', dateformat($profile['joined']), relTime($profile['joined'])),
+		__('Last post')		=> ($profile['lastpost'] ? sprintf('%s (%s)', dateformat($profile['lastpost']), relTime($profile['lastpost'])) : "None"),
+		__('Last view')		=> sprintf('%s (%s)', dateformat($profile['lastview']), relTime($profile['lastview']))
 	],
-	"User information" => [
-		'Bio'		=> ($profile['bio'] ? postfilter($profile['bio']) : ''),
-		'Location'	=> $profile['location'] ?: '',
-		'Email'		=> $email ?? '',
-		'Birthday'	=> $birthday ?? ''
+	__("User information") => [
+		__('Bio')		=> ($profile['bio'] ? postfilter($profile['bio']) : ''),
+		__('Location')	=> $profile['location'] ?: '',
+		__('Email')		=> $email ?? '',
+		__('Birthday')	=> $birthday ?? ''
 	]
 ];
 
-$post = ['date' => time(), 'text' => $samplepost ?? 'um hi', 'headerbar' => 'Sample post'];
+$post = ['date' => time(), 'text' => $samplepost ?? 'um hi', 'headerbar' => __('Sample post')];
 
 foreach ($profile as $field => $val)
 	$post['u_'.$field] = $val;
@@ -44,11 +44,11 @@ foreach ($profile as $field => $val)
 // Profile actions
 
 $actions = [
-	"forum?user=$id" => 'View threads',
-	"thread?user=$id" => 'Show posts'];
+	"forum?user=$id" => __('View threads'),
+	"thread?user=$id" => __('Show posts')];
 
 if (IS_ADMIN && $userdata['rank'] > $profile['rank'])
-	$actions["editprofile?id=$id"] = 'Edit user';
+	$actions["editprofile?id=$id"] = __('Edit user');
 
 twigloader()->display('profile.twig', [
 	'uid' => $id,

@@ -1,15 +1,15 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Member list" %}
+{% set title = __("Member list") %}
 
 	{% block content %}
 <table class="c1">
 	<tr class="h">
 		<td style="width:32px">#</td>
-		<td style="width:62px">Picture</td>
-		<td>Name</td>
-		<td class="nom" style="width:140px">Registered on</td>
-		<td style="width:50px">Posts</td>
+		<td style="width:62px">{{ __("Picture") }}</td>
+		<td>{{ __("Name") }}</td>
+		<td class="nom" style="width:140px">{{ __("Registered on") }}</td>
+		<td style="width:50px">{{ __("Posts") }}</td>
 	</tr>
 {% for user in users %}
 	<tr class="n1 center" style="height:75px">

@@ -18,7 +18,7 @@ elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread?pid=%d to poi
 	$page = floor(result("SELECT COUNT(*) FROM posts WHERE thread = ? AND id < ?", [$id, $pid]) / $ppp) + 1;
 	$viewmode = "thread";
 } else
-	error('400', "I'm confused as to what you want...");
+	error('404');
 
 // common fields to select
 $selectfields = userfields().postfields_user().

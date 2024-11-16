@@ -1,12 +1,12 @@
 <?php
 
 $ranks = [
-	-1 => 'Banned',
+	-1 => __('Banned'),
 	//0  => 'Guest',
-	1  => 'Member',
-	2  => 'Moderator',
-	3  => 'Administrator',
-	4  => 'Root',
+	1  => __('Member'),
+	2  => __('Moderator'),
+	3  => __('Administrator'),
+	4  => __('Root'),
 ];
 
 $rankColours = [
@@ -31,7 +31,7 @@ function rankIdToColour($id) {
 function needsLogin() {
 	global $log;
 	if (!$log) {
-		error('403', 'This page requires login. <p><a href="login">Login</a></p>');
+		error('403', __('This page requires login.').'<p><a href="login">'.__('Log in').'</a></p>');
 		die();
 	}
 }

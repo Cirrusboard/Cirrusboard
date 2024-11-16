@@ -1,32 +1,32 @@
 {% extends "_layout.twig" %}
 
-{% set title = "Register" %}
+{% set title = __("Register") %}
 {% set noindex = true %}
 
 	{% block content %}
 <form class="reglog" method="POST"><table class="c1">
-	<tr class="h"><td>Register</td></tr>
+	<tr class="h"><td>{{ __("Register") }}</td></tr>
 	<tr><td class="n1 center">
 		{% if error %}
-			<p class="error">The following errors occured when trying to register: <br>- {{ error | join('<br>-') | raw }}</p>
+			<p class="error">{{ __("The following errors occurred when trying to register:") }} <br>- {{ error | join('<br>-') | raw }}</p>
 		{% endif %}
 
-		<p>Register an account at {{ config.title }} in order to post and partake in discussions!</p>
+		<p>{{ __("Register an account at %s in order to post and partake in discussions!", config.title) }}</p>
 
 		<div>
-			<span>Username:</span>
+			<span>{{ __("Username:") }}</span>
 			<input type="text" name="name" size="25" maxlength="25" value="{{ name }}">
 		</div><div>
-			<span>Password:</span>
+			<span>{{ __("Password:") }}</span>
 			<input type="password" name="password" size="25" maxlength="32">
 		</div><div>
-			<span>Password confirmation:</span>
+			<span>{{ __("Password confirmation:") }}</span>
 			<input type="password" name="password2" size="25" maxlength="32">
 		</div>
 
-		<div><input type="submit" class="submit" name="action" value="Register"></div>
+		<div><input type="submit" class="submit" name="action" value="{{ __("Register") }}"></div>
 
-		<p>Before registering <a href="faq">please read the FAQ</a>, as it contains the privacy policy and rules of this board.</p>
+		<p>{{ __("Before registering %s please read the FAQ %s as it contains the privacy policy and rules of this board.", '<a href="faq">', '</a>') }}</p>
 	</td>
 </table></form>
 	{% endblock %}

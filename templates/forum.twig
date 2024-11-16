@@ -4,17 +4,17 @@
 	{% set title = forum.title %}
 
 	{% if log and userdata.rank >= forum.minthread %}
-		{% set actions = {("index?action=markread&fid="~forum.id) : "Mark forum read",
-			("newthread?id="~id) : "New thread"} %}
+		{% set actions = {("index?action=markread&fid="~forum.id) : __("Mark forum read"),
+			("newthread?id="~id) : __("New thread")} %}
 	{% endif %}
 
 	{% set pagename = "/forum?id=" ~ id %}
 {% elseif viewmode == "user" %}
-	{% set title = "Threads" %}
+	{% set title = __("Threads") %}
 	{% set pagename = "/forum?user=" ~ uid %}
 	{% set noindex = true %}
 {% elseif viewmode == "time" %}
-	{% set title = "Latest posts (by thread)" %}
+	{% set title = __("Latest posts (by thread)") %}
 	{% set pagename = "/forum?time=" ~ time %}
 	{% set noindex = true %}
 {% endif %}
@@ -22,9 +22,9 @@
 	{% block content %}
 {% if viewmode == "time" %}
 	<table class="c1 autowidth br-after">
-		<tr class="h"><td>Latest posts</td></tr>
+		<tr class="h"><td>{{ __("Latest posts") }}</td></tr>
 		<tr><td class="n1 center">
-			By thread | <a href="thread?time={{ time }}">By post</a> (<a href="rss">RSS</a>)
+			{{ __("By thread") }} | <a href="thread?time={{ time }}">{{ __("By post") }}</a> (<a href="rss">RSS</a>)
 			<br><br>{{ timelinks('forum', time) }}
 		</td></tr>
 	</table>
@@ -34,11 +34,11 @@
 
 <table class="c1">
 	<tr class="h">
-		<td colspan="2">Title</td>
-		<td class="nom" style="width:150px">Author</td>
-		<td class="nom" style="width:60px">Replies</td>
-		<td class="nom" style="width:60px">Views</td>
-		<td style="width:180px">Last post</td>
+		<td colspan="2">{{ __("Title") }}</td>
+		<td class="nom" style="width:150px">{{ __("Author") }}</td>
+		<td class="nom" style="width:60px">{{ __("Replies") }}</td>
+		<td class="nom" style="width:60px">{{ __("Views") }}</td>
+		<td style="width:180px">{{ __("Last post") }}</td>
 	</tr>
 	{% set i = 1 %}
 	{% for thread in threads %}
@@ -75,14 +75,14 @@
 			<td class="nom">{{ thread.views }}</td>
 			<td>
 				<span>{{ thread.lastdate | date('Y-m-d H:i') }}</span><br>
-				<span>by {{ userlink(thread, 'ul_' ) }}
+				<span>{{ __("by %s", userlink(thread, 'ul_' )) }}
 					<a href="thread?pid={{ thread.lastid }}#{{ thread.lastid }}">&raquo;</a></span>
 			</td>
 		</tr>
 		{% set i = i + 1 %}
 	{% endfor %}
 	{% if i == 1 %}
-		<tr><td class="n1 center" colspan="6"><p>No threads found.</p></td></tr>
+		<tr><td class="n1 center" colspan="6"><p>{{ __("No threads found.") }}</p></td></tr>
 	{% endif %}
 </table>
 
