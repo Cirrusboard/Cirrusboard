@@ -74,7 +74,7 @@ if (isset($_GET['cid']) && $cid = $_GET['cid']) { // category editor
 	else
 		$cat = fetch("SELECT * FROM categories WHERE id=?",[$cid]);
 
-	echo $twig->render("manageforums_category.twig", [
+	twigloader()->display("manageforums_category.twig", [
 		'cid' => $cid,
 		'cat' => $cat
 	]);
