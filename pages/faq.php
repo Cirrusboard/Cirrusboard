@@ -14,7 +14,7 @@ foreach ($smilies as $text => $url) {
 // Rank colours
 $ranktable = '';
 foreach ($ranks as $id => $title)
-	$ranktable .= sprintf('<td class="n1" width="120"><b><span style="color:#%s">%s</span></b></td>', rankIdToColour($id), $title);
+	$ranktable .= sprintf('<td class="n1 w-120px"><b><span style="color:#%s">%s</span></b></td>', rankIdToColour($id), $title);
 
 if (file_exists('conf/faq.php'))
 	require('conf/faq.php');

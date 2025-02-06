@@ -35,10 +35,10 @@
 <table class="c1">
 	<tr class="h">
 		<td colspan="2">{{ __("Title") }}</td>
-		<td class="nom" style="width:150px">{{ __("Author") }}</td>
-		<td class="nom" style="width:60px">{{ __("Replies") }}</td>
-		<td class="nom" style="width:60px">{{ __("Views") }}</td>
-		<td style="width:180px">{{ __("Last post") }}</td>
+		<td class="nom w-150px">{{ __("Author") }}</td>
+		<td class="nom w-60px">{{ __("Replies") }}</td>
+		<td class="nom w-60px">{{ __("Views") }}</td>
+		<td class="w-180px">{{ __("Last post") }}</td>
 	</tr>
 	{% set i = 1 %}
 	{% for thread in threads %}
@@ -56,7 +56,7 @@
 		{% endif %}
 
 		<tr class="center n{{ zebra }}">
-			<td style="width:30px">
+			<td class="w-30px">
 				{% if log and viewmode == 'forum' and not thread.isread %}
 					{% if thread.closed %}
 						{{ thread_status("on") }}

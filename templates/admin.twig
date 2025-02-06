@@ -29,12 +29,12 @@
 	{% for t in tablestatus %}
 	<tr class="right">
 		<td class="n1 left">{{ t.Name }}</td>
-		<td class="n2" style="width:175px">{{ t.Rows }}</td>
-		<td class="n2" style="width:175px">{{ t.Avg_row_length }}</td>
-		<td class="n2" style="width:175px">{{ t.Data_length }}</td>
-		<td class="n2" style="width:175px">{{ t.Index_length }}</td>
-		<td class="n2" style="width:175px">{{ t.Data_free }}</td>
-		<td class="n2" style="width:175px">{{ t.Data_length+t.Index_length }}</td>
+		<td class="n2 w-175px">{{ t.Rows }}</td>
+		<td class="n2 w-175px">{{ t.Avg_row_length }}</td>
+		<td class="n2 w-175px">{{ t.Data_length }}</td>
+		<td class="n2 w-175px">{{ t.Index_length }}</td>
+		<td class="n2 w-175px">{{ t.Data_free }}</td>
+		<td class="n2 w-175px">{{ t.Data_length+t.Index_length }}</td>
 	</tr>
 	{% endfor %}
 </table>

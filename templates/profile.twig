@@ -5,10 +5,10 @@
 	{% block content %}
 {% for cat, fields in profilefields %}
 	<table class="c1">
-		<tr class="h"><td colspan="2"><strong>{{ cat }}</strong></td></tr>
+		<tr class="h"><td colspan="2">{{ cat }}</td></tr>
 		{% for title, value in fields %}
 			{% if value %}
-				<tr><td class="n1" width="130"><b>{{ title }}</b></td><td class="n2">{{ value | raw }}</td>
+				<tr><td class="n1 w-130px"><b>{{ title }}</b></td><td class="n2">{{ value | raw }}</td>
 			{% endif %}
 		{% endfor %}
 	</table><br>

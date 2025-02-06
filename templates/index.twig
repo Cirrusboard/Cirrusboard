@@ -32,9 +32,9 @@
 <table class="c1">
 	<tr class="h">
 		<td colspan="2">{{ __("Forum") }}</td>
-		<td class="nom" style="width:60px">{{ __("Threads") }}</td>
-		<td class="nom" style="width:60px">{{ __("Posts") }}</td>
-		<td style="width:180px">{{ __("Last post") }}</td>
+		<td class="nom w-60px">{{ __("Threads") }}</td>
+		<td class="nom w-60px">{{ __("Posts") }}</td>
+		<td class="w-180px">{{ __("Last post") }}</td>
 	</tr>
 {% endif %}
 
@@ -50,9 +50,9 @@
 <table class="c1">
 	<tr class="h">
 		<td colspan="2" class="left">{{ categories[forum.cat] }}</td>
-		<td class="nom" style="width:60px">{{ __("Threads") }}</td>
-		<td class="nom" style="width:60px">{{ __("Posts") }}</td>
-		<td style="width:180px">{{ __("Last post") }}</td>
+		<td class="nom w-60px">{{ __("Threads") }}</td>
+		<td class="nom w-60px">{{ __("Posts") }}</td>
+		<td class="w-180px">{{ __("Last post") }}</td>
 	</tr>
 		{% endif %}
 
@@ -60,7 +60,7 @@
 	{% endif %}
 
 	<tr class="center">
-		<td class="n1" style="width:30px">
+		<td class="n1 w-30px">
 			{% if log and forum.lastdate > forum.rtime %}
 				{{ thread_status("n") }}
 			{% endif %}

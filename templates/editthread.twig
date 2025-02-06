@@ -8,7 +8,7 @@
 	<tr class="h"><td colspan="2">{{ __("Edit thread") }}</td></tr>
 
 	<tr>
-		<td class="n1 center" width="200">{{ __("Title:") }}</td>
+		<td class="n1 center w-180px">{{ __("Title:") }}</td>
 		<td class="n2">{{ field_input('title', thread.title, 40, 127, __("Thread title")) }}</td>
 	</tr>
 
@@ -19,7 +19,7 @@
 		</tr>
 
 		<tr>
-			<td class="n1 center" height="35">{{ __("Thread options:") }}</td>
+			<td class="n1 center h-40px">{{ __("Thread options:") }}</td>
 			<td class="n2">
 				{{ field_checkbox('close', thread.closed, __("Lock")) }} &nbsp;
 				{{ field_checkbox('sticky', thread.sticky, __("Sticky")) }}
