@@ -20,7 +20,7 @@ if (isset($_POST['savecat'])) { // save new/existing category
 		if (!result("SELECT COUNT(*) FROM categories WHERE id = ?", [$cid]))
 			redirect('manageforums');
 
-		query("UPDATE categories SET title = ?, ord = ? WHERE id = ?", [$title, $ord, $cid]);
+		query("UPDATE categories SET title = ?, ord = ? WHERE id = ?", [$title, $order, $cid]);
 	}
 	redirect('manageforums?cid=%s', $cid);
 
