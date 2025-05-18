@@ -64,6 +64,14 @@ function threadpost($post) {
 	}
 }
 
+function minipost($post) {
+	if (isset($post['deleted']) && $post['deleted']) return;
+
+	return twigloader('components')->render('minipost.twig', [
+		'post' => $post
+	]);
+}
+
 function postform($action, $name, $postTitle, $postMessage, $editableTitle) {
 	return twigloader('components')->render('postform.twig', [
 		'action' => $action,

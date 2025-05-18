@@ -1,0 +1,17 @@
+<tr>
+	<td class="n1 topbar_1 blkm">{{ userlink(post, 'u_') }}</td>
+
+	<td class="n1 topbar_2 sfont blkm clearfix">
+		{{ __("Posted on %s", post.date | date('Y-m-d H:i')) }}
+		<span class="float-right">
+			<a href="thread?pid={{ post.id }}#{{ post.id }}">{{ __("Link") }}</a>
+		</span>
+	</td>
+</tr>
+<tr valign="top">
+	<td class="n1 sfont sidebar nom">
+		<br>{{ __("Posts:") }} {{ post.u_posts }}<br>
+	</td>
+
+	<td class="n2 mainbar">{{ post.text | postfilter }}</td>
+</tr>

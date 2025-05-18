@@ -13,4 +13,13 @@
 {% endif %}
 
 {{ postform('newreply?id='~id, __("New reply"), thread.title, message, false) }}
+
+<br>
+
+<table class="c1 threadpost">
+	<tr class="h"><td colspan="2">Thread preview</td></tr>
+	{% for post in newestposts %}
+		{{ minipost(post) }}
+	{% endfor %}
+</table>
 	{% endblock %}

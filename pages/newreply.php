@@ -81,6 +81,14 @@ $breadcrumb = [
 	'thread?id='.$thread['id'] => $thread['title']
 ];
 
+$fieldlist = userfields('u');
+$newestposts = query("SELECT $fieldlist u.posts u_posts, p.*, pt.text
+			FROM posts p
+			LEFT JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
+			LEFT JOIN users u ON p.user = u.id
+			WHERE p.thread = ? AND p.deleted = 0
+			ORDER BY p.id DESC LIMIT 7", [$id]);
+
 twigloader()->display('newreply.twig', [
 	'id' => $id,
 	'breadcrumb' => $breadcrumb,
@@ -88,6 +96,6 @@ twigloader()->display('newreply.twig', [
 	'message' => $message,
 	'error' => $error,
 	'post' => $post ?? null,
-	'action' => $action
+	'action' => $action,
+	'newestposts' => $newestposts
 ]);
-
