@@ -1,6 +1,3 @@
-/// Example theme styling (voxelmanip_retro) \\\
-
-$primary: #38c016;
 
 body {
 	background: url('coolgreen2.png') #011b01;
@@ -8,7 +5,7 @@ body {
 }
 
 table.c1 {
-	border: 2px solid $primary;
+	border: 2px solid #38c016;
 }
 
 tr.c, tr.h {
@@ -19,7 +16,7 @@ tr.c, tr.h {
 }
 
 td {
-	border: 1px solid $primary;
+	border: 1px solid #38c016;
 	padding: 5px;
 }
 
@@ -39,17 +36,18 @@ input[type='submit'], input[type='button'], button {
 
 input[type='text']:hover, input[type='password']:hover, input[type='email']:hover, textarea:hover, select:hover, input[type='text']:focus, input[type='password']:focus, input[type='email']:focus, textarea:focus, select:focus,
 input[type='submit']:hover, input[type='button']:hover, button:hover, input[type='submit']:focus, input[type='button']:focus, button:focus {
-	border: 2px solid $primary;
+	border: 2px solid #38c016;
 }
 
 .reglog div {
-	border-top: 1px solid $primary;
-
-	&:last-child {border-bottom:0}
+	border-top: 1px solid #38c016;
+}
+.reglog div:last-child {
+	border-bottom: 0;
 }
 
 .quote .quotetext {
-	border: 2px solid $primary;
+	border: 2px solid #38c016;
 	border-left: 0;
 	border-right: 0;
 }
