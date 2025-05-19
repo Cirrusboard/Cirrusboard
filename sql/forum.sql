@@ -1,4 +1,4 @@
--- Adminer 4.8.1 MySQL 10.11.3-MariaDB-1 dump
+-- Database schema for Cirrusboard
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -66,8 +66,10 @@ CREATE TABLE `posts` (
   `thread` int(10) unsigned NOT NULL,
   `date` int(10) unsigned NOT NULL,
   `revision` smallint(5) unsigned NOT NULL DEFAULT 1,
+  `editdate` int(10) unsigned DEFAULT NULL,
   `ip` char(15) NOT NULL,
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `text` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `threadid` (`thread`),
   KEY `user` (`user`),
@@ -151,6 +153,3 @@ CREATE TABLE `users` (
   `bio` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- 2023-08-15 14:51:09

@@ -22,12 +22,11 @@ elseif (isset($_GET['pid'])) { // Thing to ease permalinks, thread?pid=%d to poi
 
 // common fields to select
 $selectfields = userfields().postfields_user().
-				'p.*, pt.text, pt.date rev_date, pt.revision cur_revision,
+				'p.*, p.text, p.editdate rev_date, p.revision cur_revision,
 				f.minreply minreply';
 
 // common joins
 $join = "FROM posts p
-		JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
 		JOIN users u ON p.user = u.id
 		JOIN threads t ON p.thread = t.id
 		JOIN forums f ON f.id = t.forum";

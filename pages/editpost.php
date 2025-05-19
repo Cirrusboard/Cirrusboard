@@ -30,8 +30,7 @@ if ($thread['closed'] && !IS_MOD)
 if ($userdata['id'] != $thread['p_user'] && !IS_ROOT)
 	error('403');
 
-$editpost = fetch("SELECT u.id, p.user, pt.text FROM posts p
-			LEFT JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
+$editpost = fetch("SELECT u.id, p.user, p.text, p.editdate, p.date FROM posts p
 			LEFT JOIN users u ON p.user = u.id
 			WHERE p.id = ?",
 		[$pid]);
@@ -47,12 +46,16 @@ if ($action == __('Submit')) {
 		$error[] = __("You can't blank out your post!");
 
 	if ($error == []) {
-		$newrev = result("SELECT revision FROM posts WHERE id = ?", [$pid]) + 1;
+		$rev = result("SELECT revision FROM posts WHERE id = ?", [$pid]);
 
-		query("UPDATE posts SET revision = ? WHERE id = ?", [$newrev, $pid]);
+		query("UPDATE posts SET revision = ?, editdate = ?, text = ? WHERE id = ?", [$rev + 1, time(), $message, $pid]);
 
-		query("INSERT INTO poststext (id, text, revision, date) VALUES (?,?,?,?)",
-			[$pid, $_POST['message'], $newrev, time()]);
+		insertInto('poststext', [
+			'id' => $pid,
+			'text' => $editpost['text'],
+			'revision' => $rev,
+			'date' => $editpost['editdate'] ?: null,
+		]);
 
 		redirect("thread?pid=$pid#$pid");
 	}

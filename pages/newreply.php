@@ -31,11 +31,11 @@ if ($action == __("Submit")) {
 			'user' => $userdata['id'],
 			'thread' => $id,
 			'date' => time(),
-			'ip' => $ipaddr
+			'ip' => $ipaddr,
+			'text' => $message
 		]);
 
 		$pid = insertId();
-		insertInto('poststext', ['id' => $pid, 'text' => $message]);
 
 		query("UPDATE threads SET posts = posts + 1, lastdate = ?, lastuser = ?, lastid = ? WHERE id = ?",
 			[time(), $userdata['id'], $pid, $id]);
@@ -58,9 +58,8 @@ if ($action == __("Submit")) {
 // Append quoted message to the newreply box, to reply to other messages.
 $pid = $_GET['pid'] ?? 0;
 if ($pid) {
-	$qpost = fetch("SELECT u.name name, p.user, pt.text, f.id fid, p.thread, f.minread
+	$qpost = fetch("SELECT u.name name, p.user, p.text, f.id fid, p.thread, f.minread
 				FROM posts p
-				LEFT JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
 				LEFT JOIN users u ON p.user = u.id
 				LEFT JOIN threads t ON t.id = p.thread
 				LEFT JOIN forums f ON f.id = t.forum
@@ -82,9 +81,8 @@ $breadcrumb = [
 ];
 
 $fieldlist = userfields('u');
-$newestposts = query("SELECT $fieldlist u.posts u_posts, p.*, pt.text
+$newestposts = query("SELECT $fieldlist u.posts u_posts, p.*, p.text
 			FROM posts p
-			LEFT JOIN poststext pt ON p.id = pt.id AND p.revision = pt.revision
 			LEFT JOIN users u ON p.user = u.id
 			WHERE p.thread = ? AND p.deleted = 0
 			ORDER BY p.id DESC LIMIT 7", [$id]);

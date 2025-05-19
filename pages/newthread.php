@@ -39,11 +39,11 @@ if ($action == __('Submit')) {
 			'user' => $userdata['id'],
 			'thread' => $tid,
 			'date' => time(),
-			'ip' => $ipaddr
+			'ip' => $ipaddr,
+			'text' => $message
 		]);
 
 		$pid = insertId();
-		insertInto('poststext', ['id' => $pid, 'text' => $message]);
 
 		query("UPDATE threads SET lastid = ? WHERE id = ?", [$pid, $tid]);
 
