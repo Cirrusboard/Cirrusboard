@@ -85,8 +85,8 @@ if (isset($_POST['action'])) {
 			'showemail'	=> isset($_POST['showemail']) ? 1 : 0,
 			'theme'		=> $_POST['theme'] != $config['defaulttheme'] ? $_POST['theme'] : null,
 			'timezone'	=> $_POST['timezone'] != $config['defaulttimezone'] ? $_POST['timezone'] : null,
-			'ppp'		=> $_POST['ppp'],
-			'tpp'		=> $_POST['tpp'],
+			'ppp'		=> clamp($_POST['ppp'], 1, 255),
+			'tpp'		=> clamp($_POST['tpp'], 1, 255),
 			'birthday'	=> $birthday
 		];
 

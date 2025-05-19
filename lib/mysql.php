@@ -42,9 +42,12 @@ function insertId() {
 	return $sql->lastInsertId();
 }
 
-
 function commasep($str) {
 	return implode(',', $str);
+}
+
+function clamp($current, $min, $max) {
+    return max($min, min($max, $current));
 }
 
 /**
