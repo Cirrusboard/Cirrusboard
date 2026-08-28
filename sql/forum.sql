@@ -93,7 +93,7 @@ CREATE TABLE `threads` (
   `forum` int(10) unsigned NOT NULL,
   `title` varchar(127) NOT NULL,
   `user` int(10) unsigned NOT NULL,
-  `posts` int(10) unsigned NOT NULL DEFAULT 1,
+  `posts` int(10) unsigned NOT NULL DEFAULT 0,
   `views` int(10) unsigned NOT NULL DEFAULT 0,
   `lastdate` int(10) unsigned DEFAULT NULL,
   `lastuser` int(10) unsigned DEFAULT NULL,

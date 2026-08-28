@@ -27,23 +27,15 @@ if ($action == __("Submit")) {
 		$error[] = __("Your post is empty. Enter a message and try again.");
 
 	if ($error == []) {
-		insertInto('posts', [
-			'user' => $userdata['id'],
+		$pid = newPost([
 			'thread' => $id,
-			'date' => time(),
+			'forum' => $thread['forum'],
+			'title' => $thread['title'],
 			'ip' => $ipaddr,
-			'text' => $message
+			'message' => $message,
+			'u_id' => $userdata['id'],
+			'u_name' => $userdata['name']
 		]);
-
-		$pid = insertId();
-
-		query("UPDATE threads SET posts = posts + 1, lastdate = ?, lastuser = ?, lastid = ? WHERE id = ?",
-			[time(), $userdata['id'], $pid, $id]);
-
-		query("UPDATE forums SET posts = posts + 1, lastdate = ?, lastuser = ?, lastid = ? WHERE id = ?",
-			[time(), $userdata['id'], $pid, $thread['forum']]);
-
-		query("UPDATE users SET posts = posts + 1, lastpost = ? WHERE id = ?", [time(), $userdata['id']]);
 
 		redirect("thread?pid=$pid#$pid");
 	}

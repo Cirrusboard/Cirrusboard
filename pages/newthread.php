@@ -26,37 +26,16 @@ if ($action == __('Submit')) {
 		$error[] = __("Please wait at least 30 seconds before starting a new thread.");
 
 	if ($error == []) {
-		insertInto('threads', [
-			'title' => $title,
+		$tid = newThread([
 			'forum' => $fid,
-			'user' => $userdata['id'],
-			'lastdate' => time(),
-			'lastuser' => $userdata['id']
-		]);
-
-		$tid = insertId();
-		insertInto('posts', [
-			'user' => $userdata['id'],
-			'thread' => $tid,
-			'date' => time(),
+			'title' => $title,
 			'ip' => $ipaddr,
-			'text' => $message
+			'message' => $message,
+			'u_id' => $userdata['id'],
+			'u_name' => $userdata['name']
 		]);
 
-		$pid = insertId();
-
-		query("UPDATE threads SET lastid = ? WHERE id = ?", [$pid, $tid]);
-
-		query("UPDATE forums SET
-					threads = threads + 1, posts = posts + 1,
-					lastdate = ?, lastuser = ?, lastid = ?
-				WHERE id = ?",
-			[time(), $userdata['id'], $pid, $fid]);
-
-		query("UPDATE users SET posts = posts + 1, threads = threads + 1, lastpost = ? WHERE id = ?",
-			[time(), $userdata['id']]);
-
-		redirect("thread?id=%s", $tid);
+		redirect("thread?id=$tid");
 	}
 } elseif ($action == __('Preview')) {
 	$post['date'] = time();
