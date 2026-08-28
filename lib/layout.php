@@ -97,10 +97,11 @@ function esc($text) {
 	return $text ? htmlspecialchars($text) : '';
 }
 
-function fieldinput($name, $value, $size, $max, $placeholder = '', $type = '') {
-	return sprintf('<input type="%s" name="%s" size="%s" maxlength="%s" value="%s"%s>',
+function fieldinput($name, $value, $size, $max, $placeholder = '', $type = '', $noAutocomplete = false) {
+	return sprintf('<input type="%s" name="%s" size="%s" maxlength="%s" value="%s"%s%s>',
 		($type ?: 'text'), $name, $size, $max, esc($value),
-		($placeholder ? ' placeholder="'.$placeholder.'"' : ''));
+		($placeholder ? ' placeholder="'.$placeholder.'"' : ''),
+		($noAutocomplete ? ' autocomplete="new-password"' : ''));
 }
 
 function fieldtextarea($name, $value, $rows, $cols) {
