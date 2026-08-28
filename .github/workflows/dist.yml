@@ -12,7 +12,7 @@ jobs:
     container:
       image: debian:bookworm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           path: cirrus
 
@@ -22,13 +22,13 @@ jobs:
           ./tools/make-dist.sh
 
       - name: Upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cirrus-dist
           path: ./cirrus-dist.zip
 
       - name: Upload and tag
-        uses: pyTooling/Actions/releaser@main
+        uses: pyTooling/Actions/releaser@v6.7.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: 'latest'
