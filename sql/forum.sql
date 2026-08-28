@@ -56,7 +56,8 @@ CREATE TABLE `guests` (
   `ip` char(15) NOT NULL,
   `lastview` int(10) unsigned NOT NULL,
   `bot` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  UNIQUE KEY `ip` (`ip`)
+  UNIQUE KEY `ip` (`ip`),
+  KEY `lastview` (`lastview`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

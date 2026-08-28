@@ -54,6 +54,8 @@ if ($log) {
 	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$userId]);
 
 	if (!isset($rss)) {
+		query("DELETE FROM guests WHERE lastview < ?", [(time() - 15*60)]);
+
 		query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
 
 		if (!$userdata['theme'] || !isValidTheme($userdata['theme']))
