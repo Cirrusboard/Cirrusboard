@@ -91,6 +91,9 @@ function postfilter($text) {
 	$text = preg_replace("'\[quote=(.*?)\][\n\r]*'si", '<div class="quote"><div class="author">Posted by \\1</div><div class="quotetext">', $text);
 	$text = preg_replace("'\[/quote\][\n\r]*'", '</div></div>', $text);
 
+	$text = preg_replace("'\[reply=\"(.*?)\" id=\"(.*?)\"\]'si", '<div class="quote"><div class="author"><a href=showprivate?id=\\2>Sent by \\1</a></div><div class="quotetext">', $text);
+	$text = preg_replace("'\[/reply\][\n\r]*'", '</div></div>', $text);
+
 	// Code block
 	$text = preg_replace_callback("'\[code\](.*?)\[/code\]'si", function ($match) use ($config) {
 		$text = $config['html'] ? esc($match[1]) : $match[1];

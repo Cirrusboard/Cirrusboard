@@ -1,0 +1,41 @@
+{% extends "_layout.twig" %}
+
+{% if sent %}
+	{% set title = "Private messages (sent)" %}
+{% else %}
+	{% set title = "Private messages" %}
+{% endif %}
+{% set noindex = true %}
+
+{% if sent %}
+	{% set actions = {("private") : __("View received"), ("sendprivate") : __("Send new")} %}
+{% else %}
+	{% set actions = {("private?view=sent") : __("View sent"), ("sendprivate") : __("Send new")} %}
+{% endif %}
+
+	{% block content %}
+<table class="c1">
+	<tr class="h">
+		<td width="17">&nbsp;</td>
+		<td style="width:30px">&nbsp;</td>
+		<td>Title</td>
+		<td class="nom w-180px">{{ fieldn }}</td>
+		<td class="w-150px">Sent on</td>
+	</tr>
+{% set i = 1 %}
+{% for pmsg in pmsgs %}
+	<tr class="n{% if i % 2 %}1{% else %}2{% endif %} center">
+		<td><a href="private?action=del&id={{ pmsg.id }}&view={{ view }}" class="delete">X</a></td>
+		<td >{% if pmsg.unread %}{{ thread_status("n") }}{% endif %}</td>
+		<td class="left wbreak"><a href="showprivate?id={{ pmsg.id }}">{{ pmsg.title | default('(untitled)') }}</a></td>
+		<td class="nom">{{ userlink(pmsg, 'u_') }}</td>
+		<td>{{ pmsg.date | date('Y-m-d H:i') }}</td>
+	</tr>
+	{% set i = i + 1 %}
+{% else %}
+	<tr><td class="n1 center" colspan="5"><p>{{ __("There are no private messages.") }}</p></td></tr>
+{% endfor %}
+</table>
+
+{{ pagelist | raw }}
+	{% endblock %}

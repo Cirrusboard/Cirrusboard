@@ -1,0 +1,45 @@
+{% extends "_layout.twig" %}
+
+{% set title = "Send private message" %}
+{% set noindex = true %}
+
+	{% block content %}
+{% if error %}
+	<p class="error">{{ __("The following errors occurred when trying to send the PM:") }} <br>- {{ error | join('<br>- ') | raw }}</p>
+{% endif %}
+
+{% if action == 'Preview' %}
+	{{ threadpost(post) }}
+{% endif %}
+
+<form action="sendprivate" method="POST"><table class="c1 postform">
+	<tr class="h"><td colspan="2">Send private message</td></tr>
+	<tr class="n1">
+		<td class="nb nom center" style="width:120px"><strong>{{ __("Send to:") }}</strong></td>
+		<td class="nb" style="height:32px">
+			<strong class="nod">{{ __("Send to:") }} </strong>
+			<input type="text" name="userto" style="width:60%" value="{{ userto }}">
+		</td>
+	</tr>
+	<tr class="n1">
+		<td class="nb nom center" style="width:120px"><strong>{{ __("Title:") }}</strong></td>
+		<td class="nb" style="height:32px">
+			<strong class="nod">{{ __("Title:") }} </strong>
+			<input type="text" name="title" style="width:60%" value="{{ messagetitle }}">
+		</td>
+	</tr>
+	<tr class="n1">
+		<td class="nb nom"></td>
+		<td class="nb">
+			{{ posttoolbar() }}
+
+			<textarea name="message" id="message" rows="12" cols="80">{{ message }}</textarea>
+
+			<div class="actionbar">
+				<input type="submit" name="action" value="{{ __("Preview") }}">
+				<input type="submit" name="action" value="{{ __("Submit") }}">
+			</div>
+		</td>
+	</tr>
+</table></form>
+	{% endblock %}

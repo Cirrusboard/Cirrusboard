@@ -61,6 +61,25 @@ CREATE TABLE `guests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+CREATE TABLE `pmsgs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  `ip` inet6 NOT NULL,
+  `userto` int(10) unsigned NOT NULL,
+  `userfrom` int(10) unsigned NOT NULL,
+  `unread` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `del_from` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `del_to` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `userto` (`userto`),
+  KEY `userfrom` (`userfrom`),
+  CONSTRAINT `pmsgs_ibfk_1` FOREIGN KEY (`userto`) REFERENCES `users` (`id`),
+  CONSTRAINT `pmsgs_ibfk_2` FOREIGN KEY (`userfrom`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 CREATE TABLE `posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` int(10) unsigned NOT NULL,
